@@ -1,0 +1,9897 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  padding: 1rem;
+  background-color: rgb(236, 246, 253);
+}
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+
+    z-index: 1000;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   NAV
+================================ */
+
+.navbar_container nav {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 40px;
+
+    gap: 28px;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   LOGO
+================================ */
+
+.navbar_container .logo {
+    display: flex;
+    align-items: center;
+
+    margin-right: auto;
+
+    cursor: pointer;
+}
+
+.navbar_container .logo img {
+    width: 145px;
+    height: auto;
+
+    object-fit: contain;
+
+    transition: transform 0.2s ease;
+}
+
+.navbar_container .logo img:hover {
+    transform: scale(1.04);
+}
+
+
+/* ================================
+   NAVIGATION ITEMS
+================================ */
+
+.navbar_container nav > div:not(.logo):not(.getstartedbtn) {
+    display: flex;
+    align-items: center;
+}
+
+.navbar_container a {
+    text-decoration: none;
+
+    color: #374151;
+
+    transition: color 0.2s ease;
+}
+
+
+/* ================================
+   NAVIGATION TEXT
+================================ */
+
+.navbar_container h3 {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.navbar_container h3:hover {
+    color: #2563eb;
+
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   LOGIN
+================================ */
+
+.navbar_container .login {
+    margin-left: 5px;
+}
+
+.navbar_container .login h3 {
+    color: #2563eb;
+}
+
+.navbar_container .login h3:hover {
+    color: #1d4ed8;
+}
+
+
+/* ================================
+   REGISTER BUTTON
+================================ */
+
+.navbar_container .getstartedbtn {
+    display: flex;
+    align-items: center;
+}
+
+.navbar_container .getstartedbtn button {
+    border: none;
+
+    padding: 11px 22px;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.navbar_container .getstartedbtn button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.25);
+}
+
+.navbar_container .getstartedbtn button:active {
+    transform: translateY(0);
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1200px) {
+
+    .navbar_container nav {
+        padding: 0 25px;
+        gap: 20px;
+    }
+
+    .navbar_container .logo img {
+        width: 125px;
+    }
+
+    .navbar_container h3 {
+        font-size: 13px;
+    }
+
+    .navbar_container .getstartedbtn button {
+        padding: 10px 17px;
+    }
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 950px) {
+
+    .navbar_container nav {
+        gap: 15px;
+    }
+
+    .navbar_container .forstudent,
+    .navbar_container .forrecruter,
+    .navbar_container .forcollges {
+        display: none !important;
+    }
+
+    .navbar_container h3 {
+        font-size: 14px;
+    }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 650px) {
+
+    .navbar_container {
+        height: 65px;
+    }
+
+    .navbar_container nav {
+        padding: 0 15px;
+        gap: 15px;
+    }
+
+    .navbar_container .logo img {
+        width: 105px;
+    }
+
+    .navbar_container nav > div:not(.logo):not(.getstartedbtn) {
+        display: none;
+    }
+
+    .navbar_container .getstartedbtn button {
+        padding: 9px 15px;
+
+        font-size: 13px;
+    }
+}
+
+
+
+
+/* HOME PAGE CSS */
+/* =========================================================
+   HOME PAGE
+========================================================= */
+
+.home_container {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #f8fafc;
+
+    box-sizing: border-box;
+
+    padding-top: 75px;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HERO SECTION
+========================================================= */
+
+.homeHeadingContainer {
+    width: 100%;
+    min-height: 600px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 70px 8%;
+
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f7ff 50%,
+        #f3f7ff 100%
+    );
+}
+
+
+/* =========================================================
+   HERO HEADING
+========================================================= */
+
+.HeadingPart {
+    width: 50%;
+    max-width: 650px;
+}
+
+.HeadingPart h1 {
+    margin: 0;
+
+    font-size: 52px;
+    line-height: 1.15;
+
+    font-weight: 750;
+
+    color: #172033;
+
+    letter-spacing: -1.5px;
+}
+
+.HeadingPart .para {
+    margin-top: 25px;
+}
+
+.HeadingPart .para p {
+    margin: 0;
+
+    max-width: 570px;
+
+    font-size: 18px;
+    line-height: 1.7;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   HERO BUTTON
+========================================================= */
+
+.HeadingPart button {
+    margin-top: 30px;
+
+    padding: 14px 25px !important;
+
+    border: none;
+
+    border-radius: 8px !important;
+
+    background: #344969 !important;
+
+    color: white;
+
+    font-size: 15px !important;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.HeadingPart button:hover {
+    background: #263952 !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(52, 73, 105, 0.25);
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.ImagePart {
+    width: 45%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ImagePart img {
+    width: 100%;
+    max-width: 600px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    filter: drop-shadow(0 20px 35px rgba(30, 41, 59, 0.12));
+
+    transition: transform 0.3s ease;
+}
+
+.ImagePart img:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   TRUSTED COMPANIES
+========================================================= */
+
+.trusted_companies_container {
+    width: 100%;
+
+    padding: 55px 8%;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    text-align: center;
+}
+
+.trusted_companies_container header h3 {
+    margin: 0 0 35px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   COMPANY LOGOS
+========================================================= */
+
+.comp_images {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    gap: 35px;
+
+    flex-wrap: wrap;
+}
+
+.comp_images img {
+    width: 110px;
+    height: 55px;
+
+    object-fit: contain;
+
+    filter: grayscale(100%);
+
+    opacity: 0.6;
+
+    transition:
+        filter 0.3s ease,
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.comp_images img:hover {
+    filter: grayscale(0%);
+
+    opacity: 1;
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   WHY CHOOSE HIREBRIDGE
+========================================================= */
+
+.card_container {
+    width: 100%;
+
+    padding: 80px 8%;
+
+    box-sizing: border-box;
+
+    background: #f8fafc;
+}
+
+.card_container > header {
+    text-align: center;
+
+    margin-bottom: 45px;
+}
+
+.card_container > header h3 {
+    margin: 0;
+
+    font-size: 30px;
+
+    color: #172033;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card_container .cards {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* =========================================================
+   INDIVIDUAL CARD
+========================================================= */
+
+.studentCard,
+.recruiterCard,
+.collegeCard {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.studentCard:hover,
+.recruiterCard:hover,
+.collegeCard:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================================================
+   CARD SCREEN
+========================================================= */
+
+.studentCard .screen,
+.recruiterCard .screen,
+.collegeCard .screen {
+    min-height: 190px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        135deg,
+        #344969,
+        #4c6388
+    );
+
+    color: #ffffff;
+}
+
+.studentCard .screen {
+    background: linear-gradient(
+        135deg,
+        #344969,
+        #596f94
+    );
+}
+
+.recruiterCard .screen {
+    background: linear-gradient(
+        135deg,
+        #6045a5,
+        #8062cf
+    );
+}
+
+.collegeCard .screen {
+    background: linear-gradient(
+        135deg,
+        #256b73,
+        #348d97
+    );
+}
+
+
+/* =========================================================
+   CARD ICON
+========================================================= */
+
+.screen h2 {
+    margin: 0 0 10px;
+
+    font-size: 42px;
+}
+
+.screen h3 {
+    margin: 3px 0;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CARD INFORMATION
+========================================================= */
+
+.studentCard .info,
+.recruiterCard .info,
+.collegeCard .info {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+}
+
+.info h4 {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    font-weight: 500;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer_container {
+    width: 100%;
+
+    background: #172033;
+
+    color: white;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FOOTER TOP
+========================================================= */
+
+.top_container {
+    text-align: center;
+
+    padding: 60px 20px 45px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top_container h2 {
+    margin: 0 0 15px;
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+.top_container h3 {
+    margin: 5px 0;
+
+    font-size: 15px;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   FOOTER DETAILS
+========================================================= */
+
+.detail_container {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 40px;
+
+    padding: 50px 8% 60px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FOOTER CARDS
+========================================================= */
+
+.detail_container .cards {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.detail_container .heading h3 {
+    margin: 0;
+
+    font-size: 16px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   FOOTER LINKS
+========================================================= */
+
+.detail_container .body {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.detail_container .body a {
+    text-decoration: none;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.detail_container .body a:hover {
+    color: #ffffff;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .homeHeadingContainer {
+        padding: 60px 5%;
+    }
+
+    .HeadingPart h1 {
+        font-size: 42px;
+    }
+
+    .card_container {
+        padding: 70px 5%;
+    }
+
+    .card_container .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detail_container {
+        padding: 50px 5%;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .homeHeadingContainer {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 50px 25px;
+    }
+
+    .HeadingPart {
+        width: 100%;
+    }
+
+    .HeadingPart h1 {
+        font-size: 36px;
+    }
+
+    .HeadingPart .para p {
+        font-size: 16px;
+    }
+
+    .ImagePart {
+        width: 100%;
+
+        margin-top: 45px;
+    }
+
+    .ImagePart img {
+        max-width: 450px;
+    }
+
+
+    /* COMPANY LOGOS */
+
+    .trusted_companies_container {
+        padding: 45px 25px;
+    }
+
+    .comp_images {
+        gap: 25px;
+    }
+
+    .comp_images img {
+        width: 90px;
+        height: 45px;
+    }
+
+
+    /* CARDS */
+
+    .card_container {
+        padding: 60px 25px;
+    }
+
+    .card_container > header h3 {
+        font-size: 25px;
+    }
+
+    .card_container .cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* FOOTER */
+
+    .detail_container {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 40px 25px;
+
+        padding: 45px 25px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .HeadingPart h1 {
+        font-size: 30px;
+    }
+
+    .HeadingPart button {
+        width: 100%;
+    }
+
+    .detail_container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/*REGISTER PAGE CSS*/
+/* =========================================
+   REGISTER PAGE
+========================================= */
+
+.register_container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background: #f5f7fb;
+}
+
+
+/* =========================================
+   LEFT IMAGE SECTION
+========================================= */
+
+.register_container .img_container {
+    width: 45%;
+    max-width: 560px;
+    min-height: 720px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        135deg,
+        #172033,
+        #263952
+    );
+
+    border-radius: 20px 0 0 20px;
+
+    overflow: hidden;
+}
+
+
+/* IMAGE */
+
+.register_container .img_container img {
+    width: 80%;
+    max-width: 400px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    transition: 0.3s ease;
+}
+
+
+.register_container .img_container img:hover {
+    transform: scale(1.03);
+}
+
+
+/* =========================================
+   FORM SECTION
+========================================= */
+
+.register_container .form_container {
+    width: 55%;
+    max-width: 650px;
+    min-height: 720px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 45px 55px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border-radius: 0 20px 20px 0;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.register_container .form_container form {
+    width: 100%;
+    max-width: 500px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.register_container .header {
+    margin-bottom: 25px;
+}
+
+
+/* HEADING */
+
+.register_container .heading h3 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+/* DESCRIPTION */
+
+.register_container .para p {
+    margin: 8px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM FIELDS
+========================================= */
+
+.register_container .fields {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* LABEL */
+
+.register_container .fields > label {
+    margin-bottom: 6px;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   TEXT / EMAIL / PASSWORD INPUTS
+========================================= */
+
+.register_container .fields > input[type="text"],
+.register_container .fields > input[type="email"],
+.register_container .fields > input[type="password"] {
+
+    width: 100%;
+    height: 43px;
+
+    padding: 0 12px;
+
+    margin-bottom: 14px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+
+/* INPUT FOCUS */
+
+.register_container .fields > input[type="text"]:focus,
+.register_container .fields > input[type="email"]:focus,
+.register_container .fields > input[type="password"]:focus {
+
+    border-color: #8d4ded !important;
+
+    box-shadow: 0 0 0 3px rgba(141, 77, 237, 0.10);
+}
+
+
+/* =========================================
+   ROLE SECTION
+========================================= */
+
+.register_container .role_container {
+
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin-top: 3px;
+
+    margin-bottom: 22px;
+
+    box-sizing: border-box;
+}
+
+
+/* ROLE LABEL */
+
+.register_container .role_container label {
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 8px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* RADIO BUTTON */
+
+.register_container .role_container input[type="radio"] {
+
+    margin: 0 5px 0 0;
+
+    accent-color: #8d4ded;
+
+    cursor: pointer;
+}
+
+
+/* ROLE HOVER */
+
+.register_container .role_container label:hover {
+
+    border-color: #8d4ded;
+
+    background: #faf7ff;
+
+    color: #172033;
+}
+
+
+/* =========================================
+   CREATE ACCOUNT BUTTON
+========================================= */
+
+.register_container .fields button {
+
+    width: 100%;
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #344969;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.register_container .fields button:hover {
+
+    background: #263952;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 15px rgba(52, 73, 105, 0.25);
+}
+
+
+.register_container .fields button:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   LOGIN TEXT
+========================================= */
+
+.register_container .fields > p {
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* LOGIN LINK */
+
+.register_container .fields > p a {
+
+    color: #8d4ded;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.register_container .fields > p a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .register_container {
+
+        padding: 20px;
+    }
+
+
+    .register_container .img_container {
+
+        width: 40%;
+
+        min-height: 680px;
+
+        padding: 25px;
+    }
+
+
+    .register_container .form_container {
+
+        width: 60%;
+
+        min-height: 680px;
+
+        padding: 35px;
+    }
+
+
+    .register_container .heading h3 {
+
+        font-size: 25px;
+    }
+
+
+    .register_container .role_container {
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .register_container {
+
+        min-height: 100vh;
+
+        padding: 15px;
+    }
+
+
+    /* HIDE IMAGE */
+
+    .register_container .img_container {
+
+        display: none;
+    }
+
+
+    /* FULL WIDTH FORM */
+
+    .register_container .form_container {
+
+        width: 100%;
+
+        max-width: 500px;
+
+        min-height: auto;
+
+        padding: 35px 25px;
+
+        border-radius: 16px;
+
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+
+    .register_container .form_container form {
+
+        max-width: 100%;
+    }
+
+
+    .register_container .heading h3 {
+
+        font-size: 25px;
+    }
+
+
+    .register_container .role_container {
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+    .register_container {
+
+        padding: 10px;
+    }
+
+
+    .register_container .form_container {
+
+        padding: 28px 18px;
+    }
+
+
+    .register_container .heading h3 {
+
+        font-size: 22px;
+    }
+
+
+    .register_container .para p {
+
+        font-size: 12px;
+    }
+
+
+    .register_container .fields > input[type="text"],
+    .register_container .fields > input[type="email"],
+    .register_container .fields > input[type="password"] {
+
+        height: 42px;
+    }
+
+
+    .register_container .role_container {
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 6px;
+    }
+
+
+    .register_container .role_container label {
+
+        font-size: 11px;
+
+        min-height: 40px;
+    }
+
+
+    .register_container .fields button {
+
+        height: 44px;
+    }
+}
+
+
+/*LOGIN FORM CSS */
+/* =========================================
+   LOGIN PAGE
+========================================= */
+
+.login_container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background: #f5f7fb;
+}
+
+
+/* =========================================
+   LEFT IMAGE SECTION
+========================================= */
+
+.img_container {
+    width: 50%;
+    max-width: 600px;
+    min-height: 600px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        135deg,
+        #172033,
+        #263952
+    );
+
+    border-radius: 20px 0 0 20px;
+
+    overflow: hidden;
+}
+
+
+/* IMAGE */
+
+.img_container img {
+    width: 80%;
+    max-width: 420px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    transition: 0.3s ease;
+}
+
+.img_container img:hover {
+    transform: scale(1.03);
+}
+
+
+/* =========================================
+   FORM SECTION
+========================================= */
+
+.form_container {
+    width: 50%;
+    max-width: 600px;
+    min-height: 600px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border-radius: 0 20px 20px 0;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form_container form {
+    width: 100%;
+    max-width: 400px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.form_container .header {
+    margin-bottom: 35px;
+}
+
+
+/* HEADING */
+
+.form_container .heading h3 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 32px;
+    font-weight: 700;
+}
+
+
+/* DESCRIPTION */
+
+.form_container .para p {
+    margin: 10px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   FORM FIELDS
+========================================= */
+
+.form_container .fields {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* LABEL */
+
+.form_container .fields label {
+    margin-bottom: 8px;
+
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* INPUT */
+
+.form_container .fields input {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 14px;
+
+    margin-bottom: 20px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+
+/* INPUT HOVER */
+
+.form_container .fields input:hover {
+    border-color: #b8c1d1;
+}
+
+
+/* INPUT FOCUS */
+
+.form_container .fields input:focus {
+    border-color: #8d4ded;
+
+    box-shadow: 0 0 0 3px rgba(141, 77, 237, 0.10);
+}
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+.form_container .fields > a {
+    align-self: flex-end;
+
+    margin-top: -8px;
+    margin-bottom: 25px;
+
+    color: #8d4ded;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form_container .fields > a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.form_container .fields button {
+    width: 100%;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #344969;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.form_container .fields button:hover {
+    background: #263952;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 15px rgba(52, 73, 105, 0.25);
+}
+
+
+.form_container .fields button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   REGISTER TEXT
+========================================= */
+
+.form_container .fields > p {
+    margin-top: 25px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* REGISTER LINK */
+
+.form_container .fields > p a {
+    color: #8d4ded;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.form_container .fields > p a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .login_container {
+        padding: 20px;
+    }
+
+    .img_container {
+        min-height: 550px;
+
+        padding: 25px;
+    }
+
+    .form_container {
+        min-height: 550px;
+
+        padding: 35px;
+    }
+
+    .form_container .heading h3 {
+        font-size: 28px;
+    }
+
+    .img_container img {
+        width: 90%;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .login_container {
+        min-height: 100vh;
+
+        padding: 20px;
+    }
+
+
+    /* STACK IMAGE AND FORM */
+
+    .img_container {
+        display: none;
+    }
+
+
+    .form_container {
+        width: 100%;
+        max-width: 500px;
+
+        min-height: auto;
+
+        padding: 40px 30px;
+
+        border-radius: 16px;
+
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+
+    .form_container form {
+        max-width: 100%;
+    }
+
+
+    .form_container .heading h3 {
+        font-size: 28px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .login_container {
+        padding: 12px;
+    }
+
+    .form_container {
+        padding: 30px 20px;
+    }
+
+    .form_container .heading h3 {
+        font-size: 25px;
+    }
+
+    .form_container .para p {
+        font-size: 13px;
+    }
+
+    .form_container .fields input {
+        height: 45px;
+    }
+
+    .form_container .fields button {
+        height: 45px;
+    }
+}
+
+/*STUDENT DASHBOARD CSS*/
+/* =========================================================
+   STUDENT DASHBOARD
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.studentDashboard_container {
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+    padding: 1rem;
+
+    /* Space for fixed navbar */
+    margin-top: 6rem;
+
+    background: #f4f7fb;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.studentDashboard_container .sidebar_container {
+
+
+    flex: 1 1 220px;
+
+    min-width: 200px;
+    max-width: 280px;
+
+    min-height: calc(100vh - 7rem);
+
+    background: #172033;
+
+    color: white;
+
+    border-radius: 14px;
+
+    padding: 1.5rem 1rem;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Sidebar navigation */
+
+.studentDashboard_container .sidebar_container nav {
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.35rem;
+}
+
+
+/* Welcome */
+
+.studentDashboard_container .sidebar_container nav h3 {
+
+    margin: 0;
+
+    padding: 0.5rem 0.8rem 1.2rem;
+
+    font-size: 1.4rem;
+
+    color: white;
+}
+
+
+/* Sidebar links */
+
+.studentDashboard_container .sidebar_container nav a {
+
+    width: 100%;
+
+    padding: 0.8rem;
+
+    border-radius: 8px;
+
+    color: #dbe3f0;
+
+    text-decoration: none;
+
+    font-size: 0.95rem;
+
+    transition: all 0.25s ease;
+}
+
+
+/* Hover */
+
+.studentDashboard_container .sidebar_container nav a:hover {
+
+    background: #263550;
+
+    color: white;
+
+    transform: translateX(3px);
+}
+
+
+/* Logout */
+
+.studentDashboard_container .sidebar_container nav a:last-child {
+
+    margin-top: 1rem;
+
+    color: #ff8585;
+}
+
+
+.studentDashboard_container .sidebar_container nav a:last-child:hover {
+
+    background: rgba(255, 80, 80, 0.12);
+
+    color: #ff6b6b;
+}
+
+
+/* =========================================================
+   MAIN STUDENT CONTENT
+   ========================================================= */
+
+.studentHomeDashboard_container {
+    flex: 4 1 800px;
+    min-width: 0;
+    height: 100vh;    
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 1.5rem;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   COMMON HEADING
+   ========================================================= */
+
+.studentHomeDashboard_container .heading {
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    margin-bottom: 1.5rem;
+}
+
+
+.studentHomeDashboard_container .heading h1,
+.studentHomeDashboard_container .heading h2,
+.studentHomeDashboard_container .heading h3 {
+
+    margin-top: 0;
+
+    color: #172033;
+}
+
+
+.studentHomeDashboard_container .heading h5 {
+
+    margin: 0.4rem 0;
+
+    color: #687386;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   STUDENT DASHBOARD HOME
+   ========================================================= */
+
+.dashboard_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Profile completion */
+
+.dashboard_container > h3 {
+
+    margin: 0 0 1rem;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+   ========================================================= */
+
+.progress_cards {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    margin-bottom: 1.5rem;
+}
+
+
+.progress_cards .cards {
+
+    flex: 1 1 180px;
+
+    min-width: 170px;
+
+    padding: 1.2rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+
+    transition: 0.25s ease;
+}
+
+
+.progress_cards .cards:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+.progress_cards .cards h3 {
+
+    margin: 0;
+
+    font-size: 0.9rem;
+
+    color: #536174;
+}
+
+
+.progress_cards .cards h4 {
+
+    margin: 0.6rem 0 0;
+
+    color: #172033;
+}
+
+
+.progress_cards .cards h4:last-child {
+
+    font-size: 1.8rem;
+}
+
+
+/* =========================================================
+   RECENT JOBS
+   ========================================================= */
+
+.appliedJob_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    min-height: 350px;
+
+    padding: 1.5rem;
+    overflow: scroll;
+    border: 1px solid #e2e7ee;
+    border-radius: 12px;
+}
+
+.appliedJob_container::-webkit-scrollbar{
+    display: none;
+}
+.appliedJob_container h2 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   MY PROFILE PAGE
+   ========================================================= */
+
+.myprofile_container {
+    width: 100%;
+    padding: 1rem;
+    overflow: scroll;
+    height: 100%;
+}
+.myprofile_container::-webkit-scrollbar{
+  display: none;
+}
+
+
+/* Profile header */
+
+.myprofile_container > .header {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    margin-bottom: 1.5rem;
+}
+
+
+.myprofile_container .header h3 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 1.7rem;
+}
+
+
+.myprofile_container .header h5 {
+
+    margin: 0.4rem 0;
+
+    color: #687386;
+
+    font-weight: 400;
+}
+
+
+.profile_complition {
+
+    padding: 0.8rem 1.2rem;
+
+    background: #eef4ff;
+
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+
+.profile_complition h5 {
+
+    margin: 0.2rem;
+
+    color: #315fa8 !important;
+
+    font-weight: 600 !important;
+}
+
+
+/* =========================================================
+   STUDENT PROFILE CARD
+   ========================================================= */
+
+.student_profile_card_container {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    margin-bottom: 1.5rem;
+}
+
+
+/* Main profile */
+
+.profile_card {
+
+    flex: 2 1 500px;
+
+    min-width: 300px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+/* Profile image */
+
+.image_container {
+
+    flex: 0 0 120px;
+
+    width: 120px;
+
+    height: 120px;
+
+    border-radius: 50%;
+
+    background: #e1e8f2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.image_container h2 {
+
+    margin: 0;
+
+    color: #687386;
+
+    font-size: 1rem;
+}
+
+
+/* Profile information */
+
+.profile_info {
+
+    flex: 1 1 300px;
+
+    min-width: 0;
+}
+
+
+.profile_info h2 {
+
+    margin: 0;
+
+    color: #172033;
+}
+
+
+.profile_info h4 {
+
+    margin: 0.4rem 0 1rem;
+
+    color: #315fa8;
+}
+
+
+.profile_info h5 {
+
+    margin: 0.3rem 0;
+
+    color: #536174;
+
+    font-weight: 500;
+}
+
+
+/* Quick summary */
+
+.quick_summary {
+
+    flex: 1 1 280px;
+
+    min-width: 260px;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+.quick_summary h3 {
+
+    margin-top: 0;
+
+    color: #172033;
+}
+
+
+.quick_summary h4 {
+
+    margin: 0.5rem 0 0.2rem;
+
+    color: #687386;
+
+    font-size: 0.8rem;
+}
+
+
+.quick_summary h5 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   PROFILE NAVIGATION
+   ========================================================= */
+
+.profile_Nav_container {
+
+    width: 100%;
+
+    margin-bottom: 1rem;
+
+    overflow-x: auto;
+
+    border-bottom: 1px solid #e2e7ee;
+}
+
+
+.profile_Nav_container nav {
+
+    display: flex;
+
+    gap: 0.3rem;
+
+    min-width: max-content;
+}
+
+
+.profile_Nav_container nav a {
+
+    padding: 0.8rem 1rem;
+
+    color: #536174;
+
+    text-decoration: none;
+
+    border-radius: 7px 7px 0 0;
+
+    transition: 0.2s ease;
+}
+
+
+.profile_Nav_container nav a:hover {
+
+    background: #eef4ff;
+
+    color: #315fa8;
+}
+
+
+/* =========================================================
+   COMMON FORM CONTAINERS
+   ========================================================= */
+
+.personalInfo_form_container,
+.education_form_container,
+.skill_form_container,
+.experience_form_container,
+.certification_form_container {
+
+    width: 100%;
+
+    padding: 1.2rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+/* Form */
+
+.personalInfo_form_container form,
+.education_form_container form,
+.skill_form_container form,
+.experience_form_container form,
+.certification_form_container form {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+
+/* Form rows */
+
+.personalInfo_form_container form > div {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    width: 100%;
+}
+
+
+/* Inputs */
+
+.personalInfo_form_container input,
+.education_form_container input,
+.skill_form_container input,
+.experience_form_container input,
+.certification_form_container input,
+.personalInfo_form_container select,
+.education_form_container select,
+.experience_form_container select {
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: white;
+
+    min-width: 0;
+}
+
+
+/* Inputs inside rows */
+
+.personalInfo_form_container form > div > input {
+
+    flex: 1 1 200px;
+}
+
+
+/* Labels */
+
+.personalInfo_form_container label,
+.education_form_container label,
+.skill_form_container label,
+.experience_form_container label,
+.certification_form_container label {
+
+    color: #536174;
+
+    font-size: 0.9rem;
+}
+
+
+/* Focus */
+
+.personalInfo_form_container input:focus,
+.education_form_container input:focus,
+.skill_form_container input:focus,
+.experience_form_container input:focus,
+.certification_form_container input:focus {
+
+    border-color: #5686d9;
+
+    box-shadow: 0 0 0 3px rgba(86, 134, 217, 0.1);
+}
+
+
+/* =========================================================
+   EDUCATION CARDS
+   ========================================================= */
+
+.education_form_container .cards {
+
+    width: 100%;
+
+    padding: 1.2rem;
+
+    background: white;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+
+.education_form_container .cards > div {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+
+.education_form_container .cards input {
+
+    flex: 1 1 200px;
+}
+
+
+.education_form_container .cards h3 {
+
+    margin: 0;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+
+.skill_form_container form {
+
+    background: white;
+
+    padding: 1.2rem;
+
+    border-radius: 10px;
+
+    border: 1px solid #e2e7ee;
+}
+
+
+.skill_form_container form label {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+}
+
+
+.skill_form_container form input {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   EXPERIENCE
+   ========================================================= */
+
+.experience_form_container form {
+
+    background: white;
+
+    padding: 1.2rem;
+
+    border-radius: 10px;
+
+    border: 1px solid #e2e7ee;
+}
+
+
+.experience_form_container form label {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+}
+
+
+.experience_form_container form input,
+.experience_form_container form select {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CERTIFICATION
+   ========================================================= */
+
+.certification_form_container form {
+
+    background: white;
+
+    padding: 1.2rem;
+
+    border-radius: 10px;
+
+    border: 1px solid #e2e7ee;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 1rem;
+}
+
+
+.certification_form_container form input {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.studentHomeDashboard_container button {
+
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 0.65rem 1rem;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.studentHomeDashboard_container button:hover {
+
+    background: #264f91;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PROJECT PAGE
+   ========================================================= */
+
+.project_page_container,
+.project_form_container {
+    width: 100%;
+}
+
+
+.project_page_container .heading,
+.achievement_page_container .heading {
+
+    display: flex;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.display_project_container {
+
+    width: 100%;
+
+    min-height: 350px;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+.project_form_container form {
+
+    width: 100%;
+
+    max-width: 700px;
+
+    margin: auto;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+
+.project_form_container input {
+
+    width: 100%;
+
+    padding: 0.75rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+   ========================================================= */
+
+.achievement_page_container {
+
+    width: 100%;
+}
+
+
+.display_achievements {
+
+    width: 100%;
+
+    min-height: 350px;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+.achievement_form_container {
+
+    width: 100%;
+}
+
+
+.achievement_form_container form {
+
+    width: 100%;
+
+    max-width: 600px;
+
+    margin: auto;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+
+.achievement_form_container label {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+
+    color: #536174;
+}
+
+
+.achievement_form_container select,
+.achievement_form_container input {
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+}
+
+
+/* =========================================================
+   RESUME PAGE
+   ========================================================= */
+
+.resume_page_container {
+  height: 100%;
+  width: 100%;
+  overflow: scroll; 
+}
+.resume_page_container::-webkit-scrollbar{
+  display: none;
+}
+
+
+.ai_resume_builder_container,
+.final_resume_container {
+
+    width: 100%;
+
+    padding: 1.5rem;
+
+    margin-bottom: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+.ai_resume_builder_container .heading,
+.final_resume_container .heading {
+
+    display: block;
+
+    margin-bottom: 1rem;
+}
+
+
+.ai_resume_builder_container .heading h3,
+.final_resume_container .heading h3 {
+
+    margin: 0;
+
+    color: #172033;
+}
+
+
+.ai_resume_builder_container .heading p,
+.final_resume_container .heading p {
+
+    color: #687386;
+
+    margin-bottom: 0;
+}
+
+
+/* Resume upload */
+
+.ai_resume,
+.final_resume_upload {
+
+    width: 100%;
+
+    padding: 1.5rem;
+
+    background: white;
+
+    border: 1px dashed #b8c4d5;
+
+    border-radius: 10px;
+
+    margin-bottom: 1rem;
+}
+
+
+.ai_resume h3,
+.final_resume_upload h3 {
+
+    margin-top: 0;
+
+    color: #172033;
+}
+
+
+.ai_resume input,
+.final_resume_upload input {
+
+    display: block;
+
+    margin: 1rem 0;
+}
+
+
+/* Target role */
+
+.target_role {
+
+    width: 100%;
+
+    padding: 1.2rem;
+
+    background: white;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.7rem;
+}
+
+
+.target_role > input {
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+}
+
+
+.experience_options {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+
+.experience_options label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.3rem;
+}
+
+
+.analyze_resume_btn {
+
+    margin-top: 1rem;
+
+    width: 100%;
+
+    padding: 0.8rem !important;
+}
+
+
+/* =========================================================
+   JOBS PAGE
+   ========================================================= */
+
+.applicaton_page_container {
+
+    width: 100%;
+}
+
+
+.applicaton_page_container .heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+
+.applicaton_page_container .heading label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    flex-wrap: wrap;
+
+    color: #536174;
+}
+
+
+.applicaton_page_container input {
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+
+.jobs,
+.applications {
+
+    width: 100%;
+
+    min-height: 350px;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .studentDashboard_container {
+
+        flex-direction: column;
+
+        margin-top: 5rem;
+    }
+
+
+    .studentDashboard_container .sidebar_container {
+
+        width: 100%;
+
+        max-width: none;
+
+        min-height: auto;
+    }
+
+
+    .studentDashboard_container .sidebar_container nav {
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+
+    .studentDashboard_container .sidebar_container nav a {
+
+        flex: 1 1 140px;
+
+        width: auto;
+    }
+
+
+    .studentHomeDashboard_container {
+
+        width: 100%;
+
+        min-height: auto;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .studentDashboard_container {
+
+        padding: 0.6rem;
+
+        margin-top: 4.5rem;
+    }
+
+
+    .studentHomeDashboard_container {
+
+        padding: 1rem;
+
+        border-radius: 10px;
+    }
+
+
+    .studentDashboard_container .sidebar_container {
+
+        padding: 1rem 0.7rem;
+    }
+
+
+    .studentDashboard_container .sidebar_container nav {
+
+        flex-direction: column;
+    }
+
+
+    .studentDashboard_container .sidebar_container nav a {
+
+        width: 100%;
+
+        flex: none;
+    }
+
+
+    .progress_cards {
+
+        flex-direction: column;
+    }
+
+
+    .progress_cards .cards {
+
+        width: 100%;
+    }
+
+
+    .profile_card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .quick_summary {
+
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .certification_form_container form {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .experience_options {
+
+        flex-direction: column;
+
+        gap: 0.5rem;
+    }
+}
+
+
+/* RECRUITER DASHBOARD CSS*/
+/* =========================================================
+   RECRUITER DASHBOARD
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.recruiter_container {
+    width: 100%;
+    height: calc(100vh - 3rem);
+
+    display: flex;
+    flex-wrap: nowrap;
+
+    gap: 1rem;
+    padding: 1rem;
+
+    margin-top: 6rem;
+
+    background: #f4f7fb;
+
+    align-items: stretch;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+.recruiter_container::-webkit-scrollbar{
+    display: none;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.recruiter_container .sidebar_container {
+
+    /*
+       SMALL PART OF THE FLEX CONTAINER
+       Sidebar can shrink/grow but remains smaller
+    */
+    flex: 1 1 220px;
+
+    min-width: 200px;
+    max-width: 280px;
+
+    min-height: calc(100vh - 7rem);
+
+    background: #172033;
+
+    border-radius: 14px;
+
+    padding: 1.5rem 1rem;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Logo */
+
+.recruiter_container .sidebar_container h3 {
+
+    margin: 0;
+
+    padding: 0.5rem 0.7rem;
+
+    font-size: 1.35rem;
+
+    color: #ffffff;
+}
+
+
+/* Recruiter text */
+
+.recruiter_container .sidebar_container h4 {
+
+    margin: 0.3rem 0 1.5rem;
+
+    padding: 0 0.7rem;
+
+    color: #9ca8bc;
+
+    font-size: 0.9rem;
+
+    font-weight: 500;
+}
+
+
+/* Sidebar navigation */
+
+.recruiter_container .sidebar_container nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+
+    width: 100%;
+}
+
+
+/* Sidebar links */
+
+.recruiter_container .sidebar_container nav a {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 0.8rem 0.8rem;
+
+    border-radius: 8px;
+
+    color: #dbe3f0;
+
+    text-decoration: none;
+
+    font-size: 0.95rem;
+
+    transition: 0.25s ease;
+}
+
+
+/* Hover */
+
+.recruiter_container .sidebar_container nav a:hover {
+
+    background: #263550;
+
+    color: white;
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   MAIN RECRUITER DISPLAY
+   ========================================================= */
+
+.recruiterHomeDashboard_container {
+
+    /*
+       LARGE PART OF FLEX CONTAINER
+    */
+
+    flex: 4 1 800px;
+
+    min-width: 0;
+
+    min-height: calc(100vh - 7rem);
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    padding: 1.5rem;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.recruiterHomeDashboard_container::-webkit-scrollbar{
+    display: none;
+}
+
+
+/* =========================================================
+   COMMON PAGE HEADING
+   ========================================================= */
+
+.recruiterHomeDashboard_container .heading {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 1.5rem;
+}
+
+
+.recruiterHomeDashboard_container .heading h1 {
+
+    margin: 0;
+
+    font-size: 1.8rem;
+
+    color: #172033;
+}
+
+
+.recruiterHomeDashboard_container .heading h5 {
+
+    margin: 0.4rem 0 0;
+
+    color: #687386;
+
+    font-size: 0.9rem;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   DASHBOARD PAGE
+   ========================================================= */
+
+.Dashboard_page_container {
+
+    width: 100%;
+}
+
+
+/* Dashboard heading */
+
+.Dashboard_page_container .heading {
+
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid #e4e8ef;
+}
+
+
+/* Profile button/text */
+
+.Dashboard_page_container .heading > div:last-child {
+
+    background: #eef4ff;
+
+    padding: 0.5rem 1rem;
+
+    border-radius: 8px;
+}
+
+.Dashboard_page_container .heading > div:last-child h3 {
+
+    margin: 0;
+
+    color: #315fa8;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+   ========================================================= */
+
+.cardContainer {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    margin-top: 1rem;
+
+    margin-bottom: 1.5rem;
+}
+
+
+.cardContainer .cards {
+
+    /*
+       Four cards will fit on large screen.
+       They wrap automatically on smaller screens.
+    */
+
+    flex: 1 1 180px;
+
+    min-width: 170px;
+
+    padding: 1.2rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e4e9f0;
+
+    border-radius: 12px;
+
+    transition: 0.25s ease;
+}
+
+
+.cardContainer .cards:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+.cardContainer .cards h4 {
+
+    margin: 0;
+
+    color: #697586;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+}
+
+
+.cardContainer .cards h5 {
+
+    margin: 0.7rem 0 0;
+
+    color: #172033;
+
+    font-size: 1.8rem;
+}
+
+
+/* =========================================================
+   ACTIVE JOB SECTION
+   ========================================================= */
+
+.activeJob_container {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+
+.recentjob {
+
+    flex: 1 1 500px;
+
+    min-height: 300px;
+
+    padding: 1.2rem;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+}
+
+
+.recentjob .heading {
+
+    margin: 0;
+
+    padding-bottom: 0.8rem;
+
+    border-bottom: 1px solid #e5e9ef;
+}
+
+
+.recentjob .heading h4 {
+
+    margin: 0;
+
+    color: #172033;
+}
+
+
+.recentjob .heading a {
+
+    text-decoration: none;
+
+    color: #356ac3;
+}
+
+
+/* =========================================================
+   PROFILE PAGE
+   ========================================================= */
+
+.profile_page_container {
+
+    width: 100%;
+    height: calc(100vh - 9rem);
+
+    display: flex;
+    flex-wrap: wrap;
+
+    overflow: scroll;
+}
+
+.profile_page_container::-webkit-scrollbar{
+    display: none;
+}
+
+.profile_form_container {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1.5rem;
+
+}
+
+
+/* Profile form */
+
+.profile_form_container form {
+
+    flex: 2 1 450px;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+   
+}
+
+
+
+.profile_form_container form h4 {
+
+    margin: 0 0 0.5rem;
+
+    font-size: 1.1rem;
+
+    color: #172033;
+}
+
+
+.profile_form_container form label {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+
+    color: #4b5565;
+
+    font-size: 0.9rem;
+}
+
+
+.profile_form_container input {
+
+    width: 100%;
+
+    padding: 0.7rem;
+
+    border: 1px solid #cfd6e0;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: white;
+}
+
+
+.profile_form_container input:focus {
+
+    border-color: #5686d9;
+
+    box-shadow: 0 0 0 3px rgba(86, 134, 217, 0.1);
+}
+
+
+.profile_form_container button {
+
+    padding: 0.7rem 1.2rem;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+/* Profile view */
+
+.profile_View {
+
+    flex: 1 1 280px;
+
+    min-width: 250px;
+
+    padding: 1.5rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+
+.profile_View img {
+
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    background: #dfe6f0;
+
+    margin: 1rem auto;
+}
+
+
+.profile_View h4 {
+
+    margin: 0.5rem;
+
+    color: #455065;
+}
+
+
+/* =========================================================
+   MY JOB PAGE
+   ========================================================= */
+
+.myjob_page_container {
+
+    width: 100%;
+}
+
+
+.myjob_page_container .heading button {
+
+    padding: 0.7rem 1.2rem;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+/* Search */
+
+.searching_container {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0.8rem;
+
+    padding: 1rem;
+
+    margin-bottom: 1rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 10px;
+}
+
+
+.searching_container input,
+.searching_container select {
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: white;
+}
+
+
+.searching_container input {
+
+    flex: 2 1 280px;
+}
+
+
+.searching_container select {
+
+    flex: 1 1 150px;
+}
+
+
+/* Posted jobs */
+
+.posted_job_container {
+
+    width: 100%;
+
+    min-height: 300px;
+
+    padding: 1.2rem;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+ 
+    background: white;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+}
+
+
+/* =========================================================
+   CANDIDATES
+   ========================================================= */
+
+.candidate_page_container {
+
+    width: 100%;
+}
+
+
+.candidate_profile_container {
+
+    width: 100%;
+
+    min-height: 350px;
+
+    padding: 1.5rem;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   APPLICATION / SHORTLISTED TABLE
+   ========================================================= */
+
+.application_page_container,
+.shortlisted_page_container,
+.interview_page_container {
+
+    width: 100%;
+}
+
+.interview_page_container .heading button{
+    border: none;
+
+    padding: 11px 22px;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+.search_container {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0.8rem;
+
+    padding: 1rem;
+
+    margin-bottom: 1rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 10px;
+}
+
+
+.search_container input,
+.search_container select {
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    background: white;
+
+    outline: none;
+}
+
+
+.search_container input {
+
+    flex: 2 1 280px;
+}
+
+
+.search_container select {
+
+    flex: 1 1 160px;
+}
+
+
+/* Table wrapper */
+
+.candidate_profile_table {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 10px;
+
+    background: white;
+}
+
+
+.candidate_profile_table table {
+
+    width: 100%;
+
+    min-width: 850px;
+
+    border-collapse: collapse;
+}
+
+
+.candidate_profile_table thead {
+
+    background: #f1f5f9;
+}
+
+
+.candidate_profile_table td {
+
+    padding: 0.9rem;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e5e9ef;
+
+    white-space: nowrap;
+}
+
+
+.candidate_profile_table thead td {
+
+    color: #475569;
+
+    font-size: 0.85rem;
+
+    font-weight: 700;
+}
+
+
+.candidate_profile_table tbody th {
+
+    padding: 0.9rem;
+
+    text-align: left;
+
+    border-bottom: 1px solid #edf0f4;
+
+    color: #475569;
+
+    font-size: 0.85rem;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+.candidate_profile_table tbody tr:hover {
+
+    background: #f8fafc;
+}
+
+
+.candidate_profile_table button {
+
+    padding: 0.5rem 0.8rem;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   INTERVIEW PAGE
+   ========================================================= */
+
+.interview_container {
+
+    width: 100%;
+
+    padding: 1rem;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 12px;
+
+    background: white;
+}
+
+
+.interview_heading {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1.5rem;
+
+    margin-bottom: 1rem;
+
+    border-bottom: 1px solid #e5e9ef;
+}
+
+
+.interview_heading a {
+
+    text-decoration: none;
+
+    color: #315fa8;
+}
+
+
+.interview_heading h4 {
+
+    margin: 0;
+
+    padding-bottom: 0.8rem;
+}
+
+
+.table_container {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.table_container table {
+
+    width: 100%;
+
+    min-width: 800px;
+
+    border-collapse: collapse;
+}
+
+
+.table_container td,
+.table_container th {
+
+    padding: 0.9rem;
+
+    border-bottom: 1px solid #e5e9ef;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+
+.table_container thead {
+
+    background: #f1f5f9;
+}
+
+
+.table_container th {
+
+    font-weight: 500;
+
+    color: #475569;
+}
+
+
+.table_container button {
+
+    padding: 0.45rem 0.7rem;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   AI CANDIDATE MATCH
+   ========================================================= */
+
+.aimatch_container {
+
+    width: 100%;
+}
+
+
+.subheading {
+
+    width: 100%;
+
+    padding: 1rem;
+
+    margin-bottom: 1rem;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e7ee;
+
+    border-radius: 10px;
+}
+
+
+.subheading label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.8rem;
+
+    flex-wrap: wrap;
+
+    font-weight: 600;
+
+    color: #475569;
+}
+
+
+.subheading select {
+
+    padding: 0.7rem;
+
+    min-width: 220px;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    background: white;
+}
+
+
+.topCandidates_container {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+
+.top_matched_candidates,
+.ai_matchBreakdown {
+
+    flex: 1 1 400px;
+
+    min-height: 300px;
+
+    padding: 1.2rem;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+}
+
+
+.top_matched_candidates h4,
+.ai_matchBreakdown h4 {
+
+    margin: 0;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   NEW JOB POPUP
+   ========================================================= */
+
+.newJobpost_container {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background: rgba(15, 23, 42, 0.55);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 1rem;
+
+    overflow-y: auto;
+}
+
+
+.newJobpost_container form {
+
+    width: min(650px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 1.5rem;
+
+    background: white;
+
+    border-radius: 14px;
+
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+
+.newJobpost_container form header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.newJobpost_container form header h3 {
+
+    margin: 0;
+
+    color: #172033;
+}
+
+
+.newJobpost_container form header button {
+
+    width: 35px;
+
+    height: 35px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eef1f5;
+
+    cursor: pointer;
+}
+
+.newJobpost_container button{
+    padding: 0.7rem 1.2rem;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.newJobpost_container form > label {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+
+    color: #475569;
+
+    font-weight: 600;
+
+    font-size: 0.9rem;
+}
+
+
+.newJobpost_container input,
+.newJobpost_container select,
+.newJobpost_container textarea {
+
+    width: 100%;
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-family: inherit;
+}
+
+
+.newJobpost_container textarea {
+
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+
+.experience_inputs,
+.package_inputs {
+
+    display: flex;
+
+    gap: 0.7rem;
+}
+
+
+.experience_inputs input,
+.package_inputs input {
+
+    flex: 1;
+}
+
+
+.newJobpost_container form > button[type="submit"] {
+
+    padding: 0.8rem;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SCHEDULE INTERVIEW POPUP
+   ========================================================= */
+
+.shedule_inter_form_container {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background: rgba(15, 23, 42, 0.55);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 1rem;
+
+    overflow-y: auto;
+}
+
+
+.scheduleInterview_container {
+
+    width: min(600px, 100%);
+}
+
+
+.scheduleInterview_container form {
+
+    width: 100%;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 1.5rem;
+
+    background: white;
+
+    border-radius: 14px;
+
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+
+.scheduleInterview_container form header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.scheduleInterview_container form header h3 {
+
+    margin: 0;
+
+    color: #172033;
+}
+
+
+.scheduleInterview_container form header button {
+
+    width: 35px;
+
+    height: 35px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eef1f5;
+
+    cursor: pointer;
+}
+
+
+.scheduleInterview_container form label {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+
+    color: #475569;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+}
+
+
+.scheduleInterview_container form input,
+.scheduleInterview_container form select,
+.scheduleInterview_container form textarea {
+
+    width: 100%;
+
+    padding: 0.7rem;
+
+    border: 1px solid #ccd4df;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-family: inherit;
+}
+
+
+.scheduleInterview_container form textarea {
+
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+
+.scheduleInterview_container form > button[type="submit"] {
+
+    padding: 0.8rem;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #315fa8;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .recruiter_container {
+
+        flex-direction: column;
+
+        margin-top: 5rem;
+    }
+
+
+    .recruiter_container .sidebar_container {
+
+        max-width: none;
+
+        min-height: auto;
+
+        width: 100%;
+    }
+
+
+    .recruiter_container .sidebar_container nav {
+
+        display: flex;
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+
+        gap: 0.4rem;
+    }
+
+
+    .recruiter_container .sidebar_container nav a {
+
+        width: auto;
+
+        flex: 1 1 140px;
+    }
+
+
+    .recruiterHomeDashboard_container {
+
+        width: 100%;
+
+        min-height: auto;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .recruiter_container {
+
+        padding: 0.6rem;
+
+        margin-top: 4.5rem;
+    }
+
+
+    .recruiterHomeDashboard_container {
+
+        padding: 1rem;
+
+        border-radius: 10px;
+    }
+
+
+    .recruiter_container .sidebar_container {
+
+        padding: 1rem 0.7rem;
+    }
+
+
+    .recruiter_container .sidebar_container nav {
+
+        flex-direction: column;
+    }
+
+
+    .recruiter_container .sidebar_container nav a {
+
+        width: 100%;
+
+        flex: none;
+    }
+
+
+    .recruiterHomeDashboard_container .heading h1 {
+
+        font-size: 1.5rem;
+    }
+
+
+    .cardContainer {
+
+        flex-direction: column;
+    }
+
+
+    .cardContainer .cards {
+
+        width: 100%;
+    }
+
+
+    .experience_inputs,
+    .package_inputs {
+
+        flex-direction: column;
+    }
+}
+
+
+/*ABOUT PAGE CSS */
+/* =========================================================
+   ABOUT PAGE
+========================================================= */
+
+.about_container {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #f8fafc;
+
+    padding-top: 75px;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   FIRST SECTION
+========================================================= */
+
+.about_container .container1 {
+    width: 100%;
+
+    padding: 80px 8%;
+
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f7ff 50%,
+        #f3f7ff 100%
+    );
+}
+
+
+/* =========================================================
+   ABOUT HEADER
+========================================================= */
+
+.about_container .container1 > header {
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.about_container .container1 > header h1 {
+    margin: 0;
+
+    font-size: 46px;
+
+    font-weight: 750;
+
+    color: #172033;
+
+    letter-spacing: -1px;
+}
+
+.about_container .container1 > header .para {
+    margin-top: 20px;
+}
+
+.about_container .container1 > header .para h4 {
+    margin: 0;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    font-weight: 400;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   SUB CONTAINER
+========================================================= */
+
+.about_container .subcontainer {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 60px;
+
+    margin-top: 70px;
+}
+
+
+/* =========================================================
+   MISSION + VISION
+========================================================= */
+
+.mission_vission_container {
+    width: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+
+/* =========================================================
+   MISSION / VISION CARDS
+========================================================= */
+
+.mission,
+.vission {
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.mission:hover,
+.vission:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.10);
+}
+
+
+/* =========================================================
+   MISSION / VISION HEADINGS
+========================================================= */
+
+.mission h2,
+.vission h2 {
+    margin: 0;
+
+    font-size: 23px;
+
+    color: #344969;
+
+    font-weight: 700;
+}
+
+.mission p,
+.vission p {
+    margin: 15px 0 0;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   ABOUT IMAGE
+========================================================= */
+
+.about_img_container {
+    width: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.about_img_container img {
+    width: 100%;
+
+    max-width: 600px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    filter: drop-shadow(
+        0 20px 30px rgba(15, 23, 42, 0.12)
+    );
+
+    transition: transform 0.3s ease;
+}
+
+.about_img_container img:hover {
+    transform: translateY(-6px);
+}
+
+
+/* =========================================================
+   ROLE IMAGE SECTION
+========================================================= */
+
+.role_image_container {
+    width: 100%;
+
+    padding: 90px 8%;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.role_image_container img {
+    width: 100%;
+
+    max-width: 1150px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    filter: drop-shadow(
+        0 15px 30px rgba(15, 23, 42, 0.08)
+    );
+
+    transition: transform 0.3s ease;
+}
+
+.role_image_container img:hover {
+    transform: scale(1.01);
+}
+
+
+/* =========================================================
+   FOOTER IMAGE SECTION
+========================================================= */
+
+.about_container footer {
+    width: 100%;
+
+    padding: 70px 8%;
+
+    box-sizing: border-box;
+
+    background: #f8fafc;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.about_container footer img {
+    width: 100%;
+
+    max-width: 1100px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    filter: drop-shadow(
+        0 15px 25px rgba(15, 23, 42, 0.08)
+    );
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .about_container .container1 {
+        padding: 70px 5%;
+    }
+
+    .about_container .container1 > header h1 {
+        font-size: 40px;
+    }
+
+    .about_container .subcontainer {
+        gap: 35px;
+    }
+
+    .role_image_container {
+        padding: 70px 5%;
+    }
+
+    .about_container footer {
+        padding: 60px 5%;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .about_container .container1 {
+        padding: 55px 25px;
+    }
+
+
+    /* HEADER */
+
+    .about_container .container1 > header h1 {
+        font-size: 34px;
+    }
+
+    .about_container .container1 > header .para h4 {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    /* MISSION + VISION */
+
+    .about_container .subcontainer {
+        flex-direction: column;
+
+        gap: 40px;
+
+        margin-top: 50px;
+    }
+
+    .mission_vission_container {
+        width: 100%;
+    }
+
+    .mission,
+    .vission {
+        padding: 25px;
+    }
+
+
+    /* IMAGE */
+
+    .about_img_container {
+        width: 100%;
+    }
+
+    .about_img_container img {
+        max-width: 500px;
+    }
+
+
+    /* ROLE IMAGE */
+
+    .role_image_container {
+        padding: 55px 25px;
+    }
+
+
+    /* FOOTER IMAGE */
+
+    .about_container footer {
+        padding: 50px 25px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .about_container .container1 > header h1 {
+        font-size: 29px;
+    }
+
+    .mission h2,
+    .vission h2 {
+        font-size: 20px;
+    }
+
+    .mission p,
+    .vission p {
+        font-size: 14px;
+    }
+}
+
+
+
+/*HOW IT WORKS*/
+/* =========================================================
+   HOW IT WORKS PAGE
+========================================================= */
+
+.howitworks_container {
+    width: 100%;
+    min-height: 100vh;
+
+    padding-top: 75px;
+
+    background: #f8fafc;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.howitworks_container > header {
+    width: 100%;
+
+    padding: 80px 8% 60px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f7ff 50%,
+        #f3f7ff 100%
+    );
+}
+
+.howitworks_container > header h1 {
+    margin: 0;
+
+    font-size: 46px;
+
+    line-height: 1.2;
+
+    font-weight: 750;
+
+    color: #172033;
+
+    letter-spacing: -1px;
+}
+
+.howitworks_container > header h4 {
+    margin: 18px 0 0;
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    color: #64748b;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   GENERAL IMAGE SECTIONS
+========================================================= */
+
+.forstudent_img_container,
+.forrecruiter_img_container,
+.forcollege_img_container {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 80px 8%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   STUDENT SECTION
+========================================================= */
+
+.forstudent_img_container {
+    background: #ffffff;
+}
+
+.forstudent_img_container img {
+    width: 100%;
+
+    max-width: 1150px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    filter: drop-shadow(
+        0 18px 30px rgba(15, 23, 42, 0.10)
+    );
+
+    transition: transform 0.3s ease;
+}
+
+.forstudent_img_container img:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   RECRUITER SECTION
+========================================================= */
+
+.forrecruiter_img_container {
+    background: #f8fafc;
+}
+
+.forrecruiter_img_container img {
+    width: 100%;
+
+    max-width: 1150px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    filter: drop-shadow(
+        0 18px 30px rgba(15, 23, 42, 0.10)
+    );
+
+    transition: transform 0.3s ease;
+}
+
+.forrecruiter_img_container img:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   COLLEGE SECTION
+========================================================= */
+
+.forcollege_img_container {
+    background: #ffffff;
+}
+
+.forcollege_img_container img {
+    width: 100%;
+
+    max-width: 1150px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    filter: drop-shadow(
+        0 18px 30px rgba(15, 23, 42, 0.10)
+    );
+
+    transition: transform 0.3s ease;
+}
+
+.forcollege_img_container img:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   FOOTER / CTA
+========================================================= */
+
+.howitworks_container footer {
+    width: 100%;
+
+    padding: 85px 25px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #172033,
+        #263952
+    );
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   CTA HEADING
+========================================================= */
+
+.howitworks_container footer h1 {
+    margin: 0;
+
+    font-size: 36px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   CTA DESCRIPTION
+========================================================= */
+
+.howitworks_container footer h4 {
+    max-width: 650px;
+
+    margin: 18px auto 0;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    font-weight: 400;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.howitworks_container footer button {
+    margin-top: 30px;
+
+    padding: 14px 28px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #8d4ded;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.howitworks_container footer button:hover {
+    background: #7435d4;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 25px rgba(141, 77, 237, 0.35);
+}
+
+.howitworks_container footer button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .howitworks_container > header {
+        padding: 70px 5% 50px;
+    }
+
+    .howitworks_container > header h1 {
+        font-size: 40px;
+    }
+
+    .forstudent_img_container,
+    .forrecruiter_img_container,
+    .forcollege_img_container {
+        padding: 65px 5%;
+    }
+
+    .howitworks_container footer {
+        padding: 70px 25px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .howitworks_container > header {
+        padding: 55px 25px 45px;
+    }
+
+    .howitworks_container > header h1 {
+        font-size: 33px;
+    }
+
+    .howitworks_container > header h4 {
+        font-size: 15px;
+    }
+
+
+    /* IMAGE SECTIONS */
+
+    .forstudent_img_container,
+    .forrecruiter_img_container,
+    .forcollege_img_container {
+        padding: 45px 20px;
+    }
+
+    .forstudent_img_container img,
+    .forrecruiter_img_container img,
+    .forcollege_img_container img {
+        border-radius: 12px;
+    }
+
+
+    /* FOOTER */
+
+    .howitworks_container footer {
+        padding: 60px 25px;
+    }
+
+    .howitworks_container footer h1 {
+        font-size: 29px;
+    }
+
+    .howitworks_container footer h4 {
+        font-size: 14px;
+    }
+
+    .howitworks_container footer button {
+        width: 100%;
+
+        max-width: 280px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .howitworks_container > header h1 {
+        font-size: 29px;
+    }
+
+    .howitworks_container footer h1 {
+        font-size: 26px;
+    }
+}
+
+
+
+
+/*COMPANY PAGE CSS*/
+/* =========================================================
+   COMPANIES PAGE
+========================================================= */
+
+.company_page_container {
+    width: 100%;
+    min-height: 100vh;
+
+    padding-top: 75px;
+
+    background: #f8fafc;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.company_page_container > header {
+    width: 100%;
+
+    padding: 75px 25px 55px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f7ff 50%,
+        #f3f7ff 100%
+    );
+}
+
+.company_page_container > header h1 {
+    margin: 0;
+
+    font-size: 46px;
+
+    line-height: 1.2;
+
+    font-weight: 750;
+
+    color: #172033;
+
+    letter-spacing: -1px;
+}
+
+.company_page_container > header h3 {
+    margin: 18px 0 0;
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   SEARCH CONTAINER
+========================================================= */
+
+.searching_container {
+    width: 100%;
+
+    padding: 35px 8%;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+.searching_container input {
+    width: 100%;
+
+    max-width: 650px;
+
+    height: 52px;
+
+    padding: 0 20px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.searching_container input::placeholder {
+    color: #94a3b8;
+}
+
+.searching_container input:focus {
+    border-color: #8d4ded;
+
+    box-shadow:
+        0 0 0 3px rgba(141, 77, 237, 0.10),
+        0 5px 18px rgba(15, 23, 42, 0.06);
+}
+
+
+/* =========================================================
+   REGISTERED COMPANIES SECTION
+========================================================= */
+
+.registered_company_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 450px;
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 8% 90px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+}
+
+.registered_company_container > h2 {
+    margin: 0 auto;
+
+    max-width: 900px;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    font-weight: 500;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   COMPANY CARD GRID
+
+   When you later replace the h2 with company cards,
+   use this structure:
+
+   <div className="company_cards">
+       <div className="company_card">
+           ...
+       </div>
+   </div>
+========================================================= */
+
+.company_cards {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    margin-top: 35px;
+}
+
+
+/* =========================================================
+   COMPANY CARD
+========================================================= */
+
+.company_card {
+    min-height: 260px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.company_card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 18px 35px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================================================
+   COMPANY LOGO
+========================================================= */
+
+.company_logo {
+    width: 80px;
+
+    height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+}
+
+.company_logo img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   COMPANY NAME
+========================================================= */
+
+.company_card h2 {
+    margin: 0;
+
+    font-size: 20px;
+
+    color: #172033;
+}
+
+.company_card p {
+    margin: 10px 0 20px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   VISIT BUTTON
+========================================================= */
+
+.visit_company_btn {
+    margin-top: auto;
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #344969;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.visit_company_btn:hover {
+    background: #263952;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(52, 73, 105, 0.25);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .company_page_container > header {
+        padding: 65px 25px 50px;
+    }
+
+    .company_page_container > header h1 {
+        font-size: 40px;
+    }
+
+    .registered_company_container {
+        padding: 50px 5% 70px;
+    }
+
+    .company_cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .company_page_container > header {
+        padding: 50px 25px 40px;
+    }
+
+    .company_page_container > header h1 {
+        font-size: 33px;
+    }
+
+    .company_page_container > header h3 {
+        font-size: 15px;
+    }
+
+    .searching_container {
+        padding: 25px 20px;
+    }
+
+    .searching_container input {
+        height: 48px;
+    }
+
+    .registered_company_container {
+        padding: 45px 20px 60px;
+    }
+
+    .company_cards {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .company_page_container > header h1 {
+        font-size: 29px;
+    }
+
+    .company_page_container > header h3 {
+        font-size: 14px;
+    }
+}
+
+
+/* JOB PAGE CSS*/
+
+/* =========================================================
+   JOBS PAGE
+========================================================= */
+
+.jobs_page_container {
+    width: 100%;
+    min-height: 100vh;
+
+    padding-top: 75px;
+
+    background: #f8fafc;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.jobs_page_container > header {
+    width: 100%;
+
+    padding: 75px 25px 55px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f7ff 50%,
+        #f3f7ff 100%
+    );
+}
+
+.jobs_page_container > header h1 {
+    margin: 0;
+
+    font-size: 46px;
+
+    line-height: 1.2;
+
+    font-weight: 750;
+
+    color: #172033;
+
+    letter-spacing: -1px;
+}
+
+.jobs_page_container > header h3 {
+    margin: 18px 0 0;
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   SEARCH CONTAINER
+========================================================= */
+
+.search_container {
+    width: 100%;
+
+    padding: 30px 8%;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+/* =========================================================
+   SEARCH INPUT
+========================================================= */
+
+.search_container input {
+    width: 100%;
+
+    max-width: 600px;
+
+    height: 52px;
+
+    padding: 0 20px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.search_container input::placeholder {
+    color: #94a3b8;
+}
+
+.search_container input:focus {
+    border-color: #8d4ded;
+
+    box-shadow:
+        0 0 0 3px rgba(141, 77, 237, 0.10),
+        0 5px 18px rgba(15, 23, 42, 0.06);
+}
+
+
+/* =========================================================
+   LOCATION SELECT
+========================================================= */
+
+.search_container label {
+    display: flex;
+
+    align-items: center;
+}
+
+.search_container select {
+    width: 190px;
+
+    height: 52px;
+
+    padding: 0 40px 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.search_container select:focus {
+    border-color: #8d4ded;
+
+    box-shadow:
+        0 0 0 3px rgba(141, 77, 237, 0.10);
+}
+
+
+/* =========================================================
+   POSTED JOBS SECTION
+========================================================= */
+
+.posted_job_container {
+    width: 100%;
+    
+    min-height: 500px;
+
+    padding: 60px 8% 90px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+}
+
+.posted_job_container > h2 {
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    font-weight: 500;
+
+    color: #64748b;
+}
+
+
+
+
+.job_cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   JOB CARD
+========================================================= */
+
+.job_card {
+    min-height: 300px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.job_card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 18px 35px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================================================
+   JOB CARD TOP
+========================================================= */
+
+.job_card_top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   COMPANY LOGO
+========================================================= */
+
+.job_company_logo {
+    width: 55px;
+
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+}
+
+.job_company_logo img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   COMPANY NAME
+========================================================= */
+
+.job_company_name {
+    margin: 0;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   JOB TITLE
+========================================================= */
+
+.job_card h2 {
+    margin: 22px 0 10px;
+
+    font-size: 20px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   JOB INFORMATION
+========================================================= */
+
+.job_info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px 15px;
+
+    margin-top: 5px;
+}
+
+.job_info span {
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.job_skills {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 20px;
+}
+
+.job_skills span {
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    background: #f1edff;
+
+    color: #6d3fc2;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   JOB DESCRIPTION
+========================================================= */
+
+.job_card_description {
+    margin: 18px 0 0;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   JOB CARD BOTTOM
+========================================================= */
+
+.job_card_bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: auto;
+
+    padding-top: 25px;
+}
+
+
+/* =========================================================
+   POSTED DATE
+========================================================= */
+
+.job_posted_date {
+    font-size: 12px;
+
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.job_buttons {
+    display: flex;
+
+    gap: 8px;
+}
+
+.view_job_btn,
+.apply_job_btn {
+    padding: 9px 14px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* VIEW DETAILS */
+
+.view_job_btn {
+    border: 1px solid #dbe1ea;
+
+    background: #ffffff;
+
+    color: #344969;
+}
+
+.view_job_btn:hover {
+    background: #f8fafc;
+
+    transform: translateY(-1px);
+}
+
+
+/* APPLY */
+
+.apply_job_btn {
+    border: 1px solid #344969;
+
+    background: #344969;
+
+    color: #ffffff;
+}
+
+.apply_job_btn:hover {
+    background: #263952;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .jobs_page_container > header {
+        padding: 65px 25px 50px;
+    }
+
+    .jobs_page_container > header h1 {
+        font-size: 40px;
+    }
+
+    .search_container {
+        padding: 25px 5%;
+    }
+
+    .posted_job_container {
+        padding: 50px 5% 70px;
+    }
+
+    .job_cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .jobs_page_container > header {
+        padding: 50px 25px 40px;
+    }
+
+    .jobs_page_container > header h1 {
+        font-size: 33px;
+    }
+
+    .jobs_page_container > header h3 {
+        font-size: 15px;
+    }
+
+
+    /* SEARCH */
+
+    .search_container {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 25px 20px;
+    }
+
+    .search_container input {
+        max-width: none;
+    }
+
+    .search_container select {
+        width: 100%;
+    }
+
+
+    /* JOBS */
+
+    .posted_job_container {
+        padding: 45px 20px 60px;
+    }
+
+    .job_cards {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .jobs_page_container > header h1 {
+        font-size: 29px;
+    }
+
+    .job_card {
+        padding: 20px;
+    }
+
+    .job_card_bottom {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .job_buttons {
+        width: 100%;
+    }
+
+    .view_job_btn,
+    .apply_job_btn {
+        flex: 1;
+
+        text-align: center;
+    }
+}
+
+
+
+/*COLLEGE PAGE CSS*/
+
+/* =========================================
+   COLLEGE PAGE
+========================================= */
+
+.college_container {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 90px 20px 20px;
+
+    box-sizing: border-box;
+
+    background: #f5f7fb;
+}
+
+
+/* =========================================
+   MAIN DASHBOARD CONTAINER
+========================================= */
+
+.Colldashboard_container {
+    width: 100%;
+
+    min-height: calc(100vh - 110px);
+
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    gap: 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar_container {
+    flex: 1 1 100px;
+
+    min-width: 200px;
+    max-width: 260px;
+
+    padding: 25px 15px;
+
+    box-sizing: border-box;
+
+    background: #172033;
+
+    color: white;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+    overflow-y: auto;
+}
+
+
+/* SIDEBAR TITLE */
+
+.sidebar_container > div {
+    padding: 5px 10px 20px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar_container h4 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 18px;
+}
+
+
+/* =========================================
+   SIDEBAR NAVIGATION
+========================================= */
+
+.sidebar_container nav {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-top: 20px;
+}
+
+
+/* SIDEBAR LINKS */
+
+.sidebar_container nav a {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 42px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+
+/* HOVER */
+
+.sidebar_container nav a:hover {
+    background: #263952;
+
+    color: white;
+
+    padding-left: 16px;
+}
+
+
+/* LOGOUT */
+
+.sidebar_container nav a:last-child {
+    margin-top: 15px;
+
+    color: #fca5a5;
+}
+
+.sidebar_container nav a:last-child:hover {
+    background: rgba(239, 68, 68, 0.15);
+
+    color: #ff6b6b;
+}
+
+
+/* =========================================
+   DASHBOARD DISPLAY
+========================================= */
+
+.display_container {
+    flex: 4 1 100px;
+
+    min-width: 0;
+
+    padding: 30px;    
+
+    border-radius: 15px;
+    height: 100%;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+
+    overflow-x: auto;
+}
+
+
+/* =========================================
+   COMMON HEADER
+========================================= */
+
+.display_container header {
+    margin-bottom: 25px;
+}
+
+.display_container header h1 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 30px;
+}
+
+.display_container header p {
+    margin-top: 8px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   DASHBOARD STAT CARDS
+========================================= */
+
+.collegedashboard_container .card_Container {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+.collegedashboard_container .card_Container .cards {
+    padding: 22px;
+
+    min-height: 130px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    transition: 0.2s ease;
+}
+
+
+.collegedashboard_container .card_Container .cards:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+.collegedashboard_container .card_Container .cards h4 {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+.collegedashboard_container .card_Container .cards h5 {
+    margin: 15px 0 0;
+
+    color: #172033;
+
+    font-size: 28px;
+}
+
+
+/* =========================================
+   COMPANY DRIVE
+========================================= */
+
+.companyDrive_container {
+    width: 100%;
+
+    min-height: 250px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.companyDrive_container h2 {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 17px;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.display_container input[type="search"] {
+    width: 280px;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: white;
+
+    font-size: 13px;
+}
+
+
+.display_container input[type="search"]:focus {
+    border-color: #8d4ded;
+
+    box-shadow: 0 0 0 3px rgba(141, 77, 237, 0.1);
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+.display_container select {
+    padding: 8px 12px;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 7px;
+
+    background: white;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   TABLE CONTAINER
+========================================= */
+
+.candidate_profile_table {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.candidate_profile_table table {
+    width: 100%;
+
+    min-width: 800px;
+
+    border-collapse: collapse;
+}
+
+
+.candidate_profile_table thead {
+    background: #f8fafc;
+}
+
+
+.candidate_profile_table thead td {
+    padding: 15px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    color: #475569;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.candidate_profile_table tbody th {
+    padding: 15px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    color: #475569;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+.candidate_profile_table tbody tr:hover {
+    background: #fafbff;
+}
+
+
+/* =========================================
+   TABLE BUTTON
+========================================= */
+
+.candidate_profile_table button {
+    padding: 8px 14px;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: #344969;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.candidate_profile_table button:hover {
+    background: #344969;
+
+    color: white;
+}
+
+
+/* =========================================
+   PLACEMENT ANALYSIS CARDS
+========================================= */
+
+.placementAnalysis_page_conainer .card_container {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+.placementAnalysis_page_conainer .cards {
+    padding: 20px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+}
+
+
+.placementAnalysis_page_conainer .cards h3 {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+.placementAnalysis_page_conainer .cards h4 {
+    margin: 12px 0 0;
+
+    color: #172033;
+
+    font-size: 25px;
+}
+
+
+/* =========================================
+   CHART AREA
+========================================= */
+
+.display_chart {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 20px;
+}
+
+
+.display_chart > div {
+    min-height: 280px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+
+.topRecruitingCompay {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================
+   NOTIFICATION
+========================================= */
+
+.notification_page_container header > div {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.notification_page_container header button {
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #344969;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+.notification_page_container header button:hover {
+    background: #263952;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar_container {
+        flex: 1 1 180px;
+
+        min-width: 180px;
+    }
+
+    .display_container {
+        flex: 3 1 0;
+
+        padding: 22px;
+    }
+
+    .collegedashboard_container .card_Container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .placementAnalysis_page_conainer .card_container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 750px) {
+
+    .college_container {
+        padding: 85px 10px 10px;
+    }
+
+
+    .dashboard_container {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    /* SIDEBAR BECOMES FULL WIDTH */
+
+    .sidebar_container {
+        width: 100%;
+
+        max-width: none;
+
+        min-width: 0;
+
+        flex: none;
+
+        padding: 15px;
+
+        border-radius: 12px;
+    }
+
+
+    .sidebar_container nav {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 5px;
+    }
+
+
+    .display_container {
+        width: 100%;
+
+        flex: none;
+
+        padding: 20px;
+
+        border-radius: 12px;
+    }
+
+
+    .collegedashboard_container .card_Container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .placementAnalysis_page_conainer .card_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .display_chart {
+        grid-template-columns: 1fr;
+    }
+
+
+    .topRecruitingCompay {
+        grid-column: auto;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+    .collegedashboard_container .card_Container {
+        grid-template-columns: 1fr;
+    }
+
+
+    .placementAnalysis_page_conainer .card_container {
+        grid-template-columns: 1fr;
+    }
+
+
+    .sidebar_container nav {
+        grid-template-columns: 1fr;
+    }
+
+
+    .display_container {
+        padding: 15px;
+    }
+}
+
+
+
+
+/* POSTED JOB CARDS CSS*/
+/* POSTED JOBS CONTAINER */
+.posted_job_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* NO JOB MESSAGE */
+.posted_job_container > h4 {
+    text-align: center;
+    padding: 40px;
+    color: #777;
+    font-size: 18px;
+}
+
+
+/* INDIVIDUAL JOB CARD */
+.postedJobCard_container {
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+}
+
+.postedJobCard_container:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+
+/* JOB TITLE + STATUS */
+.postedJobCard_container > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 12px;
+}
+
+.postedJobCard_container > div:first-child h3 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.postedJobCard_container > div:first-child h4 {
+    margin: 0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #e8f7ee;
+    color: #198754;
+    font-size: 13px;
+}
+
+
+/* SKILLS */
+.postedJobCard_container > h4 {
+    margin: 0;
+    color: #555;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+/* EXPERIENCE + LOCATION */
+.postedJobCard_container > div:nth-of-type(2) {
+    display: flex;
+    gap: 35px;
+    flex-wrap: wrap;
+}
+
+.postedJobCard_container > div:nth-of-type(2) h4 {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+}
+
+
+/* PACKAGE */
+.postedJobCard_container > div:nth-of-type(3) {
+    border-top: 1px solid #eeeeee;
+    padding-top: 12px;
+}
+
+.postedJobCard_container > div:nth-of-type(3) h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* APPLICATION / SHORTLIST / INTERVIEW SECTION */
+.postedJobCard_container > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    border-top: 1px solid #eeeeee;
+    padding-top: 15px;
+}
+
+.postedJobCard_container > div:last-child > h4 {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+
+/* BUTTON CONTAINER */
+.postedJobCard_container > div:last-child > div {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+
+/* BUTTONS */
+.postedJobCard_container button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+/* ========================================= */
+/* RECRUITER / HIRING CONTACT SECTION */
+/* ========================================= */
+
+.job_cards > div:nth-last-of-type(2) {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 8px;
+    padding: 10px 12px;
+
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+
+    background: #f8f9fb;
+
+    overflow: hidden;
+}
+
+
+/* Recruiter / Hiring Contact heading */
+.job_cards > div:nth-last-of-type(2) > h4 {
+    margin: 0 0 8px 0;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: #333;
+
+    white-space: nowrap;
+}
+
+
+/* Recruiter details inner div */
+.job_cards > div:nth-last-of-type(2) > div {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+/* Name / Designation / Email */
+.job_cards > div:nth-last-of-type(2) > div h4 {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    color: #555;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* Labels */
+.job_cards > div:nth-last-of-type(2) strong {
+    font-weight: 600;
+    color: #333;
+}
+
+
+/* ========================================= */
+/* BUTTON SECTION */
+/* ========================================= */
+
+.job_cards > div:last-child {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+
+/* ========================================= */
+/* BUTTONS */
+/* ========================================= */
+
+.job_cards > div:last-child button {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 8px 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+/* View Job */
+.job_cards > div:last-child button:first-child {
+    background: #e8edff;
+    color: #3154b8;
+}
+
+
+/* Apply */
+.job_cards > div:last-child button:last-child {
+    background: #3154b8;
+    color: white;
+}
+
+
+/* Hover */
+.job_cards > div:last-child button:hover {
+    opacity: 0.85;
+}
+.job_cards > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.job_cards > div:first-child img {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
+
+    object-fit: contain;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    background: #fff;
+    padding: 4px;
+
+    box-sizing: border-box;
+}
+
+.job_cards > div:first-child h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+.postedJobCard_container button:first-child {
+    background: #f0f2f5;
+    color: #333;
+}
+
+.postedJobCard_container button:first-child:hover {
+    background: #dfe3e8;
+}
+
+.postedJobCard_container button:last-child {
+    background: #dc3545;
+    color: white;
+}
+
+.postedJobCard_container button:last-child:hover {
+    background: #bb2d3b;
+}
+
+
+/*RECENT POSTED JOB CSS FOR STUDENTS*/
+
+
+.recentJob_container {
+    width: 100%;
+    max-height: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgb(248, 247, 246);
+    padding: 1rem 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* SCROLLBAR */
+
+.recentJob_container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.recentJob_container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.recentJob_container::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   JOB CARD
+========================================= */
+
+.job_cards {
+    width: 70%;
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    padding: 14px 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.2s ease;
+}
+
+
+.job_cards:hover {
+    border-color: #cbd5e1;
+
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   JOB TITLE
+========================================= */
+
+.job_cards > h3 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #1f2937;
+}
+
+
+/* =========================================
+   SKILLS
+========================================= */
+
+.job_cards > h4 {
+    margin: 0;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   EXPERIENCE
+========================================= */
+
+.job_cards > div:first-of-type {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 7px 0;
+
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+
+.job_cards > div:first-of-type h4 {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #475569;
+}
+
+
+/* =========================================
+   PACKAGE
+========================================= */
+
+.job_cards > h4:nth-of-type(2) {
+    margin: 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+
+/* =========================================
+   COMPANY INFORMATION
+========================================= */
+
+.job_cards > div:nth-of-type(2) {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 8px 25px;
+
+    padding-top: 5px;
+}
+
+
+.job_cards > div:nth-of-type(2) h4 {
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   APPLY SECTION
+========================================= */
+
+.job_cards > div:last-child {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 2px;
+
+    padding-top: 8px;
+
+    border-top: 1px solid #f1f5f9;
+}
+
+
+/* =========================================
+   APPLY BUTTON
+========================================= */
+
+.job_cards button {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 7px 20px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.job_cards button:hover {
+    background: #1d4ed8;
+
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.25);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .recentJob_container {
+        max-height: 600px;
+    }
+
+    .job_cards {
+        padding: 13px;
+    }
+
+    .job_cards > div:first-of-type {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+    }
+
+    .job_cards > div:nth-of-type(2) {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+    }
+
+    .job_cards > div:last-child {
+        justify-content: stretch;
+    }
+
+    .job_cards button {
+        width: 100%;
+    }
+}
+
+
+
+/* POPUP MESSAGE TO DISPLAY JOB DESCRIPTION AND DETAILS WHEN CLIKC ON VIEW JOBS BTN*/
+/* =========================================
+   JOB DETAILS POPUP OVERLAY
+========================================= */
+
+.job_details_overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   POPUP
+========================================= */
+
+.job_details_popup {
+    width: 800px;
+
+    max-width: 95%;
+
+    max-height: 90vh;
+
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.job_details_header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    border-bottom: 1px solid #ddd;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+}
+
+.job_details_header h2 {
+    margin: 0 0 8px 0;
+}
+
+.job_details_header h4 {
+    margin: 0;
+
+    font-weight: normal;
+
+    color: #666;
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.job_close_button {
+    border: none;
+
+    background: transparent;
+
+    font-size: 32px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    color: #555;
+}
+
+.job_close_button:hover {
+    color: red;
+}
+
+
+/* =========================================
+   JOB INFORMATION
+========================================= */
+
+.job_details_information {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+.job_detail_item {
+    background: #f7f7f7;
+
+    padding: 15px;
+
+    border-radius: 8px;
+}
+
+
+.job_detail_item strong {
+    display: block;
+
+    margin-bottom: 7px;
+}
+
+
+.job_detail_item p {
+    margin: 0;
+
+    color: #444;
+
+    word-break: break-word;
+}
+
+
+.job_detail_item small {
+    color: #777;
+}
+
+
+/* =========================================
+   JOB DESCRIPTION
+========================================= */
+
+.job_full_description {
+    border-top: 1px solid #ddd;
+
+    padding-top: 25px;
+
+    margin-top: 10px;
+}
+
+
+.job_full_description h3 {
+    margin-bottom: 15px;
+}
+
+
+.job_full_description p {
+    line-height: 1.8;
+
+    color: #444;
+
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.job_details_footer {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    border-top: 1px solid #ddd;
+
+    padding-top: 20px;
+
+    margin-top: 25px;
+}
+
+
+.job_details_footer button {
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+
+/* APPLIED JOB DATA CSS*/
+/* =============================== */
+/* APPLIED JOB CONTAINER */
+/* =============================== */
+
+.appliedJob_container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+
+/* =============================== */
+/* APPLIED JOB CARD */
+/* =============================== */
+
+.appliedJob_cards {
+    width: 100%;
+    height: fit-content;
+
+    box-sizing: border-box;
+
+    padding: 15px;
+    margin: 0 0 18px 0;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    background: #fff;
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+/* =============================== */
+/* ALL H4 TEXT */
+/* =============================== */
+
+.appliedJob_cards h4 {
+    margin: 0;
+    padding: 0;
+
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 600;
+
+    max-width: 100%;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* =============================== */
+/* COMPANY HEADER */
+/* =============================== */
+
+.appliedJob_cards > div:first-child {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+
+/* COMPANY LOGO + COMPANY NAME */
+
+.appliedJob_cards > div:first-child > div:first-child {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+    max-width: 75%;
+}
+
+
+/* =============================== */
+/* LOGO */
+/* =============================== */
+
+.appliedJob_cards img {
+    width: 55px;
+    height: 55px;
+
+    min-width: 55px;
+    max-width: 55px;
+
+    object-fit: contain;
+
+    border: 1px solid #ddd;
+    border-radius: 7px;
+
+    display: block;
+}
+
+
+/* =============================== */
+/* COMPANY NAME */
+/* =============================== */
+
+.appliedJob_cards > div:first-child > div:first-child h4 {
+    font-size: 15px;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+
+/* =============================== */
+/* APPLICATION STATUS */
+/* =============================== */
+
+.appliedJob_cards > div:first-child > div:last-child {
+    flex-shrink: 0;
+    max-width: 25%;
+}
+
+.appliedJob_cards > div:first-child > div:last-child h4 {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+
+/* =============================== */
+/* JOB TITLE */
+/* =============================== */
+
+.appliedJob_cards > h4:nth-of-type(1) {
+    font-size: 15px;
+}
+
+
+/* =============================== */
+/* SKILLS */
+/* =============================== */
+
+.appliedJob_cards > h4:nth-of-type(2) {
+    font-size: 13px;
+    color: #555;
+}
+
+
+/* =============================== */
+/* EXPERIENCE + LOCATION */
+/* =============================== */
+
+.appliedJob_cards > div:nth-last-child(2) {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    min-width: 0;
+}
+
+
+.appliedJob_cards > div:nth-last-child(2) h4 {
+    font-size: 13px;
+
+    white-space: normal;
+}
+
+
+/* =============================== */
+/* PACKAGE */
+/* =============================== */
+
+.appliedJob_cards > h4:last-of-type {
+    font-size: 13px;
+}
+
+
+/* =============================== */
+/* VIEW JOB BUTTON CONTAINER */
+/* =============================== */
+
+.appliedJob_cards > div:last-child {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    margin-top: 5px;
+
+    flex-shrink: 0;
+}
+
+
+/* =============================== */
+/* VIEW JOB BUTTON */
+/* =============================== */
+
+.appliedJob_cards > div:last-child button {
+    width: 120px;
+    height: 36px;
+
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 6px 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #2864e8;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+/* =============================== */
+/* MOBILE */
+/* =============================== */
+
+@media (max-width: 600px) {
+
+    .appliedJob_cards {
+        padding: 12px;
+    }
+
+    .appliedJob_cards > div:first-child {
+        gap: 8px;
+    }
+
+    .appliedJob_cards > div:first-child > div:first-child {
+        gap: 8px;
+        max-width: 70%;
+    }
+
+    .appliedJob_cards img {
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+    }
+
+    .appliedJob_cards h4 {
+        font-size: 12px;
+    }
+
+    .appliedJob_cards > div:first-child > div:first-child h4 {
+        font-size: 13px;
+    }
+
+    .appliedJob_cards > div:last-child button {
+        width: 105px;
+        height: 32px;
+        font-size: 12px;
+    }
+}
+
+
+
+/* CSS FOR DISPLAY THE STUDENT OR CANDIDATE PROFILE PAGE WHEN CLICK ON VIEW PROFILE BUTTON*/
+/* =========================================================
+   STUDENT PROFILE PAGE
+   ========================================================= */
+
+.studentProfilePage_container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 30px auto;
+
+    background: #ffffff;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.studentProfilePage_container > header {
+    padding: 18px 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f2937;
+    color: white;
+}
+.studentProfilePage_container header button{
+    padding:0.4rem;
+    border-radius: 0.5rem;
+}
+
+.studentProfilePage_container > header h3 {
+    margin: 0;
+
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.studentProfilePage_container > div {
+    padding: 25px;
+}
+
+
+/* =========================================================
+   TOP STUDENT INFORMATION
+   ========================================================= */
+
+/* This targets your existing flex div */
+
+.studentProfilePage_container > div > div:first-child {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    width: 100%;
+
+    padding: 15px 0 20px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SMALL PASSPORT IMAGE CONTAINER
+   ========================================================= */
+
+.studentProfilePage_container .img_container {
+    width: 60px !important;
+    height: 60px !important;
+
+    min-width: 60px !important;
+    min-height: 60px !important;
+
+    max-width: 60px !important;
+    max-height: 60px !important;
+
+    flex: 0 0 60px;
+
+    border-radius: 50%;
+
+    background: #f3f4f6;
+
+    border: 2px solid #d1d5db;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ACTUAL STUDENT IMAGE
+   ========================================================= */
+
+.studentProfilePage_container .img_container img {
+    width: 100% !important;
+    height: 100% !important;
+
+    min-width: 0;
+    min-height: 0;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+}
+
+
+/* =========================================================
+   IMAGE PLACEHOLDER TEXT
+   ========================================================= */
+
+.studentProfilePage_container .img_container h5 {
+    margin: 0;
+
+    padding: 0;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    color: #6b7280;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   STUDENT BASIC INFORMATION
+   ========================================================= */
+
+.studentProfilePage_container .student_info {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+}
+
+
+/* Student Name */
+
+.studentProfilePage_container .student_info h3 {
+    margin: 0 0 5px;
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    color: #111827;
+}
+
+
+/* Profession */
+
+.studentProfilePage_container .student_info h5 {
+    margin: 3px 0;
+
+    font-size: 13px;
+
+    font-weight: 400;
+
+    color: #6b7280;
+}
+
+
+/* Profession highlight */
+
+.studentProfilePage_container .student_info h5:first-of-type {
+    color: #2563eb;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   ABOUT / PERSONAL INFORMATION
+   ========================================================= */
+
+.about_personal_info {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+.about_personal_info h4 {
+    margin: 0 0 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid #e5e7eb;
+
+    font-size: 18px;
+
+    color: #111827;
+}
+
+.about_personal_info h5 {
+    margin: 9px 0;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    color: #4b5563;
+}
+
+
+/* =========================================================
+   EDUCATION
+   ========================================================= */
+
+.education_info {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+.education_info > h4:first-child {
+    margin: 0 0 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid #e5e7eb;
+
+    font-size: 18px;
+
+    color: #111827;
+}
+
+
+/* 10th / 12th / College headings */
+
+.education_info > h4:not(:first-child) {
+    margin: 18px 0 10px;
+
+    padding: 8px 12px;
+
+    background: #eef2ff;
+
+    border-left: 4px solid #4f46e5;
+
+    border-radius: 5px;
+
+    font-size: 15px;
+
+    color: #3730a3;
+}
+
+.education_info > div {
+    padding-left: 15px;
+}
+
+.education_info h5 {
+    margin: 8px 0;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    color: #4b5563;
+}
+
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+
+.skills_info {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+.skills_info h4 {
+    margin: 0 0 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid #e5e7eb;
+
+    font-size: 18px;
+
+    color: #111827;
+}
+
+.skills_info h5 {
+    display: inline-block;
+
+    margin: 4px 6px 4px 0;
+
+    padding: 7px 12px;
+
+    background: #e0f2fe;
+
+    color: #0369a1;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   EXPERIENCE
+   ========================================================= */
+
+.experience_info {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+.experience_info h4 {
+    margin: 0 0 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid #e5e7eb;
+
+    font-size: 18px;
+
+    color: #111827;
+}
+
+.experience_info h5 {
+    margin: 8px 0;
+
+    font-size: 14px;
+
+    color: #4b5563;
+}
+
+
+/* =========================================================
+   PROJECTS
+   ========================================================= */
+
+.project_info {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+.project_info > h4 {
+    margin: 0 0 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid #e5e7eb;
+
+    font-size: 18px;
+
+    color: #111827;
+}
+
+
+/* Project Card */
+
+.project_cards {
+    margin-top: 15px;
+
+    padding: 18px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 8px;
+}
+
+.project_cards h4 {
+    margin: 0 0 10px;
+
+    font-size: 17px;
+
+    color: #111827;
+}
+
+.project_cards h5 {
+    margin: 7px 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: #4b5563;
+}
+
+
+/* Project Links */
+
+.project_cards a {
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: 500;
+}
+
+.project_cards a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   RESUME
+   ========================================================= */
+
+.resume_info {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .studentProfilePage_container > div {
+        padding: 15px;
+    }
+
+    .studentProfilePage_container > div > div:first-child {
+        gap: 12px;
+    }
+
+    .studentProfilePage_container .img_container {
+        width: 55px !important;
+        height: 55px !important;
+
+        min-width: 55px !important;
+        min-height: 55px !important;
+
+        max-width: 55px !important;
+        max-height: 55px !important;
+
+        flex-basis: 55px;
+    }
+
+    .studentProfilePage_container .student_info h3 {
+        font-size: 19px;
+    }
+
+    .studentProfilePage_container .student_info h5 {
+        font-size: 12px;
+    }
+}
+
+
+
+
+/*CSS FOR TOP CANDIDATES CARDS*/
+/* ================================
+   TOP CANDIDATES SECTION
+================================ */
+
+.topCandidates_section {
+    width: 100%;
+    margin-top: 25px;
+}
+
+
+.topCandidates_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.topCandidates_header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+
+.topCandidates_header p {
+    margin: 5px 0 0;
+    color: #777;
+    font-size: 14px;
+}
+
+
+.viewAllCandidates_btn {
+    padding: 9px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #222;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* ================================
+   CARDS
+================================ */
+
+.candidate_cards_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+
+/* ================================
+   CARD
+================================ */
+
+.candidate_card {
+    position: relative;
+
+    display: flex;
+    gap: 15px;
+
+    padding: 20px;
+
+    background: white;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+
+    transition: 0.2s ease;
+}
+
+
+.candidate_card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ================================
+   RANK
+================================ */
+
+.candidate_rank {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #f1f1f1;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   IMAGE
+================================ */
+
+.candidate_image_container {
+    width: 65px;
+    height: 65px;
+
+    flex-shrink: 0;
+}
+
+
+.candidate_image_container img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* ================================
+   INFO
+================================ */
+
+.candidate_info {
+    flex: 1;
+    min-width: 0;
+}
+
+
+.candidate_info h3 {
+    margin: 0;
+
+    font-size: 17px;
+}
+
+
+.candidate_job_title {
+    margin: 4px 0 10px;
+
+    font-size: 13px;
+    color: #555;
+}
+
+
+/* ================================
+   MATCH
+================================ */
+
+.candidate_match {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 10px;
+
+    margin-bottom: 10px;
+
+    border-radius: 7px;
+
+    background: #f5f5f5;
+}
+
+
+.candidate_match span {
+    font-size: 12px;
+}
+
+
+.candidate_match strong {
+    font-size: 15px;
+}
+
+
+/* ================================
+   EDUCATION / EXPERIENCE
+================================ */
+
+.candidate_education,
+.candidate_experience {
+    margin: 5px 0;
+
+    font-size: 12px;
+    color: #666;
+}
+
+
+/* ================================
+   SKILLS
+================================ */
+
+.candidate_skills {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 10px;
+}
+
+
+.candidate_skills span {
+    padding: 4px 7px;
+
+    border-radius: 5px;
+
+    background: #eeeeee;
+
+    font-size: 11px;
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
+
+.candidate_buttons {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+
+.candidate_buttons button {
+    flex: 1;
+
+    padding: 8px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+.view_candidate_btn {
+    border: 1px solid #222;
+
+    background: white;
+
+    color: #222;
+}
+
+
+.interview_candidate_btn {
+    border: none;
+
+    background: #222;
+
+    color: white;
+}
+
+
+/* ================================
+   LOADING / EMPTY
+================================ */
+
+.candidate_loading,
+.no_candidates {
+    padding: 30px;
+
+    text-align: center;
+
+    color: #777;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+
+    .candidate_cards_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .candidate_cards_container {
+        grid-template-columns: 1fr;
+    }
+
+
+    .topCandidates_header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+}
+
+
+/* CHECK FOR FITLER CANDIDATES AS PER EXPERIENCE */
+.searching_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.searching_container > label:first-child {
+    flex: 1;
+}
+
+.searching_container input[type="search"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #d5d5d5;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.searching_container input[type="search"]:focus {
+    border-color: #4f46e5;
+}
+
+.experience_filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.experience_filter > span {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.experience_filter label {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.experience_filter input[type="checkbox"] {
+    cursor: pointer;
+}
+
+
+/* CSS FOR SEARCHED CANDIDATES CARDS */
+/* ================================
+   CANDIDATE PROFILE CONTAINER
+================================ */
+
+.candidate_profile_container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.candidate_profile_container > h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+
+
+
+/* CSS FOR FILTERED CANDIDATE CARDS*/
+/* ================================
+   CANDIDATE PROFILE CONTAINER
+================================ */
+
+.candidate_profile_container {
+    width: 100%;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   CANDIDATE CARD
+================================ */
+
+.candidate_profile_container .candidate_card {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+}
+
+
+/* CARD HOVER */
+
+.candidate_profile_container .candidate_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ================================
+   CANDIDATE IMAGE
+================================ */
+
+.candidate_profile_container .candidate_image {
+    width: 90px;
+    height: 90px;
+    min-width: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.candidate_profile_container .candidate_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* ================================
+   CANDIDATE INFORMATION
+================================ */
+
+.candidate_profile_container .candidate_info {
+    flex: 1;
+    min-width: 250px;
+}
+
+
+.candidate_profile_container .candidate_info h4 {
+    margin: 0 0 0.4rem 0;
+    font-size: 1rem;
+    color: #222;
+}
+
+
+.candidate_profile_container .candidate_info h4:first-child {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+.candidate_profile_container .candidate_info h5 {
+    margin: 0.35rem 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.4;
+}
+
+
+/* ================================
+   BUTTON CONTAINER
+================================ */
+
+.candidate_profile_container .btn_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 170px;
+    margin-left: auto;
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
+
+.candidate_profile_container .btn_container button {
+    border: none;
+    border-radius: 7px;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+
+/* VIEW PROFILE */
+
+.candidate_profile_container .btn_container button:first-child {
+    background: #f1f1f1;
+    color: #222;
+    border: 1px solid #ccc;
+}
+
+
+.candidate_profile_container .btn_container button:first-child:hover {
+    background: #e4e4e4;
+}
+
+
+/* SHORTLIST */
+
+.candidate_profile_container .btn_container button:last-child {
+    background: #222;
+    color: white;
+}
+
+
+.candidate_profile_container .btn_container button:last-child:hover {
+    background: #444;
+}
+
+
+/* ================================
+   NO CANDIDATE MESSAGE
+================================ */
+
+.candidate_profile_container > h4 {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+    font-weight: 400;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+    .candidate_profile_container {
+        padding: 1rem;
+    }
+
+    .candidate_profile_container .candidate_card {
+        padding: 1rem;
+    }
+
+    .candidate_profile_container .candidate_card > div {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .candidate_profile_container .candidate_info {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .candidate_profile_container .btn_container {
+        width: 100%;
+        margin-left: 0;
+    }
+
+}
+
+
+ 
+/* COMPANY PAGE COMP_CARD CSS */
+/* =========================================
+   REGISTERED COMPANIES CONTAINER
+========================================= */
+
+.registered_company_container {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+
+/* =========================================
+   COMPANY CARD
+========================================= */
+
+.comp_card {
+    position: relative;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+
+    padding: 24px;
+
+    min-height: 330px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+    overflow: hidden;
+}
+
+
+/* TOP DECORATIVE LINE */
+
+.comp_card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+}
+
+
+/* HOVER */
+
+.comp_card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+
+    border-color: #d8d8d8;
+}
+
+
+/* =========================================
+   LOGO HEADER
+========================================= */
+
+.comp_card .header {
+    width: 100%;
+    height: 130px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f8fafc;
+
+    border-radius: 14px;
+
+    border: 1px solid #eef0f4;
+}
+
+
+/* COMPANY LOGO */
+
+.comp_card .header img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================
+   COMPANY NAME
+========================================= */
+
+.comp_card h4:first-of-type {
+    width: 100%;
+
+    margin: 5px 0 10px;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #172033;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================
+   INDUSTRY
+========================================= */
+
+.comp_card h4:nth-of-type(2) {
+    margin: 0 0 8px;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-transform: capitalize;
+}
+
+
+/* =========================================
+   LOCATION
+========================================= */
+
+.comp_card h4:nth-of-type(3) {
+    margin: 0 0 20px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #6b7280;
+}
+
+
+/* LOCATION ICON EFFECT */
+
+.comp_card h4:nth-of-type(3)::before {
+    content: "📍 ";
+}
+
+
+/* =========================================
+   VISIT WEBSITE BUTTON
+========================================= */
+
+.comp_card a {
+    margin-top: auto;
+
+    width: 100%;
+
+    padding: 12px 18px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* BUTTON HOVER */
+
+.comp_card a:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
+
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #4338ca
+    );
+}
+
+
+/* BUTTON ACTIVE */
+
+.comp_card a:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .registered_company_container {
+        padding: 20px;
+
+        grid-template-columns:
+            repeat(auto-fill, minmax(240px, 1fr));
+
+        gap: 18px;
+    }
+
+    .comp_card {
+        min-height: 310px;
+
+        padding: 20px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .registered_company_container {
+        grid-template-columns: 1fr;
+
+        padding: 15px;
+    }
+
+    .comp_card {
+        min-height: auto;
+    }
+
+}
+
+
+/* CANDIDATE PAGE CSS FOR SEARCHED CANDIDATE PROFILE CARD */
+/* =========================================================
+   CANDIDATE CARD
+   ========================================================= */
+
+.filteredcandidate_card {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 22px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* TOP ACCENT */
+
+.filteredcandidate_card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+}
+
+
+/* HOVER */
+
+.filteredcandidate_card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+
+    border-color: #d1d5db;
+}
+
+
+/* =========================================================
+   CANDIDATE NAME
+   ========================================================= */
+
+.filteredcandidate_card h3 {
+    margin: 0 0 8px;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: #111827;
+
+    text-transform: capitalize;
+}
+
+
+/* PROFESSION */
+
+.filteredcandidate_card h5 {
+    margin: 8px 0;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #4b5563;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+
+.filteredcandidate_card h5:nth-of-type(3) {
+    margin-top: 16px;
+    padding: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    color: #2563eb;
+
+    font-weight: 600;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   EMAIL
+   ========================================================= */
+
+.filteredcandidate_card a {
+    color: #2563eb;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.filteredcandidate_card a:hover {
+    color: #1d4ed8;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   BUTTON CONTAINER
+   ========================================================= */
+
+.filteredcandidate_card > div:last-child {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.filteredcandidate_card button {
+    flex: 1;
+
+    padding: 11px 14px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* VIEW PROFILE */
+
+.filteredcandidate_card button:first-child {
+    background: #ffffff;
+
+    color: #2563eb;
+
+    border: 1px solid #2563eb;
+}
+
+.filteredcandidate_card button:first-child:hover {
+    background: #eff6ff;
+
+    transform: translateY(-1px);
+}
+
+
+/* INVITE FOR APPLY */
+
+.filteredcandidate_card button:last-child {
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    color: #ffffff;
+
+    border: none;
+
+    box-shadow: 0 5px 12px rgba(37, 99, 235, 0.2);
+}
+
+.filteredcandidate_card button:last-child:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 7px 16px rgba(37, 99, 235, 0.3);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .filteredcandidate_card {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .filteredcandidate_card > div:last-child {
+        flex-direction: column;
+    }
+
+    .filteredcandidate_card button {
+        width: 100%;
+    }
+}
