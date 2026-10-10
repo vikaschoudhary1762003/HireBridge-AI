@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-
-
-
-
 @RestController
 @RequestMapping("/api/shortlisted_candidates")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -95,15 +91,15 @@ public class ShortlistedCandidateController {
 
 
      // REST API TO SEND INVITATION EMAIL TO CANDIDATE
-// REST API TO SEND INVITATION EMAIL TO CANDIDATE
-@PostMapping("/send-invitation/{student_profile_id}")
+@PostMapping("/send-invitation/{recruiter_id}/{student_profile_id}")
 public ResponseEntity<?> sendInvitation(
+        @PathVariable Long recruiter_id ,
         @PathVariable Long student_profile_id) {
 
     try {
 
         // SEND INVITATION EMAIL
-        shortlistedService.sendInvitation(student_profile_id);
+        shortlistedService.sendInvitation(recruiter_id , student_profile_id);
 
         Map<String, Object> response = new HashMap<>();
 

@@ -20,29 +20,29 @@ function Register() {
         e.preventDefault();
  
         //CHECK IF ANY FIELD IS EMPTY IF ITS EMPTY SHOW RED COLOR BORDER OF THAT FIELD AND IF FIELD EMPTY THEN DO NOTHING
-         const newError = {};  // error object
+        const newError = {};  // error object
          
-         if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
+        if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)){
             newError.email = true; 
         }
     
-         if (!fields.password) {
+        if (!fields.password) {
             newError.password = true;
-         }
-         if (!fields.confirm_password) {
+        }
+        if (!fields.confirm_password) {
             newError.confirm_password = true;
-         }
-         if (!fields.user_role) {
+        }
+        if (!fields.user_role) {
             newError.user_role = true;  
-         }
+        }
 
-         //STORE ERRORS
-         setError(newError);
+        //STORE ERRORS
+        setError(newError);
 
-         //IF ANY ERROR EXISTS , STOP
-         if(Object.keys(newError) .length >0){
+        //IF ANY ERROR EXISTS , STOP
+        if(Object.keys(newError) .length >0){
             return ;
-         }
+        }
 
         //CONFIRM PASSWORD
         if (fields.confirm_password !== fields.password) {

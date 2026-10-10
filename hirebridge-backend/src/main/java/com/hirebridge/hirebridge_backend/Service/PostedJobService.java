@@ -46,11 +46,14 @@ public class PostedJobService {
     }
 
     // GET ALL JOBS FOR STUDENTS
- 
     public List<JobpostEntity> getAllPostedJobs() {
-
         return postedjobRepository.findAll();
-
     }
 
+
+
+    //GET ALL JOB TITLE FOR SEARCHING
+    public List<JobpostEntity> getPostedJobsforsearching(){
+        return postedjobRepository.findAll();
+    }
 }

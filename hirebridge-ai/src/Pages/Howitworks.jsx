@@ -25,7 +25,6 @@ function HowitWorks() {
         </div>
 
 
-
         {/*FOR RECRUITERS IMG CONTAINER*/}
         <div className="forrecruiter_img_container">
             <img src={forrecruiter} alt="" />

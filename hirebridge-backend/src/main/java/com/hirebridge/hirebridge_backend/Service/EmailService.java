@@ -26,7 +26,7 @@ public class EmailService {
     }
 
 
-    //FUNCTION TO SEND EMAIL TO CANDIDATE
+    //FUNCTION TO SEND SHORTLISTED EMAIL TO CANDIDATE
     public void sendEmail(String candidateName , String candidateEmail , String jobTitle){
         //CREATE OBJECT
         SimpleMailMessage message = new SimpleMailMessage();
@@ -72,7 +72,7 @@ public class EmailService {
 
 
     //SEND INVITATION EMAIL TO THE CANDIDATE
-    public void sendInvitationEmail(String candidateEmail , String candidateName , String jobTitle , String applyLink){
+    public void sendApplyInvitationEmail(String candidateEmail , String candidateName  ,  String companyName ,String companyWebsite ){
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -81,47 +81,51 @@ public class EmailService {
             helper.setTo(candidateEmail);
 
             //EMAIL SUBJECT
-            helper.setSubject("You Are Invited to Apply for " + jobTitle);
 
             // EMAIL BODY
         String body =
-                "<html>" +
-                "<body>" +
+                  "<html>" +
+        "<body>" +
 
-                "<h2>Dear " + candidateName + ",</h2>" +
+        "<h2>Hello " + candidateName + ",</h2>" +
 
-                "<p>We are pleased to inform you that you have been " +
-                "shortlisted by the recruiter for the following position:</p>" +
+        "<p>We are pleased to inform you that " +
+        "<strong>" + companyName + "</strong> " +
+        "is inviting you to explore career opportunities through HireBridgeAI.</p>" +
 
-                "<p><strong>Job Title:</strong> " + jobTitle + "</p>" +
+        "<p>The recruiter from <strong>" + companyName + "</strong> " +
+        "has found your profile and would like to consider you for suitable " +
+        "opportunities within the organization.</p>" +
 
-                "<p>The recruiter would like to invite you to apply " +
-                "for this position through HireBridgeAI.</p>" +
+        "<p>If you are interested in exploring opportunities with " +
+        "<strong>" + companyName + "</strong>, " +
+        "please upload your latest resume through HireBridgeAI.</p>" +
 
-                "<p>Please click the button below to apply for this job:</p>" +
+        "<br>" +
 
-                "<br>" +
+        "<a href=\"" + companyWebsite + "\" " +
+        "style=\"display:inline-block;" +
+        "padding:12px 25px;" +
+        "background-color:#007bff;" +
+        "color:white;" +
+        "text-decoration:none;" +
+        "border-radius:5px;" +
+        "font-weight:bold;\">" +
+        "Visit " + companyName + " career" +
+        "</a>" +
 
-                "<a href=\"" + applyLink + "\" " +
-                "style=\"display:inline-block;" +
-                "padding:12px 25px;" +
-                "background-color:#007bff;" +
-                "color:white;" +
-                "text-decoration:none;" +
-                "border-radius:5px;" +
-                "font-weight:bold;\">" +
-                "APPLY NOW" +
-                "</a>" +
+        "<br><br>" +
 
-                "<br><br>" +
+        "<p>Make sure your resume contains your latest skills, " +
+        "projects, education and experience.</p>" +
 
-                "<p>We look forward to receiving your application.</p>" +
+        "<p>We look forward to hearing from you.</p>" +
 
-                "<p>Best Regards,<br>" +
-                "HireBridgeAI Team</p>" +
+        "<p>Best Regards,<br>" +
+        "<strong>HireBridgeAI Team</strong></p>" +
 
-                "</body>" +
-                "</html>";
+        "</body>" +
+        "</html>";
 
         // TRUE = HTML EMAIL
         helper.setText(body, true);

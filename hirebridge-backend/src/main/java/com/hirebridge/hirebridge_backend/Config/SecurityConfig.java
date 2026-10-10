@@ -54,6 +54,7 @@ public class SecurityConfig {
 
             // REAL SOLUTION: Explicit structural array mapping to prevent Spring 6 match bypasses
             .requestMatchers(
+                "/uploads/**",
                 "/api/user/**",
                 "/api/student/**",
                 "/api/student_education/**",
@@ -61,7 +62,7 @@ public class SecurityConfig {
                 "/api/student_experience/**",
                 "/api/student_project/**",
                 "/api/recruiter_profile/**",
-                "/api/posted/**",
+                "/api/posted/**",    // for posting , editing jobs
                 "/api/application/**",
                 "/api/shortlisted_candidates/**",
                 "/api/scheduled_interview/**",

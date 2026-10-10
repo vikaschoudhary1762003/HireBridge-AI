@@ -39,51 +39,45 @@ function College() {
             {pages === "Dashboard" && (<>
 
             <div className="collegedashboard_container">
+                <header>
+                    <div>
+                        <h1>Welcome College admin</h1>
+                    </div>
+                    <p>Manage student , recruitment drives and placement activities </p>
+                </header>
 
-            
-            <header>
-                <div>
-                    <h1>Welcome College admin</h1>
+                {/*CARDS*/}
+
+                <div className="card_Container">
+                    <div className="cards">
+                        <h4>Total Student</h4>
+                        <h5>250</h5>
+                    </div>
+
+                    <div className="cards">
+                        <h4>Companies</h4>
+                        <h5>250</h5>
+                    </div>
+
+                    <div className="cards">
+                        <h4>Job Drives</h4>
+                        <h5>250</h5>
+                    </div>
+
+                    <div className="cards">
+                        <h4>Student Placed</h4>
+                        <h5>250</h5>
+                    </div>
                 </div>
-                <p>Manage student , recruitment drives and placement activities </p>
-            </header>
 
-            {/*CARDS*/}
 
-            <div className="card_Container">
-
-                <div className="cards">
-                    <h4>Total Student</h4>
-                    <h5>250</h5>
+                {/*COMPANY REQUESTS FOR DRIVE*/}
+                <div className="companyDrive_container">
+                    <h2>Drive company will be shown here</h2>
                 </div>
-
-                <div className="cards">
-                    <h4>Companies</h4>
-                    <h5>250</h5>
-                </div>
-
-                <div className="cards">
-                    <h4>Job Drives</h4>
-                    <h5>250</h5>
-                </div>
-
-                <div className="cards">
-                    <h4>Student Placed</h4>
-                    <h5>250</h5>
-                </div>
-            </div>
-
-
-
-            {/*COMPANY REQUESTS FOR DRIVE*/}
-            <div className="companyDrive_container">
-                <h2>Drive company will be shown here</h2>
-            </div>
              
             </div>
-            
             </>)}
-
 
 
             {/*STUDENT NAV PAGE*/}
@@ -98,7 +92,6 @@ function College() {
 
                     <div>
                         <input type="search" name="" placeholder="Search student by name enrollment no .." />
-
                         <div>
                             <label htmlFor="">Department 
                                 <select name="">

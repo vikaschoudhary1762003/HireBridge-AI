@@ -34,7 +34,7 @@ function Navbar() {
 
 
 
-            <div className="forstudent">
+          {/*  <div className="forstudent">
                 <a href="#"  onClick={()=>navigate("/studentdashboard")}><h3>For Student</h3></a>
             </div>
 
@@ -44,7 +44,7 @@ function Navbar() {
 
             <div className="forcollges">
                 <a href="#" onClick={()=>navigate("/college")}><h3>Colleges</h3></a>
-            </div>
+            </div>  */}
 
             <div className="login">
                 <a href="#"><h3 onClick={()=>navigate("login")}>Login</h3></a>

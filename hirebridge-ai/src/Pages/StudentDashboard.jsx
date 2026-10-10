@@ -78,115 +78,94 @@ function StudentDashboard() {
     };
 
 
-//HANDLE EDUCATION FORM INPUTS
-const handleEducationInputs = (e) => {
-    const { name, value } = e.target;
-
-    setEducationField(prev => ({
-        ...prev,
-        [name]: value
-    }));
-};
+    //HANDLE EDUCATION FORM INPUTS
+    const handleEducationInputs = (e) => {
+        const { name, value } = e.target;
+        setEducationField(prev => ({...prev,[name]: value}));
+    };
 
 
 
-// HANDLE SKILL FIELDS
-const handleSkillInputs = (e) => {
-    const { name, value } = e.target;
-
-    setSkillFields(prev => ({
-        ...prev,
-        [name]: value
-    }));
-};
+    // HANDLE SKILL FIELDS
+    const handleSkillInputs = (e) => {
+        const { name, value } = e.target;
+        setSkillFields(prev => ({...prev,[name]: value}));
+    };
 
 
-// HANDLE EXPERIENCE FIELDS
-const handleExperienceInputs = (e) => {
-
-    const { name, value, files, type } = e.target;
-
-    setExperienceFields(prev => ({
-        ...prev,
-        [name]: type === "file" ? files[0] : value
-    }));
-};
+    // HANDLE EXPERIENCE FIELDS
+    const handleExperienceInputs = (e) => {
+        const { name, value, files, type } = e.target;
+        setExperienceFields(prev => ({...prev,[name]: type === "file" ? files[0] : value}));
+    };
 
 
 
-
-//HANDLE PROJECT INPUTS
-// HANDLE PROJECT INPUTS
-const handleProjectInputs = (e) => {
-    setProjectFields((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value
-    }));
-};
+    // HANDLE PROJECT INPUTS
+    const handleProjectInputs = (e) => {
+        setProjectFields((prev) => ({...prev,[e.target.name]: e.target.value}));
+    };
 
 
    //FUNCTION TO SAVE PERSONAL INFORMATION OF USER
-   //FUNCTION TO SAVE PERSONAL INFORMATION OF USER
-const savePersonalInfo = async(e)=>{
-    e.preventDefault();
+    const savePersonalInfo = async(e)=>{
+        e.preventDefault();
 
-    try {
-        const formData = new FormData();
+        try {
+            const formData = new FormData();
 
-        // FIXED: Get the logged-in user's ID from localStorage and send it to the backend
-        const currentUserId = localStorage.getItem("user_id");
-        if (!currentUserId) {
-            alert("User session not found. Please log in again.");
-            return;
+            // FIXED: Get the logged-in user's ID from localStorage and send it to the backend
+            const currentUserId = localStorage.getItem("user_id");
+            if (!currentUserId) {
+                alert("User session not found. Please log in again.");
+                return;
+            }
+            formData.append("userId", currentUserId);
+
+            // All your other form fields remain exactly the same
+            formData.append("first_name" , studentProfileFields.first_name);
+            formData.append("firstName" , studentProfileFields.first_name);
+            formData.append("last_name" , studentProfileFields.last_name);
+            formData.append("lastName" , studentProfileFields.last_name);
+            formData.append("email" , studentProfileFields.email);
+            formData.append("phone" , studentProfileFields.phone);
+            formData.append("dob" , studentProfileFields.dob);
+            formData.append("dateOfBirth" , studentProfileFields.dob);
+            formData.append("gender" , studentProfileFields.gender);
+            formData.append("address" , studentProfileFields.address);
+            formData.append("nationality" , studentProfileFields.nationality);
+            formData.append("profession" , studentProfileFields.profession );
+            formData.append("about_me" , studentProfileFields.about_me);
+            formData.append("aboutMe" , studentProfileFields.about_me);
+            formData.append("linkedin_url" , studentProfileFields.linkedin_url);
+            formData.append("linkedinUrl" , studentProfileFields.linkedin_url);
+            formData.append("github_url" , studentProfileFields.github_url);
+            formData.append("githubUrl" , studentProfileFields.github_url);
+            formData.append("portfolio_url" , studentProfileFields.portfolio_url);
+            formData.append("portfolioUrl" , studentProfileFields.portfolio_url);
+            formData.append("language" , studentProfileFields.language);
+
+            if (studentProfileFields.profile_photo) {
+                formData.append("profilePhotoFile", studentProfileFields.profile_photo);
+            }
+
+            const resp = await fetch("http://localhost:8080/api/student/save_Profile_info" ,{
+                method:"POST",
+                body:formData
+            });
+
+            const data = await resp.json();
+
+            if(resp.ok){
+                console.log("check " , data);
+                alert(data.message);
+            } else {
+                alert(data.message || "Failed to save profile information");
+            }
+        } catch (error) {
+            console.log("error" , error);
         }
-        formData.append("userId", currentUserId);
-
-        // All your other form fields remain exactly the same
-        formData.append("first_name" , studentProfileFields.first_name);
-        formData.append("firstName" , studentProfileFields.first_name);
-        formData.append("last_name" , studentProfileFields.last_name);
-        formData.append("lastName" , studentProfileFields.last_name);
-        formData.append("email" , studentProfileFields.email);
-        formData.append("phone" , studentProfileFields.phone);
-        formData.append("dob" , studentProfileFields.dob);
-        formData.append("dateOfBirth" , studentProfileFields.dob);
-        formData.append("gender" , studentProfileFields.gender);
-        formData.append("address" , studentProfileFields.address);
-        formData.append("nationality" , studentProfileFields.nationality);
-        formData.append("profession" , studentProfileFields.profession );
-        formData.append("about_me" , studentProfileFields.about_me);
-        formData.append("aboutMe" , studentProfileFields.about_me);
-        formData.append("linkedin_url" , studentProfileFields.linkedin_url);
-        formData.append("linkedinUrl" , studentProfileFields.linkedin_url);
-        formData.append("github_url" , studentProfileFields.github_url);
-        formData.append("githubUrl" , studentProfileFields.github_url);
-        formData.append("portfolio_url" , studentProfileFields.portfolio_url);
-        formData.append("portfolioUrl" , studentProfileFields.portfolio_url);
-        formData.append("language" , studentProfileFields.language);
-
-        if (studentProfileFields.profile_photo) {
-    formData.append("profilePhotoFile", studentProfileFields.profile_photo);
-}
-
-        const resp = await fetch("http://localhost:8080/api/student/save_Profile_info" ,{
-            method:"POST",
-            body:formData
-        });
-
-        const data = await resp.json();
-
-        if(resp.ok){
-            console.log("check " , data);
-            alert(data.message);
-        } else {
-            alert(data.message || "Failed to save profile information");
-        }
-    } catch (error) {
-        console.log("error" , error);
     }
-}
-
-
 
 
    //GET  STUDENT PERSONAL PROFILE DATA
@@ -211,15 +190,13 @@ const savePersonalInfo = async(e)=>{
         return response.json();
     })
     .then(data => {
+        console.log("PROFILE DATA:", data);
+        console.log("STUDENT PROFILE ID:", data.student_profile_id);
 
-    console.log("PROFILE DATA:", data);
-
-    console.log("STUDENT PROFILE ID:", data.student_profile_id);
-
-    setStudentProfileId(data.student_profile_id);
-    setShowStudentProfile(data);
-    setLoading(false);
-})
+        setStudentProfileId(data.student_profile_id);
+        setShowStudentProfile(data);
+        setLoading(false);
+    })
     .catch(error=>{
         console.log(error);
         setLoading(false);
@@ -233,85 +210,68 @@ const savePersonalInfo = async(e)=>{
 
     //SAVE EDUCATION DATA INTO EDUCATION TABLE
     const saveEducationData = async (e) => {
+        e.preventDefault();
 
-    e.preventDefault();
-
-    // CHECK STUDENT PROFILE ID
+        // CHECK STUDENT PROFILE ID
    
-    if (!studentProfileId) {
-        alert("Student Profile ID not found");
-        return;
-    }
+        if (!studentProfileId) {
+            alert("Student Profile ID not found");
+            return;
+        }
 
 
-    try {
-        // API TO SEND DATA TO SAVE INTO DATABASE
+        try {
+            // API TO SEND DATA TO SAVE INTO DATABASE
 
-        const resp = await fetch(`http://localhost:8080/api/student_education/education_data/${studentProfileId}`,{
+            const resp = await fetch(`http://localhost:8080/api/student_education/education_data/${studentProfileId}`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(educationField)
+            });
+
+            console.log("HTTP STATUS:",resp.status );
+            const data = await resp.json();
+            console.log("BACKEND RESPONSE:",data);
+
+            //ERRORA
+
+            if (!resp.ok) {
+                alert(
+                data.message ||"Unable to save education data");
+                return;
             }
-        );
 
-        console.log("HTTP STATUS:",resp.status );
-        const data = await resp.json();
-        console.log("BACKEND RESPONSE:",data);
 
-        //ERRORA
+            // SUCCESS
+            if (data.success) {
+                alert(data.message);
+                //EMPTY ALL FIELDS
+                setEducationField({tenSchool_name:"" , ten_board:"" ,ten_percentage:"", ten_passing:"", twelve_schoolname:"" , twelve_board:"" , twelve_stream:"" , twelve_percentage:"", twelve_passing:"" , college_name:"" , course:"" , spacialization:"" , current_semester:"" , current_year:"" , college_cgpa:"" , graduation_year:"" });
+            }
 
-        if (!resp.ok) {
-
-            alert(
-                data.message ||
-                "Unable to save education data"
-            );
-
-            return;
+        } catch (error) {
+            console.error("ERROR SAVING EDUCATION:",error);
+            alert("Something went wrong while saving education");
         }
-
-
-        // SUCCESS
-        if (data.success) {
-            alert(data.message);
-            //EMPTY ALL FIELDS
-            setEducationField({tenSchool_name:"" , ten_board:"" ,ten_percentage:"", ten_passing:"", twelve_schoolname:"" , twelve_board:"" , twelve_stream:"" , twelve_percentage:"", twelve_passing:"" , college_name:"" , course:"" , spacialization:"" , current_semester:"" , current_year:"" , college_cgpa:"" , graduation_year:"" });
-        }
-
-    } catch (error) {
-        console.error("ERROR SAVING EDUCATION:",error);
-        alert("Something went wrong while saving education");
-    }
-};
+    };
      
 
 
      // GET STUDENT EDUCATION DATA
-useEffect(() => {
+    useEffect(() => {
+        if (!studentProfileId) {
+            console.log("Education: Student Profile ID not available yet");
+            return;
+        }
+        console.log("FETCHING EDUCATION FOR STUDENT PROFILE ID:",studentProfileId);
 
-    if (!studentProfileId) {
-        console.log("Education: Student Profile ID not available yet");
-        return;
-    }
-
-    console.log(
-        "FETCHING EDUCATION FOR STUDENT PROFILE ID:",
-        studentProfileId
-    );
-
-    fetch(
-        `http://localhost:8080/api/student_education/getEducation_Data/${studentProfileId}`
-    )
+        fetch(`http://localhost:8080/api/student_education/getEducation_Data/${studentProfileId}`)
         .then(response => {
-
             console.log("EDUCATION HTTP STATUS:", response.status);
-
             if (!response.ok) {
-                throw new Error(
-                    `Education API failed with status ${response.status}`
-                );
+                throw new Error(`Education API failed with status ${response.status}`);
             }
 
             return response.json();
@@ -322,7 +282,6 @@ useEffect(() => {
             console.log("FULL EDUCATION RESPONSE:", data);
 
             if (data.success && data.data) {
-
                 console.log("EDUCATION DATA:", data.data);
 
                 // Store fetched education data
@@ -351,24 +310,15 @@ useEffect(() => {
                 });
 
             } else {
-
-                console.log(
-                    "No education data found:",
-                    data.message
-                );
+                console.log("No education data found:",data.message);
             }
 
         })
         .catch(error => {
-
-            console.error(
-                "ERROR FETCHING EDUCATION DATA:",
-                error
-            );
-
+            console.error("ERROR FETCHING EDUCATION DATA:",error);
         });
 
-}, [studentProfileId]);
+    }, [studentProfileId]);
 
 
 
@@ -416,42 +366,28 @@ useEffect(() => {
 
 
       // GET STUDENT SKILLS DATA
-useEffect(() => {
+    useEffect(() => {
 
-    if (!studentProfileId) {
-        console.log("Skills: Student Profile ID not available yet");
-        return;
-    }
+        if (!studentProfileId) {
+            console.log("Skills: Student Profile ID not available yet");
+            return;
+        }
 
-    console.log(
-        "FETCHING SKILLS FOR STUDENT PROFILE ID:",
-        studentProfileId
-    );
-
-    fetch(
-        `http://localhost:8080/api/student_skills/getskilldata/${studentProfileId}`
-    )
+        console.log("FETCHING SKILLS FOR STUDENT PROFILE ID:",studentProfileId);
+        fetch(`http://localhost:8080/api/student_skills/getskilldata/${studentProfileId}`)
         .then(response => {
-
             console.log("SKILLS HTTP STATUS:", response.status);
-
             if (!response.ok) {
-                throw new Error(
-                    `Skills API failed with status ${response.status}`
-                );
+                throw new Error(`Skills API failed with status ${response.status}`);
             }
-
             return response.json();
         })
         .then(data => {
-
             console.log("========== SKILLS DATA RECEIVED ==========");
             console.log("FULL SKILLS RESPONSE:", data);
 
             if (data.success && data.data) {
-
                 console.log("SKILLS DATA:", data.data);
-
                 setSkillFields({
                     programming_skills:
                         data.data.programming_skills || "",
@@ -467,166 +403,153 @@ useEffect(() => {
                 });
 
             } else {
-
-                console.log(
-                    "No skills data found:",
-                    data.message
-                );
+                console.log("No skills data found:",data.message);
             }
 
         })
         .catch(error => {
-
-            console.error(
-                "ERROR FETCHING SKILLS DATA:",
-                error
-            );
-
+            console.error("ERROR FETCHING SKILLS DATA:",error);
         });
 
-}, [studentProfileId]);
-
-
-
+    }, [studentProfileId]);
 
 
 
 
    //FUNCTION TO SAVE EXPERIENCE DATA
-   const saveExperience=async(e)=>{
-    e.preventDefault();
+    const saveExperience=async(e)=>{
+        e.preventDefault();
 
-    try {
+        try {
+            //FORMDATA
+            const formData = new FormData();
 
-        //FORMDATA
-        const formData = new FormData();
+            formData.append("company_name" , experienceFields.company_name);
+            formData.append("experience_type" , experienceFields.experience_type);
+            formData.append("job_title" , experienceFields.job_title);
+            formData.append("working_experience" , experienceFields.working_experience);
+            
 
-        formData.append("company_name" , experienceFields.company_name);
-        formData.append("experience_type" , experienceFields.experience_type);
-        formData.append("job_title" , experienceFields.job_title);
-        formData.append("working_experience" , experienceFields.working_experience);
+            //UPLOAD IMG ,PDF ETC FILE TO DASHBOARD
+            if (experienceFields.experience_certificate) {
+                formData.append("experience_certificate" , experienceFields.experience_certificate);
+            }
+
+            //RESP API
+            const resp = await fetch(`http://localhost:8080/api/student_experience/experienceData/${studentProfileId}`,{
+                method:'POST',
+                body:formData
+            })
+
+
+            const data = await resp.json();
+            console.log("experiencdata : " , data);
+
+            if (data.success === true) {
+                alert(data.message);
+                setExperienceFields({experience_type:"" , company_name:"" , profession:"" , working_experience:""  , experience_certificate:null});
+                return ;
+            }else if(data.success === false){
+                alert(data.message);
+                return;
+            }
         
-
-        //UPLOAD IMG ,PDF ETC FILE TO DASHBOARD
-        if (experienceFields.experience_certificate) {
-            formData.append("experience_certificate" , experienceFields.experience_certificate);
+        } catch (error) {
+            console.log("experince error" , error);
+            
         }
-
-        //RESP API
-        const resp = await fetch(`http://localhost:8080/api/student_experience/experienceData/${studentProfileId}`,{
-            method:'POST',
-            body:formData
-        })
-
-
-        const data = await resp.json();
-        console.log("experiencdata : " , data);
-
-        if (data.success === true) {
-            alert(data.message);
-            setExperienceFields({experience_type:"" , company_name:"" , profession:"" , working_experience:""  , experience_certificate:null});
-            return ;
-        }else if(data.success === false){
-            alert(data.message);
-            return;
-        }
-        
-    } catch (error) {
-        console.log("experince error" , error);
-        
     }
-   }
 
 
      // GET STUDENT EXPERIENCE DATA
-useEffect(() => {
+    useEffect(() => {
 
-    if (!studentProfileId) {
-        console.log("Experience: Student Profile ID not available yet");
-        return;
-    }
+        if (!studentProfileId) {
+            console.log("Experience: Student Profile ID not available yet");
+            return;
+        }
 
-    console.log(
-        "FETCHING EXPERIENCE FOR STUDENT PROFILE ID:",
-        studentProfileId
-    );
+        console.log(
+            "FETCHING EXPERIENCE FOR STUDENT PROFILE ID:",
+            studentProfileId
+        );
 
-    fetch(
-        `http://localhost:8080/api/student_experience/getExpData/${studentProfileId}`
-    )
-        .then(response => {
-
-            console.log(
-                "EXPERIENCE HTTP STATUS:",
-                response.status
-            );
-
-            if (!response.ok) {
-                throw new Error(
-                    `Experience API failed with status ${response.status}`
-                );
-            }
-
-            return response.json();
-        })
-        .then(data => {
-
-            console.log(
-                "========== EXPERIENCE DATA RECEIVED =========="
-            );
-
-            console.log(
-                "FULL EXPERIENCE RESPONSE:",
-                data
-            );
-
-            if (data.success && data.data) {
+        fetch(
+            `http://localhost:8080/api/student_experience/getExpData/${studentProfileId}`
+        )
+            .then(response => {
 
                 console.log(
-                    "EXPERIENCE DATA:",
-                    data.data
+                    "EXPERIENCE HTTP STATUS:",
+                    response.status
                 );
 
-                // IMPORTANT:
-                // Experience data goes into experienceFields
-                // NOT skillFields
+                if (!response.ok) {
+                    throw new Error(
+                        `Experience API failed with status ${response.status}`
+                    );
+                }
 
-                setExperienceFields({
-                    experience_type:
-                        data.data.experience_type || "",
-
-                    company_name:
-                        data.data.company_name || "",
-
-                    job_title:
-                        data.data.job_title || "",
-
-                    working_experience:
-                        data.data.working_experience || "",
-
-                    experience_certificate:
-                        data.data.experience_certificate || null
-                });
-
-            } else {
+                return response.json();
+            })
+            .then(data => {
 
                 console.log(
-                    "No experience data found:",
-                    data.message
+                    "========== EXPERIENCE DATA RECEIVED =========="
                 );
-            }
 
-        })
-        .catch(error => {
+                console.log(
+                    "FULL EXPERIENCE RESPONSE:",
+                    data
+                );
 
-            console.error(
-                "ERROR FETCHING EXPERIENCE DATA:",
-                error
-            );
+                if (data.success && data.data) {
 
-        });
+                    console.log(
+                        "EXPERIENCE DATA:",
+                        data.data
+                    );
 
-}, [studentProfileId]);
+                    // IMPORTANT:
+                    // Experience data goes into experienceFields
+                    // NOT skillFields
+
+                    setExperienceFields({
+                        experience_type:
+                            data.data.experience_type || "",
+
+                        company_name:
+                            data.data.company_name || "",
+
+                        job_title:
+                            data.data.job_title || "",
+
+                        working_experience:
+                            data.data.working_experience || "",
+
+                        experience_certificate:
+                            data.data.experience_certificate || null
+                    });
+
+                } else {
+
+                    console.log(
+                        "No experience data found:",
+                        data.message
+                    );
+                }
+
+            })
+            .catch(error => {
+
+                console.error(
+                    "ERROR FETCHING EXPERIENCE DATA:",
+                    error
+                );
+
+            });
+
+    }, [studentProfileId]);
 
 
 
@@ -671,194 +594,126 @@ useEffect(() => {
 
 
    //FUNCTION TO FETCH THE POSTED JOB TO DISPLAY FOR STUDENTS TO APPLY
-  // =========================================================
-// FETCH ALL POSTED JOBS FOR STUDENTS
-// =========================================================
+    useEffect(() => {
+        const fetchJobs = async () => {
 
-useEffect(() => {
+            try {
+                console.log("FETCHING ALL JOBS ");
+                const resp = await fetch("http://localhost:8080/api/posted/allJobs");
+                console.log("JOB STATUS:",resp.status);
+                console.log("JOB OK:",resp.ok);
 
-    const fetchJobs = async () => {
-
-        try {
-
-            console.log(
-                "========== FETCHING ALL JOBS =========="
-            );
-
-            const resp = await fetch(
-                "http://localhost:8080/api/posted/allJobs"
-            );
-
-            console.log(
-                "JOB STATUS:",
-                resp.status
-            );
-
-            console.log(
-                "JOB OK:",
-                resp.ok
-            );
+                // CHECK HTTP ERROR FIRST
+                if (!resp.ok) {
+                    const errorText = await resp.text();
+                    console.error("JOB API ERROR:",errorText);
+                    throw new Error(`Job API failed with status ${resp.status}`);
+                }
 
 
-            // CHECK HTTP ERROR FIRST
-            if (!resp.ok) {
+                // CONVERT RESPONSE TO JSON
+                const data = await resp.json();
+                console.log("JOB RESPONSE:",data);
 
-                const errorText =
-                    await resp.text();
-
-                console.error(
-                    "JOB API ERROR:",
-                    errorText
-                );
-
-                throw new Error(
-                    `Job API failed with status ${resp.status}`
-                );
-            }
-
-
-            // CONVERT RESPONSE TO JSON
-            const data =
-                await resp.json();
-
-
-            console.log(
-                "JOB RESPONSE:",
-                data
-            );
-
-
-            // CHECK BACKEND RESPONSE
-            if (
-                data.success === true &&
-                Array.isArray(data.data)
-            ) {
-
-                console.log(
-                    "TOTAL JOBS:",
-                    data.data.length
-                );
-
-                console.log(
-                    "ALL JOBS:",
-                    data.data
-                );
-
-                setJobs(
-                    data.data
-                );
-
-            } else {
-
-                console.log(
-                    "NO JOB DATA FOUND"
-                );
-
+                // CHECK BACKEND RESPONSE
+                if (data.success === true &&Array.isArray(data.data)) {
+                    console.log("TOTAL JOBS:",data.data.length);
+                    console.log("ALL JOBS:",data.data);
+                    setJobs(data.data);
+                } else {
+                    console.log("NO JOB DATA FOUND");
+                    setJobs([]);
+                }
+            } catch (error) {
+                console.error("JOB FETCH ERROR:",error);
                 setJobs([]);
+            } finally {
+                setLoadingJobs(false);
             }
+        };
+        fetchJobs();
+    }, []);
+    
 
+
+    //FUNCTION TO APPLY JOB
+    const applyJob=async(job)=>{
+
+        //CHECK IF STUDENT LOGGEDIN OR NOT
+        const user_id = localStorage.getItem("user_id");
+        console.log("APPLY JOB");
+        console.log("USER ID:", user_id);
+        console.log("JOB ID:", job.job_id);
+
+        //USER NOT LOGGED IN
+        if (!user_id) {
+            alert("please login to apply");
+            Nevigation("/login");
+            return;
+        }
+
+        //IF USER IS LOGGEDIN
+        try {
+            const resp = await fetch( `http://localhost:8080/api/application/apply/${user_id}/${job.job_id}`,{ // THIS API WILL SEND ONLY JOBID AND USER_ID TO BACKEND AND AS PER THAT THE STUDENT NAME OR PROFILE AND THE JOB DETAIL WILL BE STORED IN APPLIED_JOB TABLE AND SHOWN ON SCREEN ALSO TO TEH RECRUITER
+                method:'POST'
+            })
+
+            const data = await resp.json();
+
+            if (resp.ok && data.success === true) {
+                alert("job applied successfully");
+                fetchAppliedJobs();
+                return;
+            }else{
+                alert("unable to apply");
+            }
 
         } catch (error) {
+            console.error("APPLY JOB ERROR:", error);
+            alert("Something went wrong while applying for the job.");
 
-            console.error(
-                "JOB FETCH ERROR:",
-                error
-            );
-
-            setJobs([]);
-
-        } finally {
-
-            setLoadingJobs(false);
         }
-
-    };
-
-
-    fetchJobs();
-
-}, []);
-   
-
-
-//FUNCTION TO APPLY JOB
-const applyJob=async(job)=>{
-
-    //CHECK IF STUDENT LOGGEDIN OR NOT
-    const user_id = localStorage.getItem("user_id");
-    console.log("APPLY JOB");
-    console.log("USER ID:", user_id);
-    console.log("JOB ID:", job.job_id);
-
-    //USER NOT LOGGED IN
-    if (!user_id) {
-        alert("please login to apply");
-        Nevigation("/login");
-        return;
     }
 
-    //IF USER IS LOGGEDIN
-    try {
-        const resp = await fetch( `http://localhost:8080/api/application/apply/${user_id}/${job.job_id}`,{ // THIS API WILL SEND ONLY JOBID AND USER_ID TO BACKEND AND AS PER THAT THE STUDENT NAME OR PROFILE AND THE JOB DETAIL WILL BE STORED IN APPLIED_JOB TABLE AND SHOWN ON SCREEN ALSO TO TEH RECRUITER
-            method:'POST'
-        })
 
-        const data = await resp.json();
 
-        if (resp.ok && data.success === true) {
-            alert("job applied successfully");
-            fetchAppliedJobs();
+
+    //FUNCTIO TO FETCH APPLIED JOBS
+    const fetchAppliedJobs=async()=>{
+        const user_id = localStorage.getItem("user_id");
+        if(!user_id){
+            setAppliedJobs([]);
+            setAppliedJobsLoading(false);
             return;
-        }else{
-            alert("unable to apply");
         }
 
-    } catch (error) {
-        console.error("APPLY JOB ERROR:", error);
-        alert("Something went wrong while applying for the job.");
+        //API TO FETCH APPLIED JOB DATA
+        try {
+            
+            //API
+            const resp = await fetch(`http://localhost:8080/api/application/student/${user_id}`);
 
-    }
-}
+            if(!resp.ok){
+                throw new Error("fail to fetch applied job");
+            }
 
+            //data
+            const data = await resp.json();
+            console.log("applied job data " , data);
+            setAppliedJobs(data);
+            
+        } catch (error) {
+            console.error("Error fetching applied jobs:", error);
+            setAppliedJobs([]);
 
-
-
-//FUNCTIO TO FETCH APPLIED JOBS
-const fetchAppliedJobs=async()=>{
-    const user_id = localStorage.getItem("user_id");
-    if(!user_id){
-        setAppliedJobs([]);
-        setAppliedJobsLoading(false);
-        return;
-    }
-
-    //API TO FETCH APPLIED JOB DATA
-    try {
-        
-        //API
-        const resp = await fetch(`http://localhost:8080/api/application/student/${user_id}`);
-
-        if(!resp.ok){
-            throw new Error("fail to fetch applied job");
+        }finally{
+            setAppliedJobsLoading(false);
         }
-
-        //data
-        const data = await resp.json();
-        console.log("applied job data " , data);
-        setAppliedJobs(data);
-        
-    } catch (error) {
-        console.error("Error fetching applied jobs:", error);
-        setAppliedJobs([]);
-
-    }finally{
-        setAppliedJobsLoading(false);
     }
-}
-//USESFFECT TO FETCH APPLIED_JOB DATA
-useEffect( ()=>{
-    fetchAppliedJobs();
-},[])
+    //USESFFECT TO FETCH APPLIED_JOB DATA
+    useEffect( ()=>{
+        fetchAppliedJobs();
+    },[])
 
     //FUNCTION TO LOGOUT FROM PLATEFORM
     const handleLogout = () => {
@@ -868,11 +723,7 @@ useEffect( ()=>{
         console.log("LOGOUT USERROLE" , user_role);
         alert("loggout successfully");
         navigate("/");
-
     };
-
-
-
 
 
 
@@ -1086,11 +937,6 @@ useEffect( ()=>{
                         <h3>My Profile</h3>
                         <h5>Manage your profile information and build your professional identity </h5>
                     </div>
-
-                    <div className="profile_complition">
-                        <h5>Profile Completion</h5>
-                        <h5>90 %</h5>
-                    </div>
                 </div>
 
                 {/*STUDENT PROFILE CARD*/}
@@ -1108,17 +954,17 @@ useEffect( ()=>{
                             </div>
                             
                             <div style={{display:'flex', gap:'1rem'}}>
-                                <h5>{showStudentProfile?.email}</h5>
-                                <h5>+ {showStudentProfile?.phone}</h5>
+                                <h5 style={{fontWeight:"bolder"}}>Email :- <a href="{showStudentProfile?.email}">{showStudentProfile?.email}</a></h5>
+                                
                             </div>
+                            <h5 style={{fontWeight:"bolder"}}>Phone :-  + {showStudentProfile?.phone}</h5>
                             <div style={{display:'flex', gap:'1rem'}}>
-                                <h5> {showStudentProfile?.address}</h5>
-                                <h5>DOB :{showStudentProfile?.dob}</h5>
+                                <h5 style={{fontWeight:"bolder"}}>Address :- {showStudentProfile?.address}</h5>
+                                <h5 style={{fontWeight:"bolder"}}>DOB :- {showStudentProfile?.dob}</h5>
                             </div>
                             <div style={{display:'flex',flexDirection:'column', gap:'0.3rem'}}>
-                                <h5>{showStudentProfile?.gender}</h5>
-                                <h5>About Me</h5>
-                            <h5>{showStudentProfile?.about_me}</h5>
+                                <h5 style={{fontWeight:"bolder"}}>Gender :- {showStudentProfile?.gender}</h5>
+                            <h5 style={{color:"green"}}>{showStudentProfile?.about_me}</h5>
                             </div>
 
                         </div>
@@ -1433,126 +1279,77 @@ useEffect( ()=>{
             {/*RESUME PAGE*/}
             {pages === "Resume" && (
             <div className="resume_page_container">
-
-        {/* PAGE HEADING */}
-        <div className="heading">
-            <h2>My Resume</h2>
-            <p>
-                Create, improve and manage your professional resume.
-            </p>
-        </div>
-
-
-        {/* ================= AI RESUME ANALYZER ================= */}
-
-        <div className="ai_resume_builder_container">
-
-            <div className="heading">
-                <h3>🤖 AI Resume Analyzer</h3>
-
-                <p>
-                    Upload your existing resume and get AI-powered
-                    suggestions based on your target job.
-                </p>
-            </div>
-
-
-            {/* AI FILE */}
-
-            <div className="ai_resume">
-
-                <h3>📄 Upload Resume for AI Analysis</h3>
-
-                <p>
-                    AI will analyze your resume and suggest
-                    improvements.
-                </p>
-
-                <input
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                />
-
-                <small>
-                    PDF, JPG and PNG supported
-                </small>
-
-            </div>
-
-
-            {/* TARGET ROLE */}
-
-            <div className="target_role">
-
-                <label>
-                    Target Role
-                </label>
-
-                <input
-                    type="text"
-                    placeholder="e.g. Java Developer"
-                />
-
-
-                <label>
-                    Experience Level
-                </label>
-
-                <div className="experience_options">
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="experience"
-                        />
-                        Fresher
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="experience"
-                        />
-                        0-1 Year
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="experience"
-                        />
-                        1-3 Years
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="experience"
-                        />
-                        3-5 Years
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="experience"
-                        />
-                        5+ Years
-                    </label>
-
+                {/* PAGE HEADING */}
+                <div className="heading">
+                    <h2>My Resume</h2>
+                    <p>
+                        Create, improve and manage your professional resume.
+                    </p>
                 </div>
 
+
+                {/*  AI RESUME ANALYZER  */}
+
+                <div className="ai_resume_builder_container">
+
+                    <div className="heading">
+                        <h3>🤖 AI Resume Analyzer</h3>
+
+                        <p>
+                            Upload your existing resume and get AI-powered
+                            suggestions based on your target job.
+                        </p>
+                    </div>
+
+
+                    {/* AI FILE */}
+                    <div className="ai_resume">
+                        <h3>📄 Upload Resume for AI Analysis</h3>
+                        <p>AI will analyze your resume and suggestimprovements.</p>
+                        <input type="file" accept=".pdf,.jpg,.jpeg,.png"/>
+                        <small>PDF, JPG and PNG supported</small>
+                    </div>
+
+
+                    {/* TARGET ROLE */}
+                    <div className="target_role">
+                        <label>Target Role</label>
+                            <input type="text" placeholder="e.g. Java Developer"/>
+                        <label>
+                            Experience Level
+                        </label>
+
+                        <div className="experience_options">
+
+                            <label>
+                                <input type="radio"name="experience"/> Fresher
+                            </label>
+
+                            <label>
+                                <input type="radio"name="experience"/>0-1 Year
+                            </label>
+
+                            <label>
+                                <input  type="radio" name="experience"/>1-3 Years
+                            </label>
+
+                            <label>
+                                <input type="radio"name="experience"/>3-5 Years
+                            </label>
+
+                            <label>
+                                <input type="radio"name="experience"/>5+ Years
+                            </label>
+
+                        </div>
+
+                    </div>
+                    <button className="analyze_resume_btn" onClick={generateAiResume}>
+                        Generate Resume 🤖
+                    </button>
+                </div>
             </div>
-
-
-            <button className="analyze_resume_btn" onClick={generateAiResume}>
-                Generate Resume 🤖
-            </button>
-
-        </div>
-
-    </div>
-)}
+        )}
 
           
 
@@ -1616,206 +1413,83 @@ useEffect( ()=>{
            
 
 
-            {/* ================================================= */}
         {/* FULL JOB DETAILS POPUP */}
-        {/* ================================================= */}
-
         {showJobDetails && selectedJob && (
-
             <div className="job_details_overlay">
-
                 <div className="job_details_popup">
 
-
                     {/* POPUP HEADER */}
-
                     <div className="job_details_header">
-
                         <div>
-
-                            <h2>
-                                {selectedJob.job_title}
-                            </h2>
-
-                            <h4>
-                                {selectedJob.company_name}
-                            </h4>
-
+                            <h2>{selectedJob.job_title}</h2>
+                            <h4>{selectedJob.company_name}</h4>
                         </div>
-
 
                         {/* CLOSE BUTTON */}
-
-                        <button
-                            className="job_close_button"
-                            onClick={() => {
-                                setShowJobDetails(false);
-                                setSelectedJob(null);
-                            }}
-                        >
-                            ×
-                        </button>
-
+                        <button className="job_close_button"onClick={() => {setShowJobDetails(false);setSelectedJob(null);}}>×</button>
                     </div>
-
 
                     {/* JOB INFORMATION */}
-
                     <div className="job_details_information">
 
-
                         {/* COMPANY */}
-
                         <div className="job_detail_item">
-
-                            <strong>
-                                Company
-                            </strong>
-
-                            <p>
-                                {selectedJob.company_name || "Not available"}
-                            </p>
-
+                            <strong>Company</strong>
+                            <p>{selectedJob.company_name || "Not available"}</p>
                         </div>
-
 
                         {/* LOCATION */}
-
                         <div className="job_detail_item">
-
-                            <strong>
-                                Location
-                            </strong>
-
-                            <p>
-                                {selectedJob.job_location || "Not available"}
-                            </p>
-
+                            <strong>Location</strong>
+                            <p>{selectedJob.job_location || "Not available"}</p>
                         </div>
-
 
                         {/* WORK MODE */}
-
                         <div className="job_detail_item">
-
-                            <strong>
-                                Work Mode
-                            </strong>
-
-                            <p>
-                                {selectedJob.work_mode || "Not specified"}
-                            </p>
-
+                            <strong>Work Mode</strong>
+                            <p>{selectedJob.work_mode || "Not specified"}</p>
                         </div>
-
 
                         {/* EXPERIENCE */}
-
                         <div className="job_detail_item">
-
-                            <strong>
-                                Experience
-                            </strong>
-
-                            <p>
-                                {selectedJob.min_experience} -{" "}
-                                {selectedJob.max_experience} Years
-                            </p>
-
+                            <strong>Experience</strong>
+                            <p>{selectedJob.min_experience} -{" "}{selectedJob.max_experience} Years</p>
                         </div>
-
 
                         {/* PACKAGE */}
-
                         <div className="job_detail_item">
-
-                            <strong>
-                                Salary / Package
-                            </strong>
-
-                            <p>
-                                ₹ {selectedJob.min_package} -{" "}
-                                {selectedJob.max_package}
-                            </p>
-
-                            <small>
-                                LPA
-                            </small>
-
+                            <strong>Salary / Package</strong>
+                            <p>₹ {selectedJob.min_package} -{" "}{selectedJob.max_package}</p>
+                            <small>LPA</small>
                         </div>
-
 
                         {/* SKILLS */}
-
                         <div className="job_detail_item">
-
-                            <strong>
-                                Required Skills
-                            </strong>
-
-                            <p>
-                                {selectedJob.skills || "Not specified"}
-                            </p>
-
+                            <strong>Required Skills</strong>
+                            <p>{selectedJob.skills || "Not specified"}</p>
                         </div>
-
 
                         {/* WEBSITE */}
-
                         <div className="job_detail_item">
-
-                            <strong>
-                                Company Website
-                            </strong>
-
-                            <p>
-                                {selectedJob.comp_website || "Not available"}
-                            </p>
-
+                            <strong>Company Website</strong>
+                            <p>{selectedJob.comp_website || "Not available"}</p>
                         </div>
-
                     </div>
 
 
-                    {/* ================================================= */}
                     {/* FULL JOB DESCRIPTION */}
-                    {/* ================================================= */}
-
                     <div className="job_full_description">
-
-                        <h3>
-                            Job Description
-                        </h3>
-
-                        <p>
-                            {selectedJob.job_description ||
-                                "No job description available."}
-                        </p>
-
+                        <h3>Job Description</h3>
+                        <p>{selectedJob.job_description ||"No job description available."}</p>
                     </div>
 
 
                     {/* POPUP FOOTER */}
-
                     <div className="job_details_footer">
-
-                        <button
-                            onClick={() => {
-                                setShowJobDetails(false);
-                                setSelectedJob(null);
-                            }}
-                        >
-                            Close
-                        </button>
-
-
-                        
+                        <button onClick={() => {setShowJobDetails(false);setSelectedJob(null);}}>Close</button>
                     </div>
-
                 </div>
-
             </div>
-
         )}
 
 
@@ -1824,8 +1498,7 @@ useEffect( ()=>{
         {/*INTERVIEWS PAGE */}
 
         {pages === "Interviews" && (<>
-        
-         <div className="interview_page_container">
+        <div className="interview_page_container">
             <div className="heading">
                 <div>
                     <h1>Interviews</h1>
@@ -1860,111 +1533,86 @@ useEffect( ()=>{
                             </tr>
                         </thead>
                         <tbody>
+                            {interviewsLoading ? (
+                            <tr>
+                                <td colSpan="10">Loading interviews...</td>
+                            </tr>
 
-    {interviewsLoading ? (
+                            ) : studentInterviews.length === 0 ? (
+                                <tr>
+                                    <td colSpan="10">No scheduled interviews</td>
+                                </tr>
 
-        <tr>
-            <td colSpan="10">Loading interviews...</td>
-        </tr>
+                            ) : (
 
-    ) : studentInterviews.length === 0 ? (
+                                studentInterviews.map((interview) => (
+                                    <tr key={interview.interview_id}>
 
-        <tr>
-            <td colSpan="10">No scheduled interviews</td>
-        </tr>
+                                    {/* COMPANY NAME */}
+                                    <td>
+                                        {interview.company_name || "--"}
+                                    </td>
 
-    ) : (
+                                    {/* RECRUITER NAME */}
+                                    <td>
+                                        {interview.recruiter_name || "--"}
+                                    </td>
 
-        studentInterviews.map((interview) => (
+                                    {/* JOB */}
+                                    <td>
+                                        {interview.job_title || "--"}
+                                    </td>
 
-            <tr key={interview.interview_id}>
+                                    {/* INTERVIEW TYPE */}
+                                    <td>
+                                        {interview.interview_type || "--"}
+                                    </td>
 
-                {/* COMPANY NAME */}
-                <td>
-                    {interview.company_name || "--"}
-                </td>
+                                    {/* DATE */}
+                                    <td>
+                                        {interview.interview_date || "--"}
+                                    </td>
 
-                {/* RECRUITER NAME */}
-                <td>
-                    {interview.recruiter_name || "--"}
-                </td>
+                                    {/* TIME */}
+                                    <td>
+                                        {interview.interview_time || "--"}
+                                    </td>
 
-                {/* JOB */}
-                <td>
-                    {interview.job_title || "--"}
-                </td>
+                                    {/* MODE */}
+                                    <td>
+                                        {interview.interview_mode || "--"}
+                                    </td>
 
-                {/* INTERVIEW TYPE */}
-                <td>
-                    {interview.interview_type || "--"}
-                </td>
+                                    {/* ADDRESS */}
+                                    <td>
+                                        {interview.interview_address || "--"}
+                                    </td>
 
-                {/* DATE */}
-                <td>
-                    {interview.interview_date || "--"}
-                </td>
+                                    {/* STATUS */}
+                                    <td>
+                                        {interview.status || "Scheduled"}
+                                    </td>
 
-                {/* TIME */}
-                <td>
-                    {interview.interview_time || "--"}
-                </td>
+                                    {/* ACTION */}
+                                    <td>
 
-                {/* MODE */}
-                <td>
-                    {interview.interview_mode || "--"}
-                </td>
-
-                {/* ADDRESS */}
-                <td>
-                    {interview.interview_address || "--"}
-                </td>
-
-                {/* STATUS */}
-                <td>
-                    {interview.status || "Scheduled"}
-                </td>
-
-                {/* ACTION */}
-                <td>
-
-                    {interview.meeting_link ? (
-
-                        <button
-                            type="button"
-                            onClick={() =>
-                                window.open(
-                                    interview.meeting_link,
-                                    "_blank"
-                                )
-                            }
-                        >
-                            Join Meeting
-                        </button>
-
-                    ) : (
-
-                        <span>Offline</span>
-
-                    )}
-
-                </td>
-
-            </tr>
-
-        ))
-
-    )}
-
-</tbody>
+                                        {interview.meeting_link ? (
+                                            <button type="button"onClick={() =>window.open(interview.meeting_link,"_blank")}>Join Meeting</button>
+                                        ) : (
+                                            <span>Offline</span>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))
+                            )}
+                        </tbody>
                     </table>
                 </div>
             </div>
-
        </div>
         
         </>)}
 
-            
         </div>
     </div>
     </>)

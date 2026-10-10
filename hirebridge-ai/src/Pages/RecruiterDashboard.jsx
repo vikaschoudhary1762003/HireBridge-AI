@@ -1,5 +1,5 @@
 import { use, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Await, useNavigate } from "react-router-dom";
 
 
 function RecruiterDashboard() {
@@ -18,12 +18,18 @@ function RecruiterDashboard() {
     //POSTED JOB INPUT STATES
     const [postedJobFields , setPostedJobFields] = useState({job_title:"" , skills:"" , min_experience:"" , max_experience:"" , job_location:"" , work_mode:"" , min_package:"" , max_package:"" , job_description:""});
     const [postedjobData , setPostedJobData]= useState([]); // this state contains received data from database table posted_job
+    const [editingJobId , setEditingJobId] = useState(null);// this is for editing the existing posted job
 
     //STATE FOR DISPLAY APPLIED CANDIDATES PROFILE AND JOB IN APPLICATION PAGE
     const [applications, setApplications] = useState([]);
     const [loadingApplications, setLoadingApplications] = useState(true);
     const [showStudentProfile, setShowStudentProfile] = useState(false); // this will popup the profile page to dipslay student profile 
 
+    //STATE FOR ACTIVE JOBS COUNT SHORTLISTED CANDIDATES INTERVIEWS APPLICATIONS ON DASHBOARD
+    const [activeJobsCount, setActiveJobsCount] = useState(0);
+    const [applicationsCount, setApplicationsCount] = useState(0);
+    const [shortlistedCount, setShortlistedCount] = useState(0);
+    const [interviewsCount, setInterviewsCount] = useState(0);
 
 
     //STATE TO CONTAIN OR DISPLAY THE STUDENT PROFILE TO THE RECRUITER
@@ -38,6 +44,7 @@ function RecruiterDashboard() {
     //STAES TO DISPLAY ONLY TOP 20 CANDIDATES AS PER THE REQUIRED FIELDS
     const [topCandidates, setTopCandidates] = useState([]);
     const [candidateLoading, setCandidateLoading] = useState(false);
+    const [recruiterJobSkills , setRecruiterJobSkills]= useState(""); // state for store paricular recruiter posted job skills to display the top candidates to the particular recruiter as per their required skills of posted jobs
 
     //STATES TO DISPLAY SHORTLISTED CANDIDATES
     const [shortlistedCandidates, setShortlistedCandidates] = useState([]);
@@ -61,6 +68,12 @@ function RecruiterDashboard() {
     //STATE FOR INTERVIEW PAGE IT DISPLAY OR CONTAIN ALL INTERVIEWS CANDIDATES TO DISPLAY TO RECRUITERS
     const [scheduledInterviews, setScheduledInterviews] = useState([]); // this will contain all the data of candidate who has interview
     const [interviewLoading, setInterviewLoading] = useState(false);
+
+
+    //STATE FOR SEARCHING FUNCTION FOR MYJOB PAGE TO SEARCH JOBS BY WRITING IN SEARCHBOX AND APLLIED /CLOSED
+    const [searchedText , setSearchedText]= useState(""); // it store what recruiter typed in search box
+    const [jobstatus , setJobStatus] = useState("") ; // it store what job status selected either Active jobs / Closed job
+    const [filteredjobs , setFilteredJobs] = useState([]); // it store all filtered jobs
 
 
     //HANDLE PROFILE INPUT
@@ -95,6 +108,15 @@ function RecruiterDashboard() {
             setSelectedExp(selectedExp.filter( (exp)=> exp !== value));
         }
     }
+
+
+    const handleEditJob = (job) => {
+        console.log("job selected for edit", job);
+        setSelectedJob(job);
+        setShowEditJobForm(true);
+    };
+
+
 
     //FUNCTION TO SAVE RECRUITER AND COMPANY PROFILE INFO TO DATABASE
     const saveProfile=async(e)=>{
@@ -146,11 +168,11 @@ function RecruiterDashboard() {
             if (data.success === true) {
                 alert(data.message);
                 console.log("pofile data" , data.data);
+
                 //get recruiter_id to store in local storage for further use of posting multiple jobs and  fetch as per id
                 const recruiter_id = data.data.recruiter_id;
                 console.log("RECRUITER ID FROM BACKEND:", recruiter_id);
                 
-
                 if(recruiter_id){
                     localStorage.setItem("recruiter_id", recruiter_id); //STORE RECRUITER ID
                     console.log("STORED RECRUITER ID :" , recruiter_id);
@@ -175,7 +197,6 @@ function RecruiterDashboard() {
     const fetchRecruiterProfile = async () => {
 
         const user_id = localStorage.getItem("user_id");
-
         console.log("USER ID FOR PROFILE:", user_id);
 
         if (!user_id) {
@@ -184,10 +205,8 @@ function RecruiterDashboard() {
         }
 
         try {
-
-            const resp = await fetch(
-                `http://localhost:8080/api/recruiter_profile/getData/${user_id}`
-            );
+            //API TO GET RECRUITER PROFILE DATA
+            const resp = await fetch(`http://localhost:8080/api/recruiter_profile/getData/${user_id}`);
 
             console.log("PROFILE HTTP STATUS:", resp.status);
 
@@ -198,49 +217,29 @@ function RecruiterDashboard() {
             }
 
             const data = await resp.json();
-
             console.log("REC PROF DATA:", data);
-
             setRecruiterProfile(data);
 
             // GET RECRUITER ID FROM BACKEND
             const recruiter_id = data.recruiter_id;
-
             console.log("RECRUITER ID FROM PROFILE:", recruiter_id);
 
             if (recruiter_id) {
-
                 // STORE IN STATE
                 setRecruiterId(recruiter_id);
 
                 // STORE IN LOCAL STORAGE
                 localStorage.setItem("recruiter_id", recruiter_id);
-
-                console.log(
-                    "RECRUITER ID SET:",
-                    recruiter_id
-                );
-
+                console.log("RECRUITER ID SET:",recruiter_id);
             } else {
-
-                console.error(
-                    "RECRUITER ID NOT FOUND IN PROFILE RESPONSE"
-                );
-
+                console.error("RECRUITER ID NOT FOUND IN PROFILE RESPONSE");
             }
 
         } catch (error) {
-
-            console.error(
-                "ERROR FETCHING RECRUITER PROFILE:",
-                error
-            );
-
+            console.error("ERROR FETCHING RECRUITER PROFILE:",error);
         }
     };
-
     fetchRecruiterProfile();
-
     }, []);
 
 
@@ -296,7 +295,6 @@ function RecruiterDashboard() {
         console.log("LOGOUT USERROLE" , user_role);
         alert("loggout successfully");
         navigate("/");
-
     };
 
 
@@ -361,7 +359,6 @@ function RecruiterDashboard() {
         console.log("APPLICATION ID:", applicantId);
         console.log("CANDIDATE:", candidate);
 
-       
 
         // CHECK RECRUITER LOGIN
         if (!recruiterId) {
@@ -373,13 +370,10 @@ function RecruiterDashboard() {
             return;
         }
 
-        // SEND INVITATION EMAIL
-        const response = await fetch(
-            `http://localhost:8080/api/shortlisted_candidates/save/${recruiterId}/${applicantId}`,
-            {
-                method: "POST"
-            }
-        );
+        // SEND SHORTLIST EMAIL
+        const response = await fetch(`http://localhost:8080/api/shortlisted_candidates/save/${recruiterId}/${applicantId}`,{
+            method: "POST"
+        });
 
         console.log("SHORTLIST API RESPONSE ", response.status);
         
@@ -419,7 +413,7 @@ function RecruiterDashboard() {
 
         //API
         const response = await fetch(`http://localhost:8080/api/shortlisted_candidates/recruiter/${recruiter_id}`)
-         console.log("SHORTLISTED GET HTTP STATUS:", response.status);
+        console.log("SHORTLISTED GET HTTP STATUS:", response.status);
 
         const data = await response.json();
 
@@ -545,41 +539,96 @@ function RecruiterDashboard() {
     //FUNCTION TO OPEN INTERVIEW FORM FOR CONDUCT INTERVIEW
     const openInterviewForm = (application) => {
 
-    console.log("========== OPEN INTERVIEW FORM ==========");
-    console.log("APPLICATION:", application);
+        console.log("APPLICATION:", application);
 
-    setSelectedCandidate(application);
+        setSelectedCandidate(application);
 
-    // Get candidate directly from application
-    const student = application?.student_profile;
-    const job = application?.job;
+        // Get candidate directly from application
+        const student = application?.student_profile;
+        const job = application?.job;
 
-    console.log("STUDENT:", student);
-    console.log("JOB:", job);
+        console.log("STUDENT:", student);
+        console.log("JOB:", job);
 
-    //candidate name and jobtitle
-    const candidateName =`${student?.first_name || ""} ${student?.last_name || ""}`.trim();
-    const jobTitle = application?.job?.job_title || "--";
+        //candidate name and jobtitle
+        const candidateName =`${student?.first_name || ""} ${student?.last_name || ""}`.trim();
+        const jobTitle = application?.job?.job_title || "--";
 
-    console.log("CANDIDATE NAME:", candidateName);
-    console.log("JOB TITLE:", jobTitle);
+        console.log("CANDIDATE NAME:", candidateName);
+        console.log("JOB TITLE:", jobTitle);
 
-
-    setInterviewForm({
-        candidateName: candidateName,
-        jobTitle: jobTitle,
-
-        interviewType: "",
-        interviewMode: "",
-        interviewDate: "",
-        interviewTime: "",
-        interviewer: "",
-        meetingLink: "",
-        additionalInfo: ""
-    })
+        setInterviewForm({candidateName: candidateName,jobTitle: jobTitle,interviewType: "",interviewMode: "",interviewDate: "",interviewTime: "",interviewer: "",meetingLink: "",additionalInfo: ""})
         setPopup("ScheduleInterviewForm");
     };
 
+
+
+    //FUNCTION TO COUNT ACTIVE JOBS SHORTLISTED CANDIDATES ETC FOR DASHBOARD 
+    const fetchDashboardCounts = async () => {
+
+        try {
+            const recruiterId = localStorage.getItem("recruiter_id");
+
+            if (!recruiterId) {
+                console.error("Recruiter ID not found");
+                return;
+            }
+
+            console.log("Fetching dashboard counts for recruiter:", recruiterId);
+
+            // ACTIVE JOBS
+            const jobsResponse = await fetch(`http://localhost:8080/api/posted/recievePostedData/${recruiterId}`);
+
+            if (jobsResponse.ok) {
+                const jobsData = await jobsResponse.json();
+                const jobs = jobsData.data || [];
+                console.log("Recruiter Jobs:", jobs);
+                setActiveJobsCount(jobs.length);
+            }
+
+
+            // APPLICATIONS
+            const applicationsResponse = await fetch(`http://localhost:8080/api/application/recruiter/${recruiterId}`);
+
+            if (applicationsResponse.ok) {
+                const applicationsData = await applicationsResponse.json();
+                const applications = applicationsData.data || applicationsData || [];
+                console.log("Recruiter Applications:", applications);
+                setApplicationsCount(applications.length);
+            }
+
+
+            // SHORTLISTED CANDIDATES
+            const shortlistedResponse = await fetch(`http://localhost:8080/api/shortlisted_candidates/recruiter/${recruiterId}`);
+
+            if (shortlistedResponse.ok) {
+                const shortlistedData = await shortlistedResponse.json();
+                const shortlisted = shortlistedData.data || shortlistedData || [];
+                console.log("Recruiter Shortlisted:", shortlisted);
+                setShortlistedCount(shortlisted.length);
+            }
+
+
+            // INTERVIEWS
+            const interviewsResponse = await fetch(`http://localhost:8080/api/scheduled_interview/recruiter/${recruiterId}`);
+
+            if (interviewsResponse.ok) {
+                const interviewsData = await interviewsResponse.json();
+                const interviews = interviewsData.data || interviewsData || [];
+                console.log("Recruiter Interviews:", interviews);
+                setInterviewsCount(interviews.length);
+            }
+
+        }catch (error) {
+            console.error("Error fetching dashboard counts:",error);
+        }
+    };
+
+    useEffect(() => {
+        if (pages === "Dashboard") {
+            fetchDashboardCounts();
+        }
+    }, [pages]);
 
 
     //FUNCTION TO SCHEDULE INTERVIEW AND SAVE DATA TO SCHEDULE_INTERVIEW TABLE
@@ -624,7 +673,6 @@ function RecruiterDashboard() {
             })
 
             console.log("SCHEDULE INTERVIEW STATUS" , resp.status);
-            
             const data = await resp.json();
             console.log("SCHEDULE INTERVIEW RESPONSE ", data);
 
@@ -639,9 +687,6 @@ function RecruiterDashboard() {
             }else{
                 alert(data.message || "Failed to schedule interview");
             }
-
-            
-            
         } catch (error) {
             console.error("ERROR SCHEDULING INTERVIEW :" , error);
             alert("Something went wrong while scheduling the interview.");   
@@ -655,7 +700,6 @@ function RecruiterDashboard() {
     const fetchScheduledInteviews=async()=>{
         try {
             setInterviewLoading(true);
-
             const recruiterId = localStorage.getItem("recruiter_id");
             if (!recruiterId) {
                 console.log("RECRUITER ID NOT FOUND");
@@ -664,9 +708,7 @@ function RecruiterDashboard() {
 
             //API TO FETCH DATA
             const resp = await fetch(`http://localhost:8080/api/scheduled_interview/recruiter/${recruiterId}`)
-
             console.log("SCHEDULED INTERVIEW STATUS", resp.status);
-
             const data = await resp.json();
             console.log("scheduled interview response", data);
 
@@ -706,7 +748,6 @@ function RecruiterDashboard() {
             alert("Meeting link not available");
             return;
         }
-
         //OPEN GOOGLE MEET OR ZOOM 
         window.open(meetingLink, "_blank","noopener,noreferrer");
     };
@@ -720,7 +761,6 @@ function RecruiterDashboard() {
 
         //GET SEARCH INPUT
         const searchText = appliedSearch.trim().toLowerCase();
-
         //IF SEARCH INPUT IS EMPTY
         if (searchText == "") {
             setFilteredCandidate([]);
@@ -728,152 +768,115 @@ function RecruiterDashboard() {
         }
 
         try {
+            //API TO FETCH SKILLS
+            const skillResp = await fetch(`http://localhost:8080/api/student_skills/getAllSkillsforsearching`);
+            const skillresponse = await skillResp.json();
+            const skillsData = skillresponse.data || [];
+            console.log("Skills response ", skillsData);
+            if (skillsData) {
+                setCandidateSkills(skillsData);
+            }
 
-        // FETCH SKILLS
+            //API TO FETCH EXPERIENCE DATA
+            const expResp = await fetch(`http://localhost:8080/api/student_experience/getstudentexperinecforsearching`);
+            const expResponse = await expResp.json();
+            const expData = expResponse.data || [];
+            console.log("EXPERIENCE DATA", expData);
 
-        //API TO FETCH SKILLS
-        const skillResp = await fetch(`http://localhost:8080/api/student_skills/getAllSkillsforsearching`);
-        const skillresponse = await skillResp.json();
-        const skillsData = skillresponse.data || [];
-        console.log("Skills response ", skillsData);
-        if (skillsData) {
-            setCandidateSkills(skillsData);
-        }
-
-
-        // FETCH EXPERIENCE DATA
-
-        //API TO FETCH EXPERIENCE DATA
-        const expResp = await fetch(`http://localhost:8080/api/student_experience/getstudentexperinecforsearching`);
-        const expResponse = await expResp.json();
-        const expData = expResponse.data || [];
-        console.log("EXPERIENCE DATA", expData);
-
-        //STORE EXPERIENCE DATA TO ARRAY STATE
-        if (expData) {
-            setCandidateExperience(expData);
-        }
+            //STORE EXPERIENCE DATA TO ARRAY STATE
+            if (expData) {
+                setCandidateExperience(expData);
+            }
 
 
-        // FIND CANDIDATES WHOSE SKILLS MATCH
+            // FIND CANDIDATES WHOSE SKILLS MATCH
+            const matchedCandidates = skillsData.filter((candidate) => {
+                const skills = `
+                    ${candidate.programming_skills || ""}
+                    ${candidate.technical_skills || ""}
+                    ${candidate.tools || ""}
+                    ${candidate.soft_skills || ""} `.toLowerCase();
 
-        const matchedCandidates = skillsData.filter((candidate) => {
-
-            const skills = `
-                ${candidate.programming_skills || ""}
-                ${candidate.technical_skills || ""}
-                ${candidate.tools || ""}
-                ${candidate.soft_skills || ""} `.toLowerCase();
-
-            //MATCH SEARCH TEXT WITH SKILLS
-            return skills.includes(searchText);
-        });
-
-
-        console.log("MATCHED SKILL CANDIDATES", matchedCandidates);
-
-
-        // =========================================================
-        // FIND CANDIDATES WHOSE EXPERIENCE MATCHES
-        // =========================================================
-
-        let matcheExperienceCandidate = [];
-
-        //SEARCH EXPERIENCE ONLY IF USER SELECTED EXPERIENCE
-        if (selectedExp.length > 0) {
-
-            matcheExperienceCandidate = expData.filter((candidate) => {
-
-                const experience =
-                    `${candidate.working_experience || ""}`.toLowerCase();
-
-                //CHECK SELECTED EXPERIENCE VALUE
-                return selectedExp.some((exp) => {
-
-                    if (exp === "0-1") {
-                        return experience.includes("0-1");
-                    }
-
-                    if (exp === "1-3") {
-                        return experience.includes("1-3");
-                    }
-
-                    if (exp === "3-5") {
-                        return experience.includes("3-5");
-                    }
-
-                    if (exp === "5+") {
-                        return experience.includes("5+");
-                    }
-
-                    return false;
-                });
+                //MATCH SEARCH TEXT WITH SKILLS
+                return skills.includes(searchText);
             });
-        }
-        console.log("MATCHED EXPERIENCE CANDIDATES",matcheExperienceCandidate);
 
+            console.log("MATCHED SKILL CANDIDATES", matchedCandidates);
 
-        // COMBINE SKILLS + EXPERIENCE
+            // FIND CANDIDATES WHOSE EXPERIENCE MATCHES
+            let matcheExperienceCandidate = [];
 
-        const allmatchedcandidates = [...matcheExperienceCandidate, ...matchedCandidates];
+            //SEARCH EXPERIENCE ONLY IF USER SELECTED EXPERIENCE
+            if (selectedExp.length > 0) {
+                matcheExperienceCandidate = expData.filter((candidate) => {
+                    const experience =`${candidate.working_experience || ""}`.toLowerCase();
 
-        console.log("ALL MATCHED CANDIDATES",allmatchedcandidates);
+                    //CHECK SELECTED EXPERIENCE VALUE
+                    return selectedExp.some((exp) => {
+                        if (exp === "0-1") {
+                            return experience.includes("0-1");
+                        }
+                        if (exp === "1-3") {
+                            return experience.includes("1-3");
+                        }
+                        if (exp === "3-5") {
+                            return experience.includes("3-5");
+                        }
+                        if (exp === "5+") {
+                            return experience.includes("5+");
+                        }
+                        return false;
+                    });
+                });
+            }
+            console.log("MATCHED EXPERIENCE CANDIDATES",matcheExperienceCandidate);
 
+            // COMBINE SKILLS + EXPERIENCE
+            const allmatchedcandidates = [...matcheExperienceCandidate, ...matchedCandidates];
+            console.log("ALL MATCHED CANDIDATES",allmatchedcandidates);
 
-        // REMOVE DUPLICATE CANDIDATES
-
+            // REMOVE DUPLICATE CANDIDATES
             const removeDuplicateCandidates = allmatchedcandidates.filter((candidate, index, array) => {
                 return index === array.findIndex((item) => {
                 return (item.studentprofile_id?.student_profile_id === candidate.studentprofile_id?.student_profile_id); });
             });
-
             console.log("DUPLICATE REMOVED CANDIDATES",removeDuplicateCandidates);
 
+            // GET PROFILE DETAILS FOR ALL MATCHED CANDIDATES
+            const candidateProfile = [];
+            for (const candidate of removeDuplicateCandidates) {
 
-        // GET PROFILE DETAILS FOR ALL MATCHED CANDIDATES
-        const candidateProfile = [];
+                //GET STUDENT PROFILE OBJECT
+                const studentprofile = candidate.studentprofile_id;
 
-        for (const candidate of removeDuplicateCandidates) {
+                //GET USER ID
+                const userId = studentprofile?.user?.userId;
 
-            //GET STUDENT PROFILE OBJECT
-            const studentprofile = candidate.studentprofile_id;
+                //IF USER ID IS NOT AVAILABLE
+                if (!userId) {
+                    console.log("User id not found",candidate);
+                    continue;
+                }
 
-            //GET USER ID
-            const userId = studentprofile?.user?.userId;
-
-
-            //IF USER ID IS NOT AVAILABLE
-            if (!userId) {
-                console.log("User id not found",candidate);
-                continue;
-            }
-
-
-            //EXISTING CANDIDATE PROFILE API
-            const profileResponse = await fetch(`http://localhost:8080/api/student/getProfile/${userId}`);
-
-            const profileData = await profileResponse.json();
-            console.log("PROFILE DATA",profileData);
-
+                //EXISTING CANDIDATE PROFILE API
+                const profileResponse = await fetch(`http://localhost:8080/api/student/getProfile/${userId}`);
+                const profileData = await profileResponse.json();
+                console.log("PROFILE DATA",profileData);
 
                 //STORE CANDIDATE PROFILE DATA
                 candidateProfile.push({...profileData, studentProfileId: studentprofile?.student_profile_id,
-                userId: userId,
+                    userId: userId,
 
-                // STORE SKILLS OF THIS CANDIDATE
-                programming_skills: candidate.programming_skills,
-                technical_skills: candidate.technical_skills,
-                tools: candidate.tools,
-                soft_skills: candidate.soft_skills
-            });
-        }
-
-
+                    // STORE SKILLS OF THIS CANDIDATE
+                    programming_skills: candidate.programming_skills,
+                    technical_skills: candidate.technical_skills,
+                    tools: candidate.tools,
+                    soft_skills: candidate.soft_skills
+                });
+            }
             // STORE FINAL MATCHED CANDIDATE PROFILES
-
             console.log("FINAL CANDIDATE PROFILES",candidateProfile);
             setFilteredCandidate(candidateProfile);
-
 
         } catch (error) {
             console.log("Error while searching candidates",error);
@@ -881,6 +884,329 @@ function RecruiterDashboard() {
     };
 
 
+
+
+    //FUNCTION INVITE TO APPLY CANDIDATE FOR JOB
+    const sendApplyInvitation = async(candidate)=>{
+
+        try {
+            //get loggedin recruiter id , studentprofile id
+            const recruiterId = localStorage.getItem("recruiter_id");
+            const studentProfileId = candidate.student_profile_id;
+
+            console.log("recruiter id " , recruiterId);
+            console.log("student profile id", studentProfileId);
+            console.log("FULL CANDIDATE OBJECT:", candidate);
+
+            //CANDIDATE NAME
+            const candidateName = `${candidate.firstName} ${candidate.lastName}`;
+            const candidateEmail = candidate.email;
+
+            console.log("Recruiter id" , recruiterId);
+            console.log("candidate email " , candidateEmail);
+            
+
+            //API TO SEND INVITATION FOR APPLY TO A JOB
+            const resp = await fetch(`http://localhost:8080/api/shortlisted_candidates/send-invitation/${recruiterId}/${studentProfileId}`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({recruiterId:recruiterId, candidateName:candidateName, candidateEmail:candidateEmail})
+            });
+
+            const text = await resp.text();
+            let data = {};
+            if (text) {
+                try {
+                    data=JSON.parse(text);
+                } catch (error) {
+                    data = {message: text};
+                }
+            }
+
+            if (resp.ok) {
+                alert("Invitation sent successfully");
+            }else{
+                alert(data.message || `Failed to send invitation. Status: ${resp.status}`);
+            }
+
+
+        } catch (error) {
+            console.error("Error sending invitation:", error);
+            alert("Something went wrong while sending the invitation.");
+        }
+    }
+
+
+
+   /* //SEARCH POSTED JOBS IN MY JOB PAGE 
+    const searchPostedJobSearch=async(candidate)=>{
+        //get what recruiter typed on searchbox
+        const searchText = searchedText.toLowerCase();
+        if (searchText === "") {
+            filteredjobs([]);
+            return;
+        }
+    
+        try {
+            //API TO FETCH JOBS TITLE 
+            const resp = await fetch(`http://localhost:8080/api/posted/recievePostedData`);
+
+            const data = await resp.json();
+            console.log("posted jobs fetched searching " , data);
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }*/
+
+
+
+    //EDIT JOB FUNCTION
+    const editJob=(job)=>{
+        console.log("job selected for edit", job);
+
+        //store job id in react usesstate
+        setEditingJobId(job.job_id); 
+
+        //load existing job data into form
+        setPostedJobFields({  job_title: job.job_title || "", skills: job.skills || "" , min_experience : job.min_experience ||"" , max_experience:job.max_experience||"" , job_location:job.job_location || "" , work_mode : job.work_mode ||"", min_package : job.min_package ||"" , max_package :job.max_package||"", job_description:job.job_description ||"" });
+
+        //open existing job form
+        setPopup("EditJob");
+    }
+
+    //UPDATE EXISTING JOB FUNCTION
+    const updateExistingJob=async(e)=>{
+        e.preventDefault;
+        if (!editingJobId) {
+            alert("job id not found");
+            return;
+        }
+
+        try {
+            console.log("editing job id" , editingJobId);
+            console.log("updated job data", postedJobFields);
+
+            //REST API FOR UPDATING EXISTING POSTED JOB
+            const resp = await fetch(`http://localhost:8080/api/posted/editPostedJob/${editingJobId}`,{
+                method:'PUT',
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(postedJobFields)
+            })
+
+            console.log("Update job status", resp.status);
+            const responseText = await resp.text();
+            console.log("RESPONSE TEXT" , responseText);
+            if (!resp.ok) {
+                alert(`Update failed. HTTP Status: ${resp.status}`);
+                return;
+            }
+
+            const data = responseText ? JSON.parse(responseText) : {};
+            console.log("updated job data ", data);
+
+            if (data.success === true) {
+                alert(data.message);
+                await fetchPostedJobs(); // REFRESH THE JOB LIST
+                setPostedJobFields({job_title: "", skills: "", min_experience: "", max_experience: "", job_location: "", work_mode: "", min_package: "", max_package: "", job_description: ""}); //CLEAR FORM
+                setEditingJobId(null); // clear editing jobid
+                setPopup(false); // close the popup form
+            }else{
+                alert(data.message); // Unsuccessfull message
+            }
+            
+        } catch (error) {
+            console.error("Update job err" , error);
+            alert("something went wrong while updating job");
+            
+        }
+
+    }
+
+
+    //FUNCTION TO FIND WHICH SKILLS OF A CANDIDATE MATCH WITH THE SKILLS REQUIRED BY THE RECRUITER'S POSTED JOBS
+    const getCandidateMatchedSkills = (candidate,recruiterSkills)=>{
+        //COLLECT ALL SKILLS OF A CANDIDATES
+        const candidateSkills = [candidate.programming_skills || "" , candidate.technical_skills ||""].join(",").split(/[,\s]+/).map((skill)=>skill.trim().toLowerCase()).filter((skill)=>skill != "");
+        
+        //FIND MATCHING SKILLLS
+        const matchedSkills = recruiterSkills.filter((recruiterSkills)=>candidateSkills.some((candidateSkills)=> candidateSkills === recruiterSkills));
+
+        //REMOVE DUPLICATE SKILLS
+        return [...new Set(matchedSkills)];
+    }
+
+    // FUNCTION TO GET ALL SKILLS FROM THE LOGGED-IN RECRUITER'S POSTED JOBS FOR DISPLAY THE TOP CANDIDATES TO THE PARTICULAR RECRUITER AS PER THEIR POSTE JOB SKILLS
+    const topCandidate = async()=>{
+        try {
+            //get particular reruiter id
+            const recruiterId = localStorage.getItem("recruiter_id");
+            console.log("check recruiter id ", recruiterId);
+
+            if (!recruiterId) {
+                console.log("Recruiter id not found");
+                setRecruiterJobSkills([]); // if no recruiter found keep state empty to do not display the top candidates
+                return []; 
+            }
+
+            //API TO FETCH ONLY RECRUITER POSTED JOBS 
+            const resp = await fetch(`http://localhost:8080/api/posted/recievePostedData/${recruiterId}`);
+            console.log("Recruiter job response status ", resp.status);
+            const data = await resp.json(); // store fetched posted jobs into data variable
+            console.log("display the fetched jobs " , data);
+
+            //if failed 
+            if (!resp.ok || data.success !== true) {
+                console.log("Failed to fetch recruiter jobs");
+                setRecruiterJobSkills([]);
+                return; // stop the further execution
+            }
+
+            //VARIABLE TO STORE ALL POSTED JOBS
+            const jobs = data.data || [];
+            console.log("variable jobs " , jobs);
+            
+
+            //Array to store all job skills posted by particular recruiter
+            const allJobSkills = [];
+            jobs.forEach((job) => {
+                console.log("job id", job.job_id);
+                console.log("job title" , job.job_title);
+                console.log("job skills " , job.skills);
+
+                //Get skills from this particular job
+                const skills = job.skills || "";
+
+                //CONVERT THE SKILLS STRING INTO INDIVIDUAL SKILLS ", "
+                const skillList = skills.split(",").map( (skill)=>skill.trim().toLowerCase()).filter( (skill)=> skill !== "");
+
+                //add these skillList into main skill array
+                allJobSkills.push(...skillList);
+
+            });
+
+            //REMOVE DUPLICATE SKILLS  , this is the method to remove duplicates in javascript
+                const SkillLists = [...new Set(allJobSkills)];
+
+                //STORE RECRUITER SKILLS IN STATE 
+                setRecruiterJobSkills(SkillLists);
+
+                //IF RERUITER HAS NO POSTED JOBS AND SKILLS
+                if (SkillLists.length === 0) {
+                    console.log("NO JOB POSTED FOR TOP CANDIDATES");
+                    setFilteredCandidate([]);
+                    return;
+                }
+
+                //FETCH ALL CANDIDATE SKILLS
+                const candidateResponse = await fetch("http://localhost:8080/api/student_skills/getAllSkillsforsearching");
+                console.log("FETCHED CANDIATE SKILLS RESPONSE " , candidateResponse.status);
+                const candidateData = await candidateResponse.json();
+                console.log("candidate data " , candidateData);
+
+                if (!candidateData) {
+                    console.log("No candidate found");
+                    setFilteredCandidate([]);
+                    return;
+                }
+
+                //CANDIDATES
+                const candidates = candidateData.data || candidateData || [];
+                console.log("candidates skill arrau ", candidates);
+
+                //FIND CANDIDATES WHOS SKILLS MATCHED WITH RECRUITER SKILLS
+                const matchedCandidates = [];
+
+                candidates.forEach((candidate) => {
+                    const matchedSkills = getCandidateMatchedSkills(candidate , SkillLists);
+                    if (matchedSkills.length > 0) {
+                        matchedCandidates.push({...candidate, matchedSkills: matchedSkills});
+                        console.log("Matched candidates ", matchedCandidates);
+                        
+                    }
+                });
+
+                //store candidates in state
+                setFilteredCandidate(matchedCandidates);      
+        } catch (error) {
+            console.error("ERROR FETCHING RECRUITER JOB SKILLS", error);
+            setRecruiterJobSkills([]);
+            setFilteredCandidate([]);
+            return [];
+        }
+    }
+    useEffect( ()=>{
+        if (pages === "Dashboard") {
+            topCandidate();
+        }
+    },[pages])
+
+
+
+    //WRAPPER FUNCTION FOR RECRUITER DASHBOARD CANDIDAET VIEW PROFILE BTN TO VIEW THE PROFILES OF TOP CANDIDATES
+    const dashboardViewProfile = (studentProfileId, userId)=>{
+        //call fetchStudentprofile function to view candidate profiles
+        fetchStudentProfile(studentProfileId,userId);
+        setShowStudentProfile(true);
+    }
+
+
+
+    // WRAPPER FUNCTION FOR RECRUITER DASHBOARD TO SEND INVITATION EMAIL TO TOP CANDIDATES
+    const dashboardSendInvitation = (candidate) => {
+        
+        // Get student profile object from dashboard candidate
+        const profile = candidate?.studentprofile_id;
+
+        // Get student profile ID
+        const studentProfileId = profile?.student_profile_id;
+
+        console.log("========== DASHBOARD INVITATION ==========");
+        console.log("Student Profile ID:", studentProfileId);
+        console.log("Student Profile:", profile);
+        console.log("FULL CANDIDATE OBJECT:", candidate);
+
+        // Check student profile ID
+        if (!studentProfileId) {
+            console.error("Student Profile ID not found:", candidate);
+            alert("Student Profile ID not found.");
+            return;
+        }
+
+        // Get candidate name
+        const firstName = profile?.first_name || "";
+        const lastName = profile?.last_name || "";
+
+        // Get candidate email
+        const email = profile?.email || "";
+
+        console.log("Candidate Name:", `${firstName} ${lastName}`);
+        console.log("Candidate Email:", email);
+
+        // Create a new object in the SAME format  that existing sendApplyInvitation() already expects.
+        const dashboardCandidate = {
+            ...candidate,
+
+            // Existing function expects this field
+            student_profile_id: studentProfileId,
+
+            // Existing function expects these fields
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+        };
+
+        console.log("Candidate object sent to existing sendApplyInvitation():");
+        console.log(dashboardCandidate);
+
+        // Call the OLD function without changing it
+        sendApplyInvitation(dashboardCandidate);
+    };
 
    return (<>
     
@@ -909,152 +1235,145 @@ function RecruiterDashboard() {
         <div className="recruiterHomeDashboard_container">
 
             {pages === "Dashboard" && (<>
-            
-
             <div className="Dashboard_page_container">
 
-            
-            <div className="heading">
-                <div>
-                <h1>Dashboard</h1>
-                <h5>Manage your hiring process from one place .</h5>
-                 </div>
-                <div>
-                    <h3>Profile</h3>
-                </div>
-            </div>
-
-
-        {/* CARDS */}
-        <div className="cardContainer">
-            
-            {/* THIS WILL CONTAINER RECENT JOBS POSTED AND THE APPLIED CANDIDATES*/}
-
-            {/*RECENT JOBS*/}
-            <div className="cards">
-                <h4>ACTIVE JOBS</h4>
-                <h5>10</h5>
-            </div>
-
-            <div className="cards">
-                <h4>APPLICATIONS</h4>
-                <h5>10</h5>
-            </div>
-
-            <div className="cards">
-                <h4>SHORTLISTED</h4>
-                <h5>10</h5>
-            </div>
-
-            <div className="cards">
-                <h4>INTERVIEWS</h4>
-                <h5>10</h5>
-            </div>
-        </div>
-
-
-        {/*ACTIVE JOB*/}
-        <div className="activeJob_container">
-            
-            {/* THIS WILL CONTAINER RECENT JOBS POSTED AND THE APPLIED CANDIDATES*/}
-
-            {/*RECENT JOBS*/}
-            <div className="recentjob">
                 <div className="heading">
-                    <h4>🏆 Top Candidates for a Job</h4>
-                    <a href="#" onClick={(e)=>{e.preventDefault(); setPages('Candidates')}}><h4>View more</h4></a>
+                    <div>
+                        <h1>Dashboard</h1>
+                        <h5>Manage your hiring process from one place .</h5>
+                    </div>
+                    <div>
+                        <h3>Profile</h3>
+                    </div>
                 </div>
 
-                {/* ================= TOP CANDIDATES ================= */}
 
-            <div className="topCandidates_section">
+                {/* CARDS */}
+                <div className="cardContainer">
+            
+                    {/* THIS WILL CONTAINER RECENT JOBS POSTED AND THE APPLIED CANDIDATES*/}
 
-                {/* LOADING */}
-
-                {candidateLoading && (
-                  <div className="candidate_loading">Loading candidates... </div>
-                )}
-
-
-                {/* NO CANDIDATES */}
-                {!candidateLoading && topCandidates.length === 0 && (
-                    <div className="no_candidates">
-                        No candidates available.
+                    {/*RECENT JOBS*/}
+                    <div className="cards">
+                        <h4>ACTIVE JOBS</h4>
+                        <h5>{activeJobsCount}</h5>
                     </div>
 
-                )}
+                    <div className="cards">
+                    <h4>APPLICATIONS</h4>
+                    <h5>{applicationsCount}</h5>
+                    </div>
+
+                    <div className="cards">
+                        <h4>SHORTLISTED</h4>
+                        <h5>{shortlistedCount}</h5>
+                    </div>
+
+                    <div className="cards">
+                        <h4>INTERVIEWS</h4>
+                        <h5>{interviewsCount}</h5>
+                    </div>
+                </div>
 
 
-                 {/* CANDIDATE CARDS */}
+                {/*ACTIVE JOB*/}
+                <div className="activeJob_container">
+            
+                    {/* THIS WILL CONTAINER RECENT JOBS POSTED AND THE APPLIED CANDIDATES*/}
 
-                {!candidateLoading && topCandidates.length > 0 && (
-                    <div className="candidate_cards_container">
+                    {/*RECENT JOBS*/}
+                    <div className="recentjob">
+                        <div className="heading">
+                            <h4>🏆 Top Candidates for a Job</h4>
+                            <a href="#" onClick={(e)=>{e.preventDefault(); setPages('Candidates')}}><h4>View more</h4></a>
+                        </div>
 
-                        {topCandidates.map((candidate, index) => (
-                            <div className="candidate_card" key={candidate.student_profile_id}>
+                        {/* CANDIDATE CARDS */}
+                        {/* TOP CANDIDATES FOR THIS RECRUITER */}
+                        <div className="top-candidates-section">
 
-                                {/* RANK */}
-                                <div className="candidate_rank">#{index + 1}</div>
+                            <h2>Recommended Candidates</h2>
+                                {filteredCandidate.length === 0 ? (
+                                    <p>No matching candidates found for your posted jobs.</p>
+                                ) : (
+                                    <div className="candidate-cards-container">
+                                    {filteredCandidate.map((candidate) => {
 
-                                {/* PROFILE IMAGE */}
-                                <div className="candidate_image_container">
-                                    <img src={candidate.profile_photo ? `http://localhost:8080/uploads/${candidate.profile_photo}` : "/default-profile.png"  } alt="Candidate"/>
-                                 </div>
+                                    // Candidate profile data comes inside studentprofile_id
+                                    const profile = candidate.studentprofile_id;
+
+                                    return (
+                                    <div className="candidate-profile-card" key={candidate.skill_id}>
+
+                                        {/* PROFILE HEADER */}
+                                        <div className="candidate-header">
+                                            <div className="candidate-photo-container">
+                                                <img src={profile?.profile_photo? `http://localhost:8080/uploads/${profile.profile_photo}`: "/default-profile.png"}alt={`${profile?.first_name || ""} ${profile?.last_name || ""}`}className="candidate-photo"/>
+                                            </div>
+
+                                            <div className="candidate-basic-info">
+                                                <h3>{profile?.first_name || ""}{" "}{profile?.last_name || ""}</h3>
+                                                <p>{profile?.profession || "Software Developer"}</p>
+                                            </div>
+                                        </div>
+
+                                        {/* MATCHED SKILLS */}
+                                        <div className="matched-skills">
+                                            {candidate.matchedSkills?.map((skill, index) => (
+                                            <span className="matched-skill"key={index}>✓ {skill}</span>
+                                            ))}
+                                        </div>
 
 
-                                 {/* CANDIDATE DETAILS */}
+                                        {/* EXPERIENCE */}
+                                        <div className="candidate-detail">
+                                            <strong>Experience:</strong>
+                                            <span>{profile?.working_experience || "Fresher"}</span>
+                                        </div>
 
-                                <div className="candidate_info">
-                                    <h3> {candidate.first_name}{" "} {candidate.last_name} </h3>
-                                    <p className="candidate_job_title"> {candidate.job_title ||"Student"}</p>
+
+                                        {/* LOCATION */}
+                                        <div className="candidate-detail">
+                                            <strong>📍</strong>
+                                            <span>{profile?.address || "Location not available"}</span>
+                                        </div>
 
 
-                                    {/* MATCH SCORE */}
+                                        {/* ALL SKILLS */}
+                                        <div className="candidate-skills-section">
+                                            <h4>Skills</h4>
+                                            <p>{[candidate.programming_skills,candidate.technical_skills,candidate.tools,].filter(Boolean).join(" • ")}</p>
+                                        </div>
 
-                                    <div className="candidate_match">
-                                        <span>Job Match</span>
-                                        <strong> {candidate.match_score || 0}% </strong>
+
+                                        {/* EMAIL */}
+                                        <div className="candidate-contact">
+                                            <span>✉</span>
+                                            <span>{profile?.email || "Email not available"}</span>
+                                        </div>
+
+
+                                        {/* PHONE */}
+                                        <div className="candidate-contact">
+                                            <span>☎</span>
+                                            <span>{profile?.phone || "Phone not available"}</span>
+                                        </div>
+
+                                        {/* BUTTONS */}
+                                        <div className="candidate-card-buttons">
+                                            <button className="view-profile-btn" onClick={()=>dashboardViewProfile(candidate?.studentprofile_id?.student_profile_id, candidate.studentprofile_id?.user?.userId)}> View Profile</button>
+                                            <button className="invite-candidate-btn"onClick={()=>dashboardSendInvitation(candidate)}>Invite to Apply</button>
+                                        </div>
                                     </div>
-
-
-                                    {/* EDUCATION */}
-                                    {candidate.education && (
-                                        <p className="candidate_education">🎓{" "}{candidate.education} </p>
-                                    )}
-
-
-                                    {/* EXPERIENCE */}
-                                    {candidate.experience && (
-                                        <p className="candidate_experience">💼{" "}{candidate.experience}</p>
-                                    )}
-
-
-                                    {/* SKILLS */}
-
-                                    <div className="candidate_skills">
-                                        {candidate.skills && candidate.skills
-                                        .slice(0, 4).map((skill, skillIndex) => (
-                                        <span key={skillIndex}>{skill}</span>  
-                                        )
-                                        )}
-                                    </div>
-
-
-                                    {/* ACTION BUTTONS */}
-                                    <div className="candidate_buttons">
-                                        <button className="view_candidate_btn" > View Profile </button>
-                                        <button className="interview_candidate_btn" >Interview</button>
-                                    </div>
-                                </div>
-                             </div>
-                         ))}
-                     </div>
-                )}
-        </div>  
-        </div>
-    </div>
-    </div>
-    </>)}
+                                    );
+                                })}
+                            </div>
+                            )}
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </>)}
 
 
 
@@ -1136,7 +1455,7 @@ function RecruiterDashboard() {
                     </div>
 
                     <div>
-                        <img src={`http://localhost:8080/uploads/${recruiterProfile.profile_photo}`} alt="" />
+                        <img src={`http://localhost:8080/uploads/${recruiterProfile?.profile_photo}`} alt="Recruiter" />
                     </div>
                     <h4>{recruiterProfile?.full_name}</h4>
                     <h4>{recruiterProfile.designation}</h4>
@@ -1155,11 +1474,10 @@ function RecruiterDashboard() {
                     <h4>{recruiterProfile.industry}</h4>
                     <h4><a href={recruiterProfile.website} target="blank">{recruiterProfile.website}</a></h4>
                     <h4>{recruiterProfile.location}</h4>
-
                 </div>
             </div>
-         </div>
-         </>)}
+        </div>
+        </>)}
 
 
          {/*MY JOB PAGES*/}
@@ -1185,10 +1503,6 @@ function RecruiterDashboard() {
                     <option value="AllStatus">All Status</option>
                     <option value="Active">Active</option>
                     <option value="Closed">Closed</option>
-                </select></label>
-
-                <label htmlFor=""><select name="">
-                    <option value="recent">Sort-By-Recent</option>    
                 </select></label>
             </div>
 
@@ -1225,8 +1539,8 @@ function RecruiterDashboard() {
                                 <h4>2 Interview</h4>
 
                                 <div>
-                                    <button>Edit</button>
-                                    <button>Close</button>
+                                    
+                                    <button type="button" onClick={()=>editJob(job)}>Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -1287,8 +1601,8 @@ function RecruiterDashboard() {
                             <h5>Email : <a href="{candidate.email}">{candidate.email}</a></h5>
                             <h5>Phone : {candidate.phone}</h5>
                             <div>
-                                <button>View Profile</button>
-                                <button>Invite for Apply</button>
+                                <button onClick={()=>{fetchStudentProfile(candidate.student_profile_id,candidate.userId); setShowStudentProfile(true)}}>View Profile</button>
+                                <button onClick={()=>sendApplyInvitation(candidate)}>Invite for Apply</button>
                             </div>
                         </div>
                     ))
@@ -1316,7 +1630,7 @@ function RecruiterDashboard() {
                 
                 <label htmlFor="">
                     <input type="search" name="Aisearch" placeholder="Search profession or skills" />
-                    <button style={{display:'flex', padding:'0.5rem', borderRadius:'0.7rem', width:"100%", justifyContent:'center'}}>AI Match</button>
+                    <button style={{display:'flex', padding:'0.5rem', borderRadius:'0.7rem', width:"100%", justifyContent:'center'}}>AI ATS RESUME FILTER</button>
                 </label>
             </div>
 
@@ -1352,16 +1666,13 @@ function RecruiterDashboard() {
                                 <td style={{display:'flex', gap:'1rem'}}>
                                     <button onClick={() =>{fetchStudentProfile( application.student_profile?.student_profile_id,application.student_profile?.user?.userId ); setShowStudentProfile(true);}}> View Profile</button>
                                     <button type="button"  onClick={()=>shortlistCandidate(application)} disabled={application.application_status === "Shortlisted"}style={{backgroundColor: application.application_status === "Applied" ? "yellow": "green"}}>{application.application_status === "Shortlisted" ? "Shortlisted":"Shortlist"}</button>
-                                 </td> 
-
+                                </td> 
                             </tr>
-                            ))}
-                            
+                            ))} 
                         </tbody>
                     </table>
                 </div>
-                )}
-                
+                )}  
         </div>
        </>)}
 
@@ -1499,300 +1810,224 @@ function RecruiterDashboard() {
                             </tr>
                         </thead>
                         <tbody>
-  {interviewLoading ? (
-    <tr>
-      <td colSpan="8">Loading...</td>
-    </tr>
-  ) : scheduledInterviews.length === 0 ? (
-    <tr>
-      <td colSpan="8">No Interview Conducted Yet!</td>
-    </tr>
-  ) : (
-    scheduledInterviews.map((interview, index) => {
+                            {interviewLoading ? (
+                                <tr>
+                                    <td colSpan="8">Loading...</td>
+                                </tr>
+                                ) : scheduledInterviews.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="8">No Interview Conducted Yet!</td>
+                                    </tr>
+                                ) : (
+                                    scheduledInterviews.map((interview, index) => {
+                                        const candidateName = interview?.candidateName || interview?.candidate_name ||(`${interview?.applicant_id?.student_profile?.first_name || ""}${interview?.applicant_id?.student_profile?.last_name || ""}`).trim() ||"--";
+                                        const jobTitle = interview?.jobTitle ||interview?.job_title ||interview?.applicant_id?.job?.job_title ||interview?.application?.job?.job_title ||"--";
+                                        const interviewType = interview?.interviewType ||interview?.interview_type ||"--";
+                                        const interviewDate = interview?.interviewDate ||interview?.interview_date ||"--";
+                                        const interviewTime =interview?.interviewTime ||interview?.interview_time ||"--";
+                                        const interviewMode =interview?.interviewMode ||interview?.interview_mode ||"--";
+                                        const status =interview?.status ||interview?.interview_status ||"Scheduled";
+                                        const meetingLink =interview?.meetingLink ||interview?.meeting_link ||"";
 
-      const candidateName =
-        interview?.candidateName ||
-        interview?.candidate_name ||
-        (
-          `${interview?.applicant_id?.student_profile?.first_name || ""}
-           ${interview?.applicant_id?.student_profile?.last_name || ""}`
-        ).trim() ||
-        "--";
-
-      const jobTitle =
-        interview?.jobTitle ||
-        interview?.job_title ||
-        interview?.applicant_id?.job?.job_title ||
-        interview?.application?.job?.job_title ||
-        "--";
-
-      const interviewType =
-        interview?.interviewType ||
-        interview?.interview_type ||
-        "--";
-
-      const interviewDate =
-        interview?.interviewDate ||
-        interview?.interview_date ||
-        "--";
-
-      const interviewTime =
-        interview?.interviewTime ||
-        interview?.interview_time ||
-        "--";
-
-      const interviewMode =
-        interview?.interviewMode ||
-        interview?.interview_mode ||
-        "--";
-
-      const status =
-        interview?.status ||
-        interview?.interview_status ||
-        "Scheduled";
-
-      const meetingLink =
-        interview?.meetingLink ||
-        interview?.meeting_link ||
-        "";
-
-      return (
-        <tr
-          key={
-            interview?.interview_id ||
-            interview?.scheduled_interview_id ||
-            index
-          }
-        >
-
-          <td>
-            {interview?.student_profile?.first_name? 
-            `${interview.student_profile.first_name} 
-             ${interview.student_profile.last_name || ""}`: interview?.first_name? `${interview.first_name} ${ interview.last_name || ""}`: "--"}</td>
-
-          <td>{jobTitle}</td>
-
-          <td>{interviewType}</td>
-
-          <td>{interviewDate}</td>
-
-          <td>{interviewTime}</td>
-
-          <td>{interviewMode}</td>
-
-          <td>office address</td>
-
-          <td>{status}</td>
-
-          <td>
-            {meetingLink ? (
-              <button type="button" onClick={()=>joinMeeting(interview)} disabled={!meetingLink} >Join Meeting</button>
-            ) : (
-              <button type="button" disabled>
-                No Meeting Link
-              </button>
-            )}
-          </td>
-
-        </tr>
-      );
-    })
-  )}
-</tbody>
+                                        return (
+                                            <tr key={interview?.interview_id ||interview?.scheduled_interview_id ||index}>
+                                                <td>
+                                                    {interview?.student_profile?.first_name? 
+                                                    `${interview.student_profile.first_name} 
+                                                    ${interview.student_profile.last_name || ""}`: interview?.first_name? `${interview.first_name} ${ interview.last_name || ""}`: "--"}
+                                                </td>
+                                                <td>{jobTitle}</td>
+                                                <td>{interviewType}</td>
+                                                <td>{interviewDate}</td>
+                                                <td>{interviewTime}</td>
+                                                <td>{interviewMode}</td>
+                                                <td>office address</td>
+                                                <td>{status}</td>
+                                                <td>{meetingLink ? (
+                                                    <button type="button" onClick={()=>joinMeeting(interview)} disabled={!meetingLink} >Join Meeting</button>
+                                                ) : (
+                                                    <button type="button" disabled>No Meeting Link</button>
+                                                )}
+                                                </td>
+                                            </tr>
+                                        )})
+                            )}
+                        </tbody>
                     </table>
                 </div>
             </div>
-
        </div>
-       </>)}
+    </>)}
 
 
        {/*AI CANDIDATE MATCH*/}
        {pages === "AiMatch" && (<>
        
        <div className="aimatch_container">
-        <div className="heading">
-            <div>
-                <h1>AI Candidate Match</h1>
-                <h5>AI-Powered recommendations for your job openings.</h5>
-            </div>
-        </div>
-
-        <div className="subheading">
-            <label htmlFor="">Job Position : 
-                <select name="">
-                <option value="SE">Software Engineer</option>
-                <option value="Java">Java Developer</option> {/*FETCH THESE JOB TITLE FROM DATABASE */}
-                </select>
-            </label>
-        </div>
-
-        {/* TOP MATCHED CANDIDATES CONTAINER*/}
-        <div className="topCandidates_container">
-
-            <div className="top_matched_candidates">
-                <h4>Top Matched Candidates</h4>
+            <div className="heading">
+                <div>
+                    <h1>AI Candidate Match</h1>
+                    <h5>AI-Powered recommendations for your job openings.</h5>
+                </div>
             </div>
 
-            <div className="ai_matchBreakdown">
-                <h4>AI - Matched Breakdown</h4>
+            <div className="subheading">
+                <label htmlFor="">Job Position : 
+                    <select name="">
+                    <option value="SE">Software Engineer</option>
+                    <option value="Java">Java Developer</option> {/*FETCH THESE JOB TITLE FROM DATABASE */}
+                    </select>
+                </label>
             </div>
-        </div>
+
+            {/* TOP MATCHED CANDIDATES CONTAINER*/}
+            <div className="topCandidates_container">
+                <div className="top_matched_candidates">
+                    <h4>Top Matched Candidates</h4>
+                </div>
+
+                <div className="ai_matchBreakdown">
+                    <h4>AI - Matched Breakdown</h4>
+                </div>
+            </div>
        </div>
        </>)}
        
 
 
-       {/*POPUP OF NEW JOB POSTING AND INTERVIEW SCHEDULING FORM */}
-      {popup === "NewJob" && (
-    <div className="newJobpost_container">
+        {/*POPUP OF NEW JOB POSTING AND INTERVIEW SCHEDULING FORM */}
+        {(popup === "NewJob" || popup === "EditJob") && (
+        <div className="newJobpost_container">
+            <form>
+                <header>
+                    <h3>{popup ==="EditJob"?"Edit Job" : "Post New Job"}</h3>
+                    <button  type="button"onClick={() => setPopup(false)}>  X </button>
+                </header>
 
-        <form>
-
-            <header>
-                <h3>Post New Job</h3>
-                <button  type="button"onClick={() => setPopup(false)}>  X </button>
-            </header>
-
-
-            <label>
-                Job Title :
-                <input  type="text" name="job_title" placeholder="e.g. Software Developer" value={postedJobFields.job_title} onChange={handlePostedJobInput}/>
-            </label>
+                <label>
+                    Job Title :<input  type="text" name="job_title" placeholder="e.g. Software Developer" value={postedJobFields.job_title} onChange={handlePostedJobInput}/>
+                </label>
 
 
-            <label>
-                Skills :
-                <input type="text" name="skills" placeholder="e.g. Java, React, MySQL" value={postedJobFields.skills} onChange={handlePostedJobInput}/>
-            </label>
+                <label>
+                    Skills :<input type="text" name="skills" placeholder="e.g. Java, React, MySQL" value={postedJobFields.skills} onChange={handlePostedJobInput}/>
+                </label>
 
 
-            <label>
-                Experience :
+                <label>
+                    Experience :
+                    <div className="experience_inputs">
+                        <input type="number" name="min_experience" placeholder="Minimum" value={postedJobFields.min_experience} onChange={handlePostedJobInput}/>
+                        <input type="number" name="max_experience"  placeholder="Maximum" value={postedJobFields.max_experience} onChange={handlePostedJobInput}/>
+                    </div>
+                </label>
 
-                <div className="experience_inputs">
-                    <input type="number" name="min_experience" placeholder="Minimum" value={postedJobFields.min_experience} onChange={handlePostedJobInput}/>
-
-                    <input type="number" name="max_experience"  placeholder="Maximum" value={postedJobFields.max_experience} onChange={handlePostedJobInput}/>
-                </div>
-            </label>
-
-
-            <label>
-                Location :
-                <input type="text" name="job_location" placeholder="e.g. Mumbai"  value={postedJobFields.job_location} onChange={handlePostedJobInput}/>
-            </label>
+                <label>
+                    Location : <input type="text" name="job_location" placeholder="e.g. Mumbai"  value={postedJobFields.job_location} onChange={handlePostedJobInput}/>
+                </label>
 
 
-            <label>
-                Work Mode :
-                <select name="work_mode" value={postedJobFields.work_mode} onChange={handlePostedJobInput}>
-                    <option value="">Select Work Mode</option>
-                    <option>On-site</option>
-                    <option>Hybrid</option>
-                    <option>Remote</option>
-                </select>
-            </label>
+                <label>
+                    Work Mode :
+                    <select name="work_mode" value={postedJobFields.work_mode} onChange={handlePostedJobInput}>
+                        <option value="">Select Work Mode</option>
+                        <option>On-site</option>
+                        <option>Hybrid</option>
+                        <option>Remote</option>
+                    </select>
+                </label>
 
 
-            <label>
-                Package :
+                <label>
+                    Package :
 
-                <div className="package_inputs">
-                    <input type="text" name="min_package" placeholder="Minimum (LPA)"  value={postedJobFields.min_package} onChange={handlePostedJobInput}/>
+                    <div className="package_inputs">
+                        <input type="text" name="min_package" placeholder="Minimum (LPA)"  value={postedJobFields.min_package} onChange={handlePostedJobInput}/>
+                        <input type="text" name="max_package" placeholder="Maximum (LPA)" value={postedJobFields.max_package} onChange={handlePostedJobInput}/>
+                    </div>
+                </label>
 
-                    <input type="text" name="max_package" placeholder="Maximum (LPA)" value={postedJobFields.max_package} onChange={handlePostedJobInput}/>
-                </div>
-            </label>
+                <label>
+                    Job Description :
+                    <textarea name="job_description" placeholder="Describe the job role and responsibilities..."  value={postedJobFields.job_description}  onChange={handlePostedJobInput}/>
+                </label>
 
-            <label>
-                Job Description :
-                <textarea name="job_description" placeholder="Describe the job role and responsibilities..."  value={postedJobFields.job_description}  onChange={handlePostedJobInput}/>
-            </label>
-
-            <button type="button" onClick={postJob}> Post Job</button>
-        </form>
-
-    </div>
- )}
+                <button type="button" onClick={popup ==="EditJob"? updateExistingJob : postJob}> {popup ==="EditJob"?"Update Job" : "Post Job"}</button>
+            </form>
+        </div>
+        )}
 
 
 
        {/*SCHEDULE INTERVIEW FORM POPUP */}
        {popup === 'ScheduleInterviewForm' && (<>
        <div className="shedule_inter_form_container">
-
+    
         <div className="scheduleInterview_container">
+            <form>
+                <header>
+                    <h3>Schedule Interview</h3>
+                    <button  type="button" onClick={() => setPopup(false)}>X</button>
+                </header>
 
-    <form>
+                <label>
+                    Candidate :<input type="text" name="candidateName" placeholder="Candidate Name" value={interviewForm.candidateName} onChange={handleInterviewForm} readOnly/>
+                </label>
 
-        <header>
-            <h3>Schedule Interview</h3>
+                <label>
+                    Job Position : <input type="text" name="jobTitle" placeholder="Job Title" value={interviewForm.jobTitle} onChange={handleInterviewForm} readOnly/>
+                </label>
 
-            <button  type="button" onClick={() => setPopup(false)}>X</button>
-        </header>
+                <label>
+                    Interview Type :
+                    <select name="interviewType" value={interviewForm.interviewType} onChange={handleInterviewForm}>
+                        <option value="">Select Type</option>
+                        <option>Technical</option>
+                        <option>HR</option>
+                        <option>Managerial</option>
+                        <option>Final Round</option>
+                    </select>
+                </label>
 
-        <label>
-            Candidate :<input type="text" name="candidateName" placeholder="Candidate Name" value={interviewForm.candidateName} onChange={handleInterviewForm} readOnly/>
-        </label>
+                <label>
+                    Interview Mode :
+                    <select name="interviewMode" value={interviewForm.interviewMode} onChange={handleInterviewForm}>
+                        <option value="">Select Mode</option>
+                        <option>Online</option>
+                        <option>Offline</option>
+                    </select>
+                </label>
 
-        <label>
-            Job Position : <input type="text" name="jobTitle" placeholder="Job Title" value={interviewForm.jobTitle} onChange={handleInterviewForm} readOnly/>
-        </label>
+                <label>
+                    Interview Date :
+                    <input type="date" name="interviewDate" value={interviewForm.interviewDate} onChange={handleInterviewForm}/>
+                </label>
 
-        <label>
-            Interview Type :
-            <select name="interviewType" value={interviewForm.interviewType} onChange={handleInterviewForm}>
-                <option value="">Select Type</option>
-                <option>Technical</option>
-                <option>HR</option>
-                <option>Managerial</option>
-                <option>Final Round</option>
-            </select>
-        </label>
+                <label>
+                    Interview Time :
+                    <input type="time" name="interviewTime" value={interviewForm.interviewTime} onChange={handleInterviewForm} />
+                </label>
 
-        <label>
-            Interview Mode :
-            <select name="interviewMode" value={interviewForm.interviewMode} onChange={handleInterviewForm}>
-                <option value="">Select Mode</option>
-                <option>Online</option>
-                <option>Offline</option>
-            </select>
-        </label>
+                <label>
+                    Interviewer :
+                    <input type="text" name="interviewer" placeholder="Interviewer name" value={interviewForm.interviewer} onChange={handleInterviewForm}/>
+                </label>
 
-        <label>
-            Interview Date :
-            <input type="date" name="interviewDate" value={interviewForm.interviewDate} onChange={handleInterviewForm}/>
-        </label>
+                <label>
+                    Meeting Link :
+                    <input type="url" name="meetingLink" placeholder="https://meet.google.com/..." value={interviewForm.meetingLink} onChange={handleInterviewForm}/>
+                </label>
 
-        <label>
-            Interview Time :
-            <input type="time" name="interviewTime" value={interviewForm.interviewTime} onChange={handleInterviewForm} />
-        </label>
+                <label>
+                    Additional Instructions :
+                    <textarea name="additionalInfo" placeholder="Enter instructions for the candidate..." value={interviewForm.additionalInfo} onChange={handleInterviewForm}/>
+                </label>
 
-        <label>
-            Interviewer :
-            <input type="text" name="interviewer" placeholder="Interviewer name" value={interviewForm.interviewer} onChange={handleInterviewForm}/>
-        </label>
-
-        <label>
-            Meeting Link :
-            <input type="url" name="meetingLink" placeholder="https://meet.google.com/..." value={interviewForm.meetingLink} onChange={handleInterviewForm}/>
-        </label>
-
-        <label>
-            Additional Instructions :
-            <textarea name="additionalInfo" placeholder="Enter instructions for the candidate..." value={interviewForm.additionalInfo} onChange={handleInterviewForm}/>
-        </label>
-
-        <button type="button" onClick={scheduleInterview}> Schedule Interview </button>
-
-    </form>
-
-</div>
-        
-       </div>
-       </>)}
+                <button type="button" onClick={scheduleInterview}> Schedule Interview </button>
+            </form>
+        </div>
+        </div>
+     </>)}
 
 
        
@@ -1815,8 +2050,8 @@ function RecruiterDashboard() {
                     <h3>{studentProfile.first_name} {studentProfile.last_name}</h3>
                     <h5>{studentProfile?.profession || "--"}</h5>
                     <h5><a href={studentProfile.email}>{studentProfile.email}</a></h5>
-                    <h5>{studentProfile.phone}</h5>
-                    <h5>{studentProfile.aboutme}</h5>
+                    <h5>{studentProfile?.phone||"Not provided"}</h5>
+                    <h5>{studentProfile?.aboutme ||"--"}</h5>
                     </div>
                 </div>
                 
@@ -1826,9 +2061,9 @@ function RecruiterDashboard() {
                 <div className="about_personal_info">
                     <h4>About / Personal Information</h4>
 
-                    <h5>DOB : {studentProfile.dob}</h5>
-                    <h5>Gender : {studentProfile.gender}</h5>
-                    <h5>Address : {studentProfile.address}</h5>
+                    <h5>DOB : {studentProfile?.dob || "Not provided"}</h5>
+                    <h5>Gender : {studentProfile?.gender ||"Not provided"}</h5>
+                    <h5>Address : {studentProfile?.address ||"Not provided"}</h5>
 
                 </div>
 
@@ -1837,38 +2072,38 @@ function RecruiterDashboard() {
 
                     <h4>10 th</h4>
                     <div>
-                        <h5>School Name : {studentEducation.tenSchool_name}</h5>    
-                        <h5>BOARD : {studentEducation.ten_board}</h5>
-                        <h5>Percentage : {studentEducation.ten_percentage}</h5>
+                        <h5>School Name : {studentEducation?.tenSchool_name || "Not provided"}</h5>    
+                        <h5>BOARD : {studentEducation?.ten_board || "Not provided"}</h5>
+                        <h5>Percentage : {studentEducation?.ten_percentage || "Not provided"}</h5>
                     </div>
 
                     <h4>12 th</h4>   
                     <div>
-                        <h5>School Name : {studentEducation.twelve_schoolname}</h5>
-                        <h5>BOARD : {studentEducation.twelve_board}</h5>
-                        <h5>Percentage : {studentEducation.twelve_percentage}</h5>
-                        <h5>Stream : {studentEducation.twelve_stream}</h5>
+                        <h5>School Name : {studentEducation?.twelve_schoolname || "Not provided"}</h5>
+                        <h5>BOARD : {studentEducation?.twelve_board || "Not provided"}</h5>
+                        <h5>Percentage : {studentEducation?.twelve_percentage || "Not provided"}</h5>
+                        <h5>Stream : {studentEducation?.twelve_stream || "Not provided"}</h5>
                     </div> 
 
                     <h4>College</h4>  
-                    <h5>College Name : {studentEducation.college_name}</h5>   
-                    <h5>CGPA : {studentEducation.college_cgpa}</h5>
-                    <h5>Course :{studentEducation.course}</h5>
+                    <h5>College Name : {studentEducation?.college_name || "Not provided"}</h5>   
+                    <h5>CGPA : {studentEducation?.college_cgpa || "Not provided"}</h5>
+                    <h5>Course :{studentEducation?.course || "Not provided"}</h5>
 
                 </div>
 
                 <div className="skills_info">
                     <h4>Skills</h4>
-                    <h5>{studentSkills.programming_skills}</h5>
-                    <h5>{studentSkills?.technical_skills}</h5>
+                    <h5>{studentSkills?.programming_skills || "Not provided"}</h5>
+                    <h5>{studentSkills?.technical_skills || "Not provided"}</h5>
                 </div>
 
                 <div className="experience_info">
                     <h4>Experience</h4>
                     <div style={{display:'flex', flexWrap:'wrap', gap:'1rem', borderBottom:"2px solid black", borderRadius:'1rem', paddingLeft:'1rem'}}>
-                    <h5>{studentExperiences[0]?.company_name}</h5>
-                    <h5>{studentExperiences[0]?.job_title}</h5>
-                    <h5>{studentExperiences[0]?.experience_type}</h5>
+                    <h5>{studentExperiences[0]?.company_name || "Not provided"}</h5>
+                    <h5>{studentExperiences[0]?.job_title || "Not provided"}</h5>
+                    <h5>{studentExperiences[0]?.experience_type || "Not provided"}</h5>
                     <h5>Total Experience: {studentExperiences[0]?.working_experience || "Nill"}</h5>
                     </div>
                 </div>
@@ -1902,7 +2137,6 @@ function RecruiterDashboard() {
        )}
        
       
-
         </div>
     </div>
     </>)

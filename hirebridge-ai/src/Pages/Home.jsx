@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import homeimg from "../assets/homeImg_UI.png";
+
+
 function Home() {
-// functions 
-//NAVIGATE FUNCTION
+
+    //NAVIGATE FUNCTION
    const navigate = useNavigate();
 
     return(<>
@@ -52,8 +54,6 @@ function Home() {
 
 
 
-
-
         {/* CONTAINER FOR CARDS FOR STUDENTS RECRUITER COLLEGES */}
         <div className="card_container">
             <header>
@@ -62,52 +62,49 @@ function Home() {
 
             <div className="cards">
 
-            {/* STUDENT CARD */}
-            <div className="studentCard">
-                {/* screen*/}
-                <div className="screen">
-                    <h2>🎓</h2>
-                    <h3>For Students :</h3>
-                    <h3>Land Your Dream Job</h3>
-                </div>
-                {/* INFO */}
-                <div className="info">
-                    <h4>Find relevent job , Improve your skills and manage your career profile in one place</h4>
-                </div>
-
-            </div>
-
-
-            {/* RECRUITER CARD*/}
-             <div className="recruiterCard">
-                {/* screen*/}
-                <div className="screen">
-                    <h2>👤</h2>
-                    <h3>For Recruiter :</h3>
-                    <h3>Source Top Talent Fast</h3>
-                </div>
-                {/* INFO */}
-                <div className="info">
-                    <h4>Find Right Candidate Faster Using AI-Powered Matching and Advance Filter</h4>
+                {/* STUDENT CARD */}
+                <div className="studentCard">
+                    {/* screen*/}
+                    <div className="screen">
+                        <h2>🎓</h2>
+                        <h3>For Students :</h3>
+                        <h3>Land Your Dream Job</h3>
+                    </div>
+                    {/* INFO */}
+                    <div className="info">
+                        <h4>Find relevent job , Improve your skills and manage your career profile in one place</h4>
+                    </div>
                 </div>
 
-            </div>
 
-
-            {/* COLLEGE CARD*/}
-            <div className="collegeCard">
-                {/* screen*/}
-                <div className="screen">
-                    <h2>🏛️</h2>
-                    <h3>For Colleges :</h3>
-                    <h3>Drive Placement Success</h3>
+                {/* RECRUITER CARD*/}
+                <div className="recruiterCard">
+                    {/* screen*/}
+                    <div className="screen">
+                        <h2>👤</h2>
+                        <h3>For Recruiter :</h3>
+                        <h3>Source Top Talent Fast</h3>
+                    </div>
+                    {/* INFO */}
+                    <div className="info">
+                        <h4>Find Right Candidate Faster Using AI-Powered Matching and Advance Filter</h4>
+                    </div>
                 </div>
-                {/* INFO */}
-                <div className="info">
-                    <h4>Manage Placement Drives , Track Student Progress and Analyse Placement Statistics .</h4>
-                </div>
 
-            </div>
+
+                {/* COLLEGE CARD*/}
+                <div className="collegeCard">
+                    {/* screen*/}
+                    <div className="screen">
+                        <h2>🏛️</h2>
+                        <h3>For Colleges :</h3>
+                        <h3>Drive Placement Success</h3>
+                    </div>
+                    {/* INFO */}
+                    <div className="info">
+                        <h4>Manage Placement Drives , Track Student Progress and Analyse Placement Statistics .</h4>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -129,7 +126,6 @@ function Home() {
             <div className="detail_container">
 
                 {/*CARDS*/}
-
                 <div className="cards">
                     <div className="heading">
                         <h3>Quick Links</h3>

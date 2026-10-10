@@ -19,8 +19,7 @@ function Companies() {
             //check all registered companies 
             console.log("COMPANIES STATUS" , resp.status);
             if (!resp.ok) {
-                console.error("FAILED TO FETCH COMPANIES", resp.status);
-                
+                console.error("FAILED TO FETCH COMPANIES", resp.status); 
             }
 
             const data = await resp.json();
@@ -79,7 +78,7 @@ function Companies() {
                         </div>
                         <h4>{comp.company_name}</h4>
                         <h4>{comp.industry}</h4>
-                        <h4>{comp.location} , {comp.country}</h4>
+                        <h4>{comp.location} , {comp?.country || "Country"}</h4>
                         <a href={comp.website} target="_blank"> Visit Website</a>
 
                     </div>

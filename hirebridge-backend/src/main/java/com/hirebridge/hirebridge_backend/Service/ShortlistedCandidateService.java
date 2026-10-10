@@ -92,12 +92,10 @@ public class ShortlistedCandidateService {
 
 
 
-// FUNCTION TO SEND INVITATION EMAIL TO CANDIDATE
-//
-
 
 // FUNCTION TO SEND INVITATION EMAIL TO CANDIDATE
-public void sendInvitation(Long student_profile_id) {
+// FUNCTION TO SEND INVITATION EMAIL TO CANDIDATE
+public void sendInvitation(Long recruiter_id, Long student_profile_id) {
 
     // FIND CANDIDATE USING STUDENT PROFILE ID
     StudentProfileEntity candidate =
@@ -105,34 +103,36 @@ public void sendInvitation(Long student_profile_id) {
             .orElseThrow(() ->
                     new RuntimeException("Candidate not found"));
 
+    // FIND RECRUITER USING RECRUITER ID
+    RecruiterProfileEntity recruiter =
+            recruiterRepository.findById(recruiter_id)
+            .orElseThrow(() ->
+                    new RuntimeException("Recruiter not found"));
+
     // GET CANDIDATE EMAIL
     String candidateEmail = candidate.getEmail();
 
     // GET CANDIDATE NAME
     String candidateName =
-            candidate.getFirst_name() + " " + candidate.getLast_name();
+            candidate.getFirst_name() + " " +
+            candidate.getLast_name();
 
-    // GENERIC JOB TITLE BECAUSE CANDIDATE PAGE
-    // DOES NOT HAVE A SPECIFIC JOB SELECTED
-    String jobTitle = "Job Opportunity";
+    // GET COMPANY NAME
+    String companyName = recruiter.getCompany_name();
 
-    // APPLY PAGE LINK
-    String applyLink = "http://localhost:5173/jobs";
+    // LINK FOR CANDIDATE
+    String companyWebsite = recruiter.getWebsite();
 
     // SEND INVITATION EMAIL
-    emailService.sendInvitationEmail(
+    emailService.sendApplyInvitationEmail(
             candidateEmail,
             candidateName,
-            jobTitle,
-            applyLink
+            companyName,
+            companyWebsite
     );
 }
 
 
-
-
-
-    
 }
 
 
