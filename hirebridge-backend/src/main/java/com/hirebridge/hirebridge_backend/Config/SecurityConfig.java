@@ -83,7 +83,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         //REACT FRONTEND (Supports both standard dev ports just in case)
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of("https://hirebridgeai.netlify.app"));
 
         //ALLOWED METHODS
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
