@@ -149,7 +149,7 @@ function StudentDashboard() {
                 formData.append("profilePhotoFile", studentProfileFields.profile_photo);
             }
 
-            const resp = await fetch("http://localhost:8080/api/student/save_Profile_info" ,{
+            const resp = await fetch("https://hirebridge-ai.onrender.com/api/student/save_Profile_info" ,{
                 method:"POST",
                 body:formData
             });
@@ -180,7 +180,7 @@ function StudentDashboard() {
     }
 
     //FETCH STUDENT PERSONAL INFOR FROM BACKEND
-    fetch(`http://localhost:8080/api/student/getProfile/${user_id}`)
+    fetch(`https://hirebridge-ai.onrender.com/api/student/getProfile/${user_id}`)
     .then(response =>{
         console.log("HTTP STATUS:", response.status);
         if(!response.ok){
@@ -223,7 +223,7 @@ function StudentDashboard() {
         try {
             // API TO SEND DATA TO SAVE INTO DATABASE
 
-            const resp = await fetch(`http://localhost:8080/api/student_education/education_data/${studentProfileId}`,{
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/student_education/education_data/${studentProfileId}`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -267,7 +267,7 @@ function StudentDashboard() {
         }
         console.log("FETCHING EDUCATION FOR STUDENT PROFILE ID:",studentProfileId);
 
-        fetch(`http://localhost:8080/api/student_education/getEducation_Data/${studentProfileId}`)
+        fetch(`https://hirebridge-ai.onrender.com/api/student_education/getEducation_Data/${studentProfileId}`)
         .then(response => {
             console.log("EDUCATION HTTP STATUS:", response.status);
             if (!response.ok) {
@@ -332,7 +332,7 @@ function StudentDashboard() {
         try {
             
             //REST API TO SEND FRONTEND DATA TO BACKEND 
-            const resp = await fetch(`http://localhost:8080/api/student_skills/skillData/${studentProfileId}`, {
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/student_skills/skillData/${studentProfileId}`, {
                 method:'POST',
                 headers:{
                     "Content-Type":"application/json"
@@ -374,7 +374,7 @@ function StudentDashboard() {
         }
 
         console.log("FETCHING SKILLS FOR STUDENT PROFILE ID:",studentProfileId);
-        fetch(`http://localhost:8080/api/student_skills/getskilldata/${studentProfileId}`)
+        fetch(`https://hirebridge-ai.onrender.com/api/student_skills/getskilldata/${studentProfileId}`)
         .then(response => {
             console.log("SKILLS HTTP STATUS:", response.status);
             if (!response.ok) {
@@ -436,7 +436,7 @@ function StudentDashboard() {
             }
 
             //RESP API
-            const resp = await fetch(`http://localhost:8080/api/student_experience/experienceData/${studentProfileId}`,{
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/student_experience/experienceData/${studentProfileId}`,{
                 method:'POST',
                 body:formData
             })
@@ -475,7 +475,7 @@ function StudentDashboard() {
         );
 
         fetch(
-            `http://localhost:8080/api/student_experience/getExpData/${studentProfileId}`
+            `https://hirebridge-ai.onrender.com/api/student_experience/getExpData/${studentProfileId}`
         )
             .then(response => {
 
@@ -563,7 +563,7 @@ function StudentDashboard() {
     try {
         
         //API
-        const resp = await fetch(`http://localhost:8080/api/student_project/uploadProject/${studentProfileId}`,{
+        const resp = await fetch(`https://hirebridge-ai.onrender.com/api/student_project/uploadProject/${studentProfileId}`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
@@ -599,7 +599,7 @@ function StudentDashboard() {
 
             try {
                 console.log("FETCHING ALL JOBS ");
-                const resp = await fetch("http://localhost:8080/api/posted/allJobs");
+                const resp = await fetch("https://hirebridge-ai.onrender.com/api/posted/allJobs");
                 console.log("JOB STATUS:",resp.status);
                 console.log("JOB OK:",resp.ok);
 
@@ -654,7 +654,7 @@ function StudentDashboard() {
 
         //IF USER IS LOGGEDIN
         try {
-            const resp = await fetch( `http://localhost:8080/api/application/apply/${user_id}/${job.job_id}`,{ // THIS API WILL SEND ONLY JOBID AND USER_ID TO BACKEND AND AS PER THAT THE STUDENT NAME OR PROFILE AND THE JOB DETAIL WILL BE STORED IN APPLIED_JOB TABLE AND SHOWN ON SCREEN ALSO TO TEH RECRUITER
+            const resp = await fetch( `https://hirebridge-ai.onrender.com/api/application/apply/${user_id}/${job.job_id}`,{ // THIS API WILL SEND ONLY JOBID AND USER_ID TO BACKEND AND AS PER THAT THE STUDENT NAME OR PROFILE AND THE JOB DETAIL WILL BE STORED IN APPLIED_JOB TABLE AND SHOWN ON SCREEN ALSO TO TEH RECRUITER
                 method:'POST'
             })
 
@@ -691,7 +691,7 @@ function StudentDashboard() {
         try {
             
             //API
-            const resp = await fetch(`http://localhost:8080/api/application/student/${user_id}`);
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/application/student/${user_id}`);
 
             if(!resp.ok){
                 throw new Error("fail to fetch applied job");
@@ -733,7 +733,7 @@ function StudentDashboard() {
 
         try {
             //API TO GENERATE RESUME
-            const resp = await fetch("http://localhost:8080/api/ai-resume/generate", {
+            const resp = await fetch("https://hirebridge-ai.onrender.com/api/ai-resume/generate", {
                 method:'POST',
                 headers:{
                     "Content-Type":"application/json"
@@ -793,7 +793,7 @@ function StudentDashboard() {
             setInterviewsLoading(true);
 
             //API TO RECIEVE COMPANY AND INTERVIEW DETAILS
-            const resp = await fetch(`http://localhost:8080/api/scheduled_interview/student/${user_id}`)
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/scheduled_interview/student/${user_id}`)
             console.log("RECRUITER PROFILE HTTP STATUS" , resp.status);
 
             if (!resp.ok) {
@@ -882,7 +882,7 @@ function StudentDashboard() {
                         <div className="appliedJob_cards" key={application.application_id}>
                             <div style={{display:'flex', gap:'2rem', justifyContent:'space-between'}}>
                                 <div  style={{display:'flex', gap:'2rem'}}> 
-                                    <img src={job?.comp_Logo ? `http://localhost:8080/api/recruiter_profile/company-logo/${job.comp_Logo}`: "/default-company-logo.png"} alt="" />
+                                    <img src={job?.comp_Logo ? `https://hirebridge-ai.onrender.com/api/recruiter_profile/company-logo/${job.comp_Logo}`: "/default-company-logo.png"} alt="" />
                                     <h4>{recruiter?.company_name}</h4>
                                 </div>
                                 <div>
@@ -943,7 +943,7 @@ function StudentDashboard() {
                 <div className="student_profile_card_container">
                     <div className="profile_card">
                         <div className="image_container">
-                            <img src={`http://localhost:8080/api/student/profile-photo/${showStudentProfile?.profile_photo}`} alt="" />
+                            <img src={`https://hirebridge-ai.onrender.com/api/student/profile-photo/${showStudentProfile?.profile_photo}`} alt="" />
                         </div>
 
                         <div className="profile_info">

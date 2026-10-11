@@ -22,7 +22,7 @@ function Jobs() {
     
             try {
                 //API TO FETCH ALL JOBS TO DISPLAY
-                const resp = await fetch("http://localhost:8080/api/posted/allJobs");
+                const resp = await fetch("https://hirebridge-ai.onrender.com/api/posted/allJobs");
 
                 console.log("JOB STATUS:",resp.status);
                 console.log("JOB OK:",resp.ok);
@@ -86,7 +86,7 @@ function Jobs() {
 
         //IF USER IS LOGGEDIN
         try {
-            const resp = await fetch( `http://localhost:8080/api/application/apply/${user_id}/${job.job_id}`,{ // THIS API WILL SEND ONLY JOBID AND USER_ID TO BACKEND AND AS PER THAT THE STUDENT NAME OR PROFILE AND THE JOB DETAIL WILL BE STORED IN APPLIED_JOB TABLE AND SHOWN ON SCREEN ALSO TO TEH RECRUITER
+            const resp = await fetch( `https://hirebridge-ai.onrender.com/api/application/apply/${user_id}/${job.job_id}`,{ // THIS API WILL SEND ONLY JOBID AND USER_ID TO BACKEND AND AS PER THAT THE STUDENT NAME OR PROFILE AND THE JOB DETAIL WILL BE STORED IN APPLIED_JOB TABLE AND SHOWN ON SCREEN ALSO TO TEH RECRUITER
             method:'POST'
             })
 
@@ -149,7 +149,7 @@ function Jobs() {
                             return(
                             <div className="job_cards" key={job.job_id}>
                                 <div>
-                                    <img src={recruiter?.comp_Logo ? `http://localhost:8080/api/recruiter_profile/company-logo/${recruiter.comp_Logo}` : "/default-company-logo.png"} alt="" />
+                                    <img src={recruiter?.comp_Logo ? `https://hirebridge-ai.onrender.com/api/recruiter_profile/company-logo/${recruiter.comp_Logo}` : "/default-company-logo.png"} alt="" />
                                     <h4>{recruiter?.company_name}</h4>
                                 </div>
                                 <h3>{job.job_title}</h3>

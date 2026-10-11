@@ -14,7 +14,7 @@ function Companies() {
             setLoading(true);
 
             //API TO FETCH ALL COMPANIES DATA FROM DATABASE
-            const resp = await fetch("http://localhost:8080/api/recruiter_profile/getAllData");
+            const resp = await fetch("https://hirebridge-ai.onrender.com/api/recruiter_profile/getAllData");
 
             //check all registered companies 
             console.log("COMPANIES STATUS" , resp.status);

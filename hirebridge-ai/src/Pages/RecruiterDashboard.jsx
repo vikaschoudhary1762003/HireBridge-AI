@@ -156,7 +156,7 @@ function RecruiterDashboard() {
 
         try {
             //API TO SEND / POST DATA TO BACKEND
-            const resp = await fetch(`http://localhost:8080/api/recruiter_profile/saveProfile/${user_id}`,{
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/recruiter_profile/saveProfile/${user_id}`,{
                 method:'POST',
                 body:formData
             })
@@ -206,7 +206,7 @@ function RecruiterDashboard() {
 
         try {
             //API TO GET RECRUITER PROFILE DATA
-            const resp = await fetch(`http://localhost:8080/api/recruiter_profile/getData/${user_id}`);
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/recruiter_profile/getData/${user_id}`);
 
             console.log("PROFILE HTTP STATUS:", resp.status);
 
@@ -252,7 +252,7 @@ function RecruiterDashboard() {
             console.log("RECRUITER ID:", recruiter_id);
 
             //API TO SEND DATA TO BACKEND
-            const resp = await fetch(`http://localhost:8080/api/posted/job/${recruiter_id}`,{
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/posted/job/${recruiter_id}`,{
                 method:'POST',
                 headers:{
                     "Content-Type":"application/json"
@@ -308,25 +308,25 @@ function RecruiterDashboard() {
             setLoadingProfile(true);
 
             //API TO FETCH STUDENT PERSONAL PROFILE DATA FROM BACKEND
-            const profileResponse = await fetch(`http://localhost:8080/api/student/getProfile/${userId}`);            
+            const profileResponse = await fetch(`https://hirebridge-ai.onrender.com/api/student/getProfile/${userId}`);            
             const profileData = await profileResponse.json();
             console.log("profile" , profileData);
 
             //API TO FETCH STUDENT EDUCATION DATA
-            const educationResponse = await fetch(`http://localhost:8080/api/student_education/getEducation_Data/${studentProfileId}`)
+            const educationResponse = await fetch(`https://hirebridge-ai.onrender.com/api/student_education/getEducation_Data/${studentProfileId}`)
             const educationData = await educationResponse.json();
 
             //API TO FETCH SKILLS
-            const skillResponse = await fetch( `http://localhost:8080/api/student_skills/getskilldata/${studentProfileId}`)
+            const skillResponse = await fetch( `https://hirebridge-ai.onrender.com/api/student_skills/getskilldata/${studentProfileId}`)
             const skillData = await skillResponse.json();
 
             //API TO FETCH EXPERIENCE
-            const experienceResponse = await fetch(`http://localhost:8080/api/student_experience/getExpData/${studentProfileId}`)
+            const experienceResponse = await fetch(`https://hirebridge-ai.onrender.com/api/student_experience/getExpData/${studentProfileId}`)
             const experienceData = await experienceResponse.json();
             console.log("EXPERIENCE DATA FOR RECRUITER:", experienceData);
 
             //API TO FETCH PROJECT DETAILS
-            const projectResponse = await  fetch(`http://localhost:8080/api/student_project/getProjectData/${studentProfileId}`)
+            const projectResponse = await  fetch(`https://hirebridge-ai.onrender.com/api/student_project/getProjectData/${studentProfileId}`)
             const projectData = await projectResponse.json();
 
             //STORE EACH RESPONSES
@@ -371,7 +371,7 @@ function RecruiterDashboard() {
         }
 
         // SEND SHORTLIST EMAIL
-        const response = await fetch(`http://localhost:8080/api/shortlisted_candidates/save/${recruiterId}/${applicantId}`,{
+        const response = await fetch(`https://hirebridge-ai.onrender.com/api/shortlisted_candidates/save/${recruiterId}/${applicantId}`,{
             method: "POST"
         });
 
@@ -412,7 +412,7 @@ function RecruiterDashboard() {
         console.log("Shortlisted recruiter id"  ,recruiter_id);
 
         //API
-        const response = await fetch(`http://localhost:8080/api/shortlisted_candidates/recruiter/${recruiter_id}`)
+        const response = await fetch(`https://hirebridge-ai.onrender.com/api/shortlisted_candidates/recruiter/${recruiter_id}`)
         console.log("SHORTLISTED GET HTTP STATUS:", response.status);
 
         const data = await response.json();
@@ -460,7 +460,7 @@ function RecruiterDashboard() {
                 return;
             }
 
-            const resp = await fetch(`http://localhost:8080/api/posted/recievePostedData/${id}`);
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/posted/recievePostedData/${id}`);
             console.log("POSTED JOB STATUS:", resp.status);
             const data = await resp.json();
             console.log("POSTED JOB DATA:", data);
@@ -501,7 +501,7 @@ function RecruiterDashboard() {
                 return;
             }
 
-            const resp = await fetch(`http://localhost:8080/api/application/recruiter/${id}`);
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/application/recruiter/${id}`);
             console.log("APPLICATION HTTP STATUS:",resp.status);
             const data = await resp.json();
             console.log("APPLICATION API RESPONSE:",data);
@@ -577,7 +577,7 @@ function RecruiterDashboard() {
             console.log("Fetching dashboard counts for recruiter:", recruiterId);
 
             // ACTIVE JOBS
-            const jobsResponse = await fetch(`http://localhost:8080/api/posted/recievePostedData/${recruiterId}`);
+            const jobsResponse = await fetch(`https://hirebridge-ai.onrender.com/api/posted/recievePostedData/${recruiterId}`);
 
             if (jobsResponse.ok) {
                 const jobsData = await jobsResponse.json();
@@ -588,7 +588,7 @@ function RecruiterDashboard() {
 
 
             // APPLICATIONS
-            const applicationsResponse = await fetch(`http://localhost:8080/api/application/recruiter/${recruiterId}`);
+            const applicationsResponse = await fetch(`https://hirebridge-ai.onrender.com/api/application/recruiter/${recruiterId}`);
 
             if (applicationsResponse.ok) {
                 const applicationsData = await applicationsResponse.json();
@@ -599,7 +599,7 @@ function RecruiterDashboard() {
 
 
             // SHORTLISTED CANDIDATES
-            const shortlistedResponse = await fetch(`http://localhost:8080/api/shortlisted_candidates/recruiter/${recruiterId}`);
+            const shortlistedResponse = await fetch(`https://hirebridge-ai.onrender.com/api/shortlisted_candidates/recruiter/${recruiterId}`);
 
             if (shortlistedResponse.ok) {
                 const shortlistedData = await shortlistedResponse.json();
@@ -610,7 +610,7 @@ function RecruiterDashboard() {
 
 
             // INTERVIEWS
-            const interviewsResponse = await fetch(`http://localhost:8080/api/scheduled_interview/recruiter/${recruiterId}`);
+            const interviewsResponse = await fetch(`https://hirebridge-ai.onrender.com/api/scheduled_interview/recruiter/${recruiterId}`);
 
             if (interviewsResponse.ok) {
                 const interviewsData = await interviewsResponse.json();
@@ -668,7 +668,7 @@ function RecruiterDashboard() {
             params.append("additionalInfo", interviewForm.additionalInfo);      
 
             //API TO SEND EMAIL AND SAVE DATA TO THE DATABASE
-            const resp = await fetch(`http://localhost:8080/api/scheduled_interview/schedule/${recruiterId}/${applicationId}?${params.toString()}`,{
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/scheduled_interview/schedule/${recruiterId}/${applicationId}?${params.toString()}`,{
                 method:'POST'
             })
 
@@ -707,7 +707,7 @@ function RecruiterDashboard() {
             }
 
             //API TO FETCH DATA
-            const resp = await fetch(`http://localhost:8080/api/scheduled_interview/recruiter/${recruiterId}`)
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/scheduled_interview/recruiter/${recruiterId}`)
             console.log("SCHEDULED INTERVIEW STATUS", resp.status);
             const data = await resp.json();
             console.log("scheduled interview response", data);
@@ -769,7 +769,7 @@ function RecruiterDashboard() {
 
         try {
             //API TO FETCH SKILLS
-            const skillResp = await fetch(`http://localhost:8080/api/student_skills/getAllSkillsforsearching`);
+            const skillResp = await fetch(`https://hirebridge-ai.onrender.com/api/student_skills/getAllSkillsforsearching`);
             const skillresponse = await skillResp.json();
             const skillsData = skillresponse.data || [];
             console.log("Skills response ", skillsData);
@@ -778,7 +778,7 @@ function RecruiterDashboard() {
             }
 
             //API TO FETCH EXPERIENCE DATA
-            const expResp = await fetch(`http://localhost:8080/api/student_experience/getstudentexperinecforsearching`);
+            const expResp = await fetch(`https://hirebridge-ai.onrender.com/api/student_experience/getstudentexperinecforsearching`);
             const expResponse = await expResp.json();
             const expData = expResponse.data || [];
             console.log("EXPERIENCE DATA", expData);
@@ -859,7 +859,7 @@ function RecruiterDashboard() {
                 }
 
                 //EXISTING CANDIDATE PROFILE API
-                const profileResponse = await fetch(`http://localhost:8080/api/student/getProfile/${userId}`);
+                const profileResponse = await fetch(`https://hirebridge-ai.onrender.com/api/student/getProfile/${userId}`);
                 const profileData = await profileResponse.json();
                 console.log("PROFILE DATA",profileData);
 
@@ -907,7 +907,7 @@ function RecruiterDashboard() {
             
 
             //API TO SEND INVITATION FOR APPLY TO A JOB
-            const resp = await fetch(`http://localhost:8080/api/shortlisted_candidates/send-invitation/${recruiterId}/${studentProfileId}`,{
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/shortlisted_candidates/send-invitation/${recruiterId}/${studentProfileId}`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -951,7 +951,7 @@ function RecruiterDashboard() {
     
         try {
             //API TO FETCH JOBS TITLE 
-            const resp = await fetch(`http://localhost:8080/api/posted/recievePostedData`);
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/posted/recievePostedData`);
 
             const data = await resp.json();
             console.log("posted jobs fetched searching " , data);
@@ -991,7 +991,7 @@ function RecruiterDashboard() {
             console.log("updated job data", postedJobFields);
 
             //REST API FOR UPDATING EXISTING POSTED JOB
-            const resp = await fetch(`http://localhost:8080/api/posted/editPostedJob/${editingJobId}`,{
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/posted/editPostedJob/${editingJobId}`,{
                 method:'PUT',
                 headers:{
                     "Content-Type":"application/json"
@@ -1055,7 +1055,7 @@ function RecruiterDashboard() {
             }
 
             //API TO FETCH ONLY RECRUITER POSTED JOBS 
-            const resp = await fetch(`http://localhost:8080/api/posted/recievePostedData/${recruiterId}`);
+            const resp = await fetch(`https://hirebridge-ai.onrender.com/api/posted/recievePostedData/${recruiterId}`);
             console.log("Recruiter job response status ", resp.status);
             const data = await resp.json(); // store fetched posted jobs into data variable
             console.log("display the fetched jobs " , data);
@@ -1104,7 +1104,7 @@ function RecruiterDashboard() {
                 }
 
                 //FETCH ALL CANDIDATE SKILLS
-                const candidateResponse = await fetch("http://localhost:8080/api/student_skills/getAllSkillsforsearching");
+                const candidateResponse = await fetch("https://hirebridge-ai.onrender.com/api/student_skills/getAllSkillsforsearching");
                 console.log("FETCHED CANDIATE SKILLS RESPONSE " , candidateResponse.status);
                 const candidateData = await candidateResponse.json();
                 console.log("candidate data " , candidateData);
@@ -1308,7 +1308,7 @@ function RecruiterDashboard() {
                                         {/* PROFILE HEADER */}
                                         <div className="candidate-header">
                                             <div className="candidate-photo-container">
-                                                <img src={profile?.profile_photo? `http://localhost:8080/uploads/${profile.profile_photo}`: "/default-profile.png"}alt={`${profile?.first_name || ""} ${profile?.last_name || ""}`}className="candidate-photo"/>
+                                                <img src={profile?.profile_photo? `https://hirebridge-ai.onrender.com/uploads/${profile.profile_photo}`: "/default-profile.png"}alt={`${profile?.first_name || ""} ${profile?.last_name || ""}`}className="candidate-photo"/>
                                             </div>
 
                                             <div className="candidate-basic-info">
@@ -1455,7 +1455,7 @@ function RecruiterDashboard() {
                     </div>
 
                     <div>
-                        <img src={`http://localhost:8080/uploads/${recruiterProfile?.profile_photo}`} alt="Recruiter" />
+                        <img src={`https://hirebridge-ai.onrender.com/uploads/${recruiterProfile?.profile_photo}`} alt="Recruiter" />
                     </div>
                     <h4>{recruiterProfile?.full_name}</h4>
                     <h4>{recruiterProfile.designation}</h4>
@@ -1468,7 +1468,7 @@ function RecruiterDashboard() {
                         <h4>Company Profile</h4>
                     </div>
                     <div>
-                        <img src={`http://localhost:8080/uploads/${recruiterProfile.comp_Logo}`} alt="Logo" />
+                        <img src={`https://hirebridge-ai.onrender.com/uploads/${recruiterProfile.comp_Logo}`} alt="Logo" />
                     </div>
                     <h4>{recruiterProfile.company_name}</h4>
                     <h4>{recruiterProfile.industry}</h4>
